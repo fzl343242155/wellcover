@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">WellCover</string>
+    <string name="Interface_not_found">接口未找到</string>
+    <string name="server_not_responding">服务端未响应，请重试。</string>
+    <string name="please_input_typeinfo">请传入正确的class或者type信息</string>
+</resources>
