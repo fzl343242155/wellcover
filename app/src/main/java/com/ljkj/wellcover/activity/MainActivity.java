@@ -24,7 +24,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
-        showLoading();
         map.onCreate(getSavedInstanceState());
 
         HttpServer.$().onLogin("", "")
