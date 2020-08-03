@@ -1,6 +1,6 @@
 package com.ljkj.wellcover.utils;
 
-import com.blankj.utilcode.util.GsonUtils;
+import com.google.gson.Gson;
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.WellCoverApplication;
 import com.lzy.okgo.convert.Converter;
@@ -43,11 +43,10 @@ public class GenericConverter<T> implements Converter<T> {
         }
         String json = response.body().string();
         if (tClass != null) {
-
-            return GsonUtils.fromJson(json, tClass);
+            return new Gson().fromJson(json, tClass);
         }
         if (type != null) {
-            return GsonUtils.fromJson(json, type);
+            return new Gson().fromJson(json, type);
         }
         throw new IllegalAccessException(WellCoverApplication.getInstance().getResources().getString(R.string.please_input_typeinfo));
     }
