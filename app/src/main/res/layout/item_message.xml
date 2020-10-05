@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32mm"
+            android:layout_marginTop="25mm"
+            android:text="编号："
+            android:textColor="@color/black"
+            android:textSize="26mm" />
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10mm"
+            android:layout_marginTop="20mm"
+            android:text="LJKJ1234567890"
+            android:textColor="@color/black"
+            android:textSize="26mm" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32mm"
+            android:layout_marginTop="20mm"
+            android:layout_marginBottom="20mm"
+            android:text="有新消息"
+            android:textColor="@color/red"
+            android:textSize="26mm" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2mm"
+        android:background="@color/line_color" />
+
+</LinearLayout>

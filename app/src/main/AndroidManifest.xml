@@ -27,7 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,6 +35,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.ActionActivity" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"

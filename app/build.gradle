@@ -125,4 +125,9 @@ dependencies {
 
     implementation 'me.jessyan:autosize:1.2.1'
 
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
+
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11'
+
 }

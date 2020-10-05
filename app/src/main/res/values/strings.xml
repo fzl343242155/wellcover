@@ -3,4 +3,13 @@
     <string name="Interface_not_found">接口未找到</string>
     <string name="server_not_responding">服务端未响应，请重试。</string>
     <string name="please_input_typeinfo">请传入正确的class或者type信息</string>
+    <string name="hint_click_exit">再按一次退出程序</string>
+    <string name="network_error_tips">加载失败,请重试</string>
+    <string name="network_error_des1">建议检查网络后</string>
+    <string name="network_error_des2">点击屏幕尝试重新连接</string>
+    <string name="main_home">首页</string>
+    <string name="main_messge">消息</string>
+    <string name="main_my">我的</string>
+
+
 </resources>

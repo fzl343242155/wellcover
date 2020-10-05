@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
@@ -14,10 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ljkj.wellcover.R;
+import com.ljkj.wellcover.bean.EventCenter;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.view.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -58,6 +62,28 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public Bundle getSavedInstanceState() {
         return savedInstanceState;
+    }
+
+
+    /**
+     * EventBus 回调方法
+     *
+     * @param eventCenter
+     */
+    public void onEventCallBack(EventCenter eventCenter) {
+
+    }
+
+    /**
+     * 当前Activity Or Fragment 注册 如有EventBus回调 则会回调到此方法
+     *
+     * @param eventCenter
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(EventCenter eventCenter) {
+        if (null != eventCenter) {
+            onEventCallBack(eventCenter);
+        }
     }
 
     @Override
@@ -147,5 +173,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .load(url)//
                 .error(R.mipmap.ic_launcher)//
                 .into(imageView);
+    }
+
+    public void toast(String message){
+        Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show();
     }
 }

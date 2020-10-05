@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="60mm">
+
+    <ImageView
+        android:id="@+id/empty_image"
+        android:layout_width="300mm"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true" />
+
+    <TextView
+        android:id="@+id/empty_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20mm"
+        tools:text="暂无数据~"
+        tools:textColor="#999999"
+        tools:textSize="28mm" />
+
+    <TextView
+        android:id="@+id/refresh_button"
+        android:layout_width="190mm"
+        android:layout_height="60mm"
+        android:layout_gravity="center"
+        android:layout_marginTop="30mm"
+        android:background="@drawable/bg_refresh_tv_bg"
+        android:gravity="center"
+        tools:text="刷新"
+        tools:textColor="@color/black"
+        tools:textSize="30mm" />
+</LinearLayout>
