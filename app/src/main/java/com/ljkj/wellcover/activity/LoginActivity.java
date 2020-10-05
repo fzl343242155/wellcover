@@ -4,7 +4,6 @@ package com.ljkj.wellcover.activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.ljkj.wellcover.R;
 
@@ -42,5 +41,6 @@ public class LoginActivity extends BaseActivity {
     //TODO 网络请求 实现登录功能
     private void login(String userName, String password) {
         startActivity(new Intent(mContext, MainActivity.class));
+        finish();
     }
 }

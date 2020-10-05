@@ -1,5 +1,7 @@
 package com.ljkj.wellcover.fragment;
 
+import com.ljkj.wellcover.R;
+
 /**
  * 文件名：HomeFragment
  * 作者：Turbo
@@ -9,6 +11,6 @@ package com.ljkj.wellcover.fragment;
 public class MyFragment extends BaseFragment {
     @Override
     protected int getContentViewLayoutID() {
-        return 0;
+        return R.layout.fragment_my;
     }
 }

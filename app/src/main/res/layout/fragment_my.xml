@@ -1,44 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/_f2f3f5"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="90mm"
+        android:layout_height="350mm"
         android:background="@color/_09B1FF">
+
+        <com.ljkj.wellcover.view.CircleImageView
+            android:layout_width="100mm"
+            android:layout_height="100mm"
+            android:layout_marginLeft="32mm"
+            android:layout_marginTop="70mm"
+            android:background="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150mm"
+            android:layout_marginTop="80mm"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18512349876"
+                android:textColor="@color/white"
+                android:textSize="28mm" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5mm">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="职位权限："
+                    android:textColor="@color/white"
+                    android:textSize="28mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="可操作"
+                    android:textColor="@color/white"
+                    android:textSize="28mm" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60mm"
+            android:layout_marginTop="240mm"
+            android:layout_marginRight="60mm"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="公司名："
+                android:textColor="@color/white"
+                android:textSize="28mm" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="天津瓴建科技有限公司"
+                android:textColor="@color/white"
+                android:textSize="28mm" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100mm"
+        android:layout_marginTop="10mm"
+        android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="智能井盖列表"
-            android:textColor="@color/white"
-            android:textSize="36mm" />
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32mm"
+            android:text="修改密码"
+            android:textColor="@color/black"
+            android:textSize="32mm" />
 
     </RelativeLayout>
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="100mm"
+        android:layout_marginTop="2mm"
+        android:background="@color/white">
 
-        <com.ljkj.wellcover.view.LoadingLayout
-            android:id="@+id/loadlayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:llEmptyImage="@mipmap/img_nodata"
-            app:llErrorImage="@mipmap/img_nonetwork">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32mm"
+            android:text="权限申请"
+            android:textColor="@color/black"
+            android:textSize="32mm" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_base"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-        </com.ljkj.wellcover.view.LoadingLayout>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100mm"
+        android:layout_marginTop="2mm"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32mm"
+            android:text="关于我们"
+            android:textColor="@color/black"
+            android:textSize="32mm" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100mm"
+        android:layout_marginTop="50mm"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="退出登录"
+            android:textColor="@color/black"
+            android:textSize="32mm" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

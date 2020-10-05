@@ -1,12 +1,16 @@
 package com.ljkj.wellcover.fragment;
 
 
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ljkj.wellcover.R;
+import com.ljkj.wellcover.activity.ActionActivity;
+import com.ljkj.wellcover.adapter.BaseRecyclerAdapter;
 import com.ljkj.wellcover.adapter.HomeAdapter;
 import com.ljkj.wellcover.adapter.MessageAdapter;
 import com.ljkj.wellcover.view.LoadingLayout;
@@ -70,6 +74,13 @@ public class MessageFragment extends BaseFragment implements LoadingLayout.Retry
         recycleLayout.setAdapter(mMessageAdapter);
 
         loadData();
+
+        mMessageAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, Object data) {
+                startActivity(new Intent(mContext, ActionActivity.class));
+            }
+        });
     }
 
     private void loadData() {
