@@ -40,7 +40,7 @@ public class MyFragment extends BaseFragment {
         return R.layout.fragment_my;
     }
 
-    @OnClick({R.id.rl_equipment, R.id.rl_editpassword, R.id.rl_permissions, R.id.rl_about, R.id.rl_logout})
+    @OnClick({R.id.rl_equipment, R.id.rl_editpassword, R.id.rl_permissions, R.id.rl_about, R.id.rl_logout, R.id.rl_update})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_equipment:
@@ -53,6 +53,8 @@ public class MyFragment extends BaseFragment {
             case R.id.rl_about:
                 break;
             case R.id.rl_logout:
+                break;
+            case R.id.rl_update:
                 break;
         }
     }
