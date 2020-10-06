@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90mm"
+        android:background="@color/_09B1FF">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="80mm"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:paddingTop="25mm"
+            android:paddingBottom="25mm"
+            android:src="@mipmap/icon_back_w" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="添加设备"
+            android:textColor="@color/white"
+            android:textSize="36mm" />
+
+        <TextView
+            android:id="@+id/tv_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="32mm"
+            android:text="完成"
+            android:textColor="@color/white"
+            android:textSize="30mm" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="90mm"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="32mm"
+            android:layout_marginTop="10mm"
+            android:layout_marginBottom="10mm"
+            android:text="设备信息"
+            android:textColor="@color/black"
+            android:textSize="32mm" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80mm"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="32mm"
+                android:text="编号："
+                android:textColor="@color/black"
+                android:textSize="32mm" />
+
+            <EditText
+                android:id="@+id/et_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20mm"
+                android:hint="请输入编号"
+                android:textSize="32mm" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80mm"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="32mm"
+                android:text="经度："
+                android:textColor="@color/black"
+                android:textSize="32mm" />
+
+            <EditText
+                android:id="@+id/et_longitude"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20mm"
+                android:hint="请输入经度"
+                android:textSize="32mm" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80mm"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="32mm"
+                android:text="纬度："
+                android:textColor="@color/black"
+                android:textSize="32mm" />
+
+            <EditText
+                android:id="@+id/et_latitude"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20mm"
+                android:hint="请输入纬度"
+                android:textSize="32mm" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="32mm"
+            android:layout_marginTop="20mm"
+            android:layout_marginBottom="20mm"
+            android:text="地图选择地址"
+            android:textColor="@color/black"
+            android:textSize="32mm" />
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/mv_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</RelativeLayout>

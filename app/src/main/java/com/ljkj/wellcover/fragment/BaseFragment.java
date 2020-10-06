@@ -11,7 +11,10 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.ljkj.wellcover.R;
+import com.ljkj.wellcover.activity.AddEquipmentActivity;
 import com.ljkj.wellcover.bean.EventCenter;
+import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.view.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -88,6 +91,8 @@ public abstract class BaseFragment extends Fragment {
         if (isBindEventBusHere()) {
             EventBus.getDefault().register(this);
         }
+
+        ImmersionBarUtils.initColorBaseBar(getActivity(), R.color._09B1FF);
     }
 
     @Override

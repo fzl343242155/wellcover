@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.adapter.ActionAdapter;
+import com.ljkj.wellcover.utils.ImmersionBarUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,7 @@ public class ActionActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
-
+        ImmersionBarUtils.initColorBaseBar(ActionActivity.this, R.color._09B1FF);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         rlContent.setLayoutManager(mLayoutManager);
         rlContent.setItemAnimator(new DefaultItemAnimator());

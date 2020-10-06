@@ -19,7 +19,7 @@
     <com.ljkj.wellcover.view.BottomBar
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="100mm"
+        android:layout_height="130mm"
         android:layout_gravity="bottom"
         android:background="@color/_f8f8f8" />
 

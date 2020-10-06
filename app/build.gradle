@@ -45,9 +45,9 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release//签名
-            shrinkResources true
+            shrinkResources false
             zipAlignEnabled true
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -103,6 +103,7 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.2.0'
 
     implementation 'com.amap.api:navi-3dmap:latest.integration'//导航
+    implementation 'com.amap.api:location:latest.integration'//导航
 
     // 基础依赖包，必须要依赖
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
