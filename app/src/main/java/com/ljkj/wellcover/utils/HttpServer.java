@@ -100,5 +100,21 @@ public class HttpServer {
                 .adapt(new ObservableBody<BaseData>());
     }
 
+    /**
+     * 添加设备
+     *
+     * @return
+     */
+    public Observable<BaseData> deleteArticle(String id) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        return OkGo.<BaseData>post(URLs.DELETEARTICLE)
+                .headers("Cookie", SPUtils.getInstance().getString(ConstantUtils.COOKIE))
+                .upJson(new Gson().toJson(map))
+                .converter(new GenericConverter<BaseData>((new TypeToken<BaseData>() {
+                }.getType())))
+                .adapt(new ObservableBody<BaseData>());
+    }
+
 
 }

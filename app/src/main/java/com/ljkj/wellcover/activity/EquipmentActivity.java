@@ -2,6 +2,8 @@ package com.ljkj.wellcover.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -41,6 +43,8 @@ import rx.schedulers.Schedulers;
  */
 public class EquipmentActivity extends BaseActivity implements LoadingLayout.RetryListener {
 
+    private static final String TAG = "EquipmentActivity";
+
     @BindView(R.id.rv_base)
     RecyclerView recycleLayout;
     @BindView(R.id.loadlayout)
@@ -53,6 +57,7 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
     private int page = 1;
     private EquipmentAdapter mEquipmentAdapter;
     private List<EquipmentBean.ListBean> mList = new ArrayList<>();
+    private boolean isAllSelect = true;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -67,22 +72,6 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
     @Override
     public void onEventCallBack(EventCenter eventCenter) {
         super.onEventCallBack(eventCenter);
-    }
-
-    @OnClick({R.id.ivBack, R.id.tv_add,R.id.ll_select, R.id.rl_delect})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.tv_add:
-                startActivity(new Intent(mContext, AddEquipmentActivity.class));
-                break;
-            case R.id.ll_select:
-                break;
-            case R.id.rl_delect:
-                break;
-        }
     }
 
     @Override
@@ -110,10 +99,73 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
         recycleLayout.setLayoutManager(mLayoutManager);
         recycleLayout.setItemAnimator(new DefaultItemAnimator());
 
-        mEquipmentAdapter = new EquipmentAdapter(mContext);
+        mEquipmentAdapter = new EquipmentAdapter(mContext, ivSelect);
         recycleLayout.setAdapter(mEquipmentAdapter);
 
         loadData();
+    }
+
+    @OnClick({R.id.ivBack, R.id.tv_add, R.id.ll_select, R.id.rl_delect})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ivBack:
+                finish();
+                break;
+            case R.id.tv_add:
+                startActivity(new Intent(mContext, AddEquipmentActivity.class));
+                break;
+            case R.id.ll_select:
+                if (isAllSelect) {
+                    for (int i = 0; i < mEquipmentAdapter.getDatas().size(); i++) {
+                        mEquipmentAdapter.setItemChecked(i, isAllSelect);
+                    }
+                    ivSelect.setBackgroundResource(R.color._07a0ed);
+                } else {
+                    for (int i = 0; i < mEquipmentAdapter.getDatas().size(); i++) {
+                        mEquipmentAdapter.setItemChecked(i, isAllSelect);
+                    }
+                    ivSelect.setBackgroundResource(R.color.black);
+                }
+                isAllSelect = !isAllSelect;
+                break;
+            case R.id.rl_delect:
+                List<EquipmentBean.ListBean> list = mEquipmentAdapter.getSelectedItem();
+                StringBuffer stringBuffer = new StringBuffer();
+                for (int i = 0; i < list.size(); i++) {
+                    stringBuffer.append(list.get(i).getId() + ",");
+                }
+                String result = stringBuffer.toString().substring(0, stringBuffer.length() - 1);
+                Log.e(TAG, "onViewClicked: " + result);
+                deleteData(result);
+                break;
+        }
+    }
+
+    private void deleteData(String id) {
+        HttpServer.$().deleteArticle(id)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        showLoading();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<BaseData>() {
+                    @Override
+                    public void call(BaseData response) {
+                        dismissLoading();
+                        if (!TextUtils.isEmpty(response.getMsg())) {
+                            toast(response.getMsg());
+                            finish();
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        dismissLoading();
+                    }
+                });
     }
 
     private void loadData() {
@@ -164,39 +216,6 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
                         dismissLoading();
                     }
                 });
-
-//        loadingLayout.showContent();
-//
-//        List<String> list = new ArrayList<>();
-//        for (int i = 0; i < 20; i++) {
-//            list.add(i + "");
-//        }
-//        mEquipmentAdapter.addDatas(list);
-
-        //TODO 请求成功调用下边这些
-//        boolean isRefresh;
-//        if (response != null) {
-//            if ("0".equals(response.getCode())) {
-//                if (page == 1) {
-//                    mList.clear();
-//                    mList = response.getData().getPostsList();
-//                    if (mList.size() == 0) {
-//                        refreshLayout.finishRefresh();
-//                        loadingLayout.showEmpty();
-//                        LoadUtil.forbidLoadMore(mList, srl, loadingLayout);
-//                        return;
-//                    }
-//                    isRefresh = true;
-//                } else {
-//                    isRefresh = false;
-//                    mList.addAll(response.getData().getPostsList());
-//                }
-//                topicRvAdapter.addDatas(mList);
-//                LoadUtil.closeRefreshOrLoadMore(response.getData().isHasNext(), isRefresh, refreshLayout, loadingLayout);
-//            } else {
-//                loadingLayout.showEmpty();
-//            }
-//        }
     }
 
     @Override

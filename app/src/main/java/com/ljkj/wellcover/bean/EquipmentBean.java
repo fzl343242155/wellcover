@@ -64,8 +64,8 @@ public class EquipmentBean implements Serializable {
         private String company;
         private String id;
         private int userId;
-        private String latitude;
-        private String longitude;
+        private double latitude;
+        private double longitude;
 
         public String getStreetName() {
             return streetName;
@@ -115,19 +115,19 @@ public class EquipmentBean implements Serializable {
             this.userId = userId;
         }
 
-        public String getLatitude() {
+        public double getLatitude() {
             return latitude;
         }
 
-        public void setLatitude(String latitude) {
+        public void setLatitude(double latitude) {
             this.latitude = latitude;
         }
 
-        public String getLongitude() {
+        public double getLongitude() {
             return longitude;
         }
 
-        public void setLongitude(String longitude) {
+        public void setLongitude(double longitude) {
             this.longitude = longitude;
         }
     }

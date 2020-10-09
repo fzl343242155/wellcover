@@ -1,6 +1,7 @@
 package com.ljkj.wellcover.fragment;
 
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -71,9 +72,18 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
     @Override
     protected void initViews() {
         super.initViews();
+
+        mvMap.onCreate(getSavedInstanceState());
+        amap = mvMap.getMap();
+        myLocationStyle = new MyLocationStyle();
+        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_SHOW);
+        amap.setMyLocationStyle(myLocationStyle);
+        amap.getUiSettings().setMyLocationButtonEnabled(true);
+        amap.setMyLocationEnabled(true);
+
+
         loadingLayout.setRetryListener(this);
         loadingLayout.setEmptyText("暂无记录");
-
         refreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
@@ -87,33 +97,12 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
                 loadData();
             }
         });
-
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         recycleLayout.setLayoutManager(mLayoutManager);
         recycleLayout.setItemAnimator(new DefaultItemAnimator());
-
         mHomeAdapter = new HomeAdapter(mContext);
         recycleLayout.setAdapter(mHomeAdapter);
-
         loadData();
-
-        mvMap.onCreate(getSavedInstanceState());
-
-        amap = mvMap.getMap();
-        myLocationStyle = new MyLocationStyle();
-        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_SHOW);
-        amap.setMyLocationStyle(myLocationStyle);
-        amap.getUiSettings().setMyLocationButtonEnabled(true);
-        amap.setMyLocationEnabled(true);
-
-        MarkerOptions markerOption = new MarkerOptions();
-
-        markerOption.position(new LatLng(39.909843, 116.434739));//经纬度（左边纬度，右边经度）
-        markerOption.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car));//自定义标点的图片
-        markerOption.title("北京站").snippet("39.909843, 116.434739");
-        markerOption.draggable(true);//是否平铺，这里设置为平铺
-        Marker marker = amap.addMarker(markerOption);
-        marker.setObject("11");
     }
 
     @Override
@@ -159,6 +148,13 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
                                     hasNext = true;
                                 }
                                 LoadUtil.closeRefreshOrLoadMore(hasNext, isRefresh, refreshLayout, loadingLayout);
+                                //地图添加marker
+                                for (int i = 0; i < mList.size(); i++) {
+                                    MarkerOptions markerOption = new MarkerOptions();
+                                    markerOption.position(new LatLng(mList.get(i).getLongitude(), mList.get(i).getLatitude()));
+                                    markerOption.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car));//自定义标点的图片
+                                    amap.addMarker(markerOption);
+                                }
                             } else {
                                 loadingLayout.showEmpty();
                             }

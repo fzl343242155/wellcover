@@ -17,4 +17,5 @@ public class URLs {
     public static final String GETINFO = BASEURL + "/login/getInfo";
     public static final String LISTARTICLE = BASEURL + "/article/listArticle";
     public static final String ADDARTICLE = BASEURL + "/article/addArticle";
+    public static final String DELETEARTICLE = BASEURL + "/article/deleteArticle";
 }

@@ -1,16 +1,20 @@
 package com.ljkj.wellcover.adapter;
 
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.bean.EquipmentBean;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,9 +28,40 @@ import butterknife.ButterKnife;
 public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean> {
 
     private Context mContext;
+    private ImageView mIvSelect;
+    private SparseBooleanArray mSelectedPositions = new SparseBooleanArray();
 
-    public EquipmentAdapter(Context context) {
+    public EquipmentAdapter(Context context, ImageView ivSelect) {
         this.mContext = context;
+        this.mIvSelect = ivSelect;
+    }
+
+    //更新adpter的数据和选择状态
+    public void updateDataSet(ArrayList<EquipmentBean.ListBean> list) {
+        mSelectedPositions = new SparseBooleanArray();
+        addDatas(list);
+    }
+
+    //获得选中条目的结果
+    public ArrayList<EquipmentBean.ListBean> getSelectedItem() {
+        ArrayList<EquipmentBean.ListBean> selectList = new ArrayList<>();
+        for (int i = 0; i < getDatas().size(); i++) {
+            if (isItemChecked(i)) {
+                selectList.add(getDatas().get(i));
+            }
+        }
+        return selectList;
+    }
+
+    //设置给定位置条目的选择状态
+    public void setItemChecked(int position, boolean isChecked) {
+        mSelectedPositions.put(position, isChecked);
+        notifyItemChanged(position);
+    }
+
+    //根据位置判断条目是否选中
+    public boolean isItemChecked(int position) {
+        return mSelectedPositions.get(position);
     }
 
     @Override
@@ -55,6 +90,30 @@ public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean
         holder.tvUnit.setText(data.getCompany());
         holder.tvStreet.setText(data.getStreetName());
 
+        if (isItemChecked(position)) {
+            //true
+            holder.ivSelect.setBackgroundResource(R.color._07a0ed);
+        } else {
+            //false
+            holder.ivSelect.setBackgroundResource(R.color.black);
+        }
+
+        holder.rlContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isItemChecked(position)) {
+                    setItemChecked(position, false);
+                } else {
+                    setItemChecked(position, true);
+                }
+            }
+        });
+
+        if (getDatas().size() == getSelectedItem().size()) {
+            mIvSelect.setBackgroundResource(R.color._07a0ed);
+        }else{
+            mIvSelect.setBackgroundResource(R.color.black);
+        }
     }
 
     class HomeHolder extends Holder {
@@ -69,6 +128,8 @@ public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean
         TextView tvUnit;
         @BindView(R.id.tv_street)
         TextView tvStreet;
+        @BindView(R.id.rl_content)
+        RelativeLayout rlContent;
 
         public HomeHolder(View itemView) {
             super(itemView);
