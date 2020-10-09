@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.adapter.ActionAdapter;
+import com.ljkj.wellcover.bean.EquipmentBean;
+import com.ljkj.wellcover.utils.ConstantUtils;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class ActionActivity extends BaseActivity {
 
     private List<String> mList = new ArrayList<>();
     private ActionAdapter mActionAdapter;
+    private EquipmentBean.ListBean mBean;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -63,6 +66,23 @@ public class ActionActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
+        mBean = (EquipmentBean.ListBean) getIntent().getSerializableExtra(ConstantUtils.DATA);
+        if (null != mBean) {
+            tvNumber.setText(mBean.getId());
+            String lockStatus = mBean.getLockStatus();
+            //设备状态：1：开启  2 ： 关闭 3： 解除报警
+            switch (lockStatus) {
+                case "1":
+                    tvState.setText("开启");
+                    break;
+                case "2":
+                    tvState.setText("关闭");
+                    break;
+                case "3":
+                    tvState.setText("解除报警");
+                    break;
+            }
+        }
         ImmersionBarUtils.initColorBaseBar(ActionActivity.this, R.color._09B1FF);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         rlContent.setLayoutManager(mLayoutManager);

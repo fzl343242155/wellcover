@@ -12,8 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.adapter.EquipmentAdapter;
+import com.ljkj.wellcover.bean.BaseData;
+import com.ljkj.wellcover.bean.EquipmentBean;
 import com.ljkj.wellcover.bean.EventCenter;
+import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
+import com.ljkj.wellcover.utils.LoadUtil;
 import com.ljkj.wellcover.view.LoadingLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -23,8 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * 文件名：设备管理
@@ -45,6 +52,7 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
 
     private int page = 1;
     private EquipmentAdapter mEquipmentAdapter;
+    private List<EquipmentBean.ListBean> mList = new ArrayList<>();
 
     @Override
     protected int getContentViewLayoutID() {
@@ -109,13 +117,61 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
     }
 
     private void loadData() {
-        loadingLayout.showContent();
+        HttpServer.$().onEquipmentList(page)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        showLoading();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<BaseData<EquipmentBean>>() {
+                    @Override
+                    public void call(BaseData<EquipmentBean> response) {
+                        dismissLoading();
+                        boolean isRefresh;
+                        if (response != null) {
+                            if (response.getSuccess()) {
+                                if (page == 1) {
+                                    mList.clear();
+                                    mList = response.getInfo().getList();
+                                    if (mList.size() == 0) {
+                                        refreshLayout.finishRefresh();
+                                        loadingLayout.showEmpty();
+                                        LoadUtil.forbidLoadMore(mList, refreshLayout, loadingLayout);
+                                        return;
+                                    }
+                                    isRefresh = true;
+                                } else {
+                                    isRefresh = false;
+                                    mList.addAll(response.getInfo().getList());
+                                }
+                                mEquipmentAdapter.addDatas(mList);
+                                boolean hasNext = false;
+                                if (response.getInfo().getTotalCount() > (response.getInfo().getTotalPage() * 10)) {
+                                    hasNext = true;
+                                }
+                                LoadUtil.closeRefreshOrLoadMore(hasNext, isRefresh, refreshLayout, loadingLayout);
+                            } else {
+                                loadingLayout.showEmpty();
+                            }
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        dismissLoading();
+                    }
+                });
 
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            list.add(i + "");
-        }
-        mEquipmentAdapter.addDatas(list);
+//        loadingLayout.showContent();
+//
+//        List<String> list = new ArrayList<>();
+//        for (int i = 0; i < 20; i++) {
+//            list.add(i + "");
+//        }
+//        mEquipmentAdapter.addDatas(list);
 
         //TODO 请求成功调用下边这些
 //        boolean isRefresh;

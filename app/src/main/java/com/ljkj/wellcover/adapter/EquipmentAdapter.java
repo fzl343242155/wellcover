@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ljkj.wellcover.R;
+import com.ljkj.wellcover.bean.EquipmentBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +21,7 @@ import butterknife.ButterKnife;
  * 时间： 2020-10-05 18:18
  * 蚁穴虽小，溃之千里。
  */
-public class EquipmentAdapter extends BaseRecyclerAdapter<String> {
+public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean> {
 
     private Context mContext;
 
@@ -34,8 +35,25 @@ public class EquipmentAdapter extends BaseRecyclerAdapter<String> {
     }
 
     @Override
-    public void onBind(RecyclerView.ViewHolder viewHolder, int position, String data) {
+    public void onBind(RecyclerView.ViewHolder viewHolder, int position, EquipmentBean.ListBean data) {
         HomeHolder holder = (HomeHolder) viewHolder;
+
+        holder.tvNumber.setText(data.getId());
+        String lockStatus = data.getLockStatus();
+        //设备状态：1：开启  2 ： 关闭 3： 解除报警
+        switch (lockStatus) {
+            case "1":
+                holder.tvState.setText("开启");
+                break;
+            case "2":
+                holder.tvState.setText("关闭");
+                break;
+            case "3":
+                holder.tvState.setText("解除报警");
+                break;
+        }
+        holder.tvUnit.setText(data.getCompany());
+        holder.tvStreet.setText(data.getStreetName());
 
     }
 

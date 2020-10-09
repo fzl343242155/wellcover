@@ -1,6 +1,5 @@
 package com.ljkj.wellcover.activity;
 
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,7 +18,13 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.blankj.utilcode.util.SPUtils;
 import com.ljkj.wellcover.R;
+import com.ljkj.wellcover.bean.BaseData;
+import com.ljkj.wellcover.bean.InfoBean;
+import com.ljkj.wellcover.bean.LoginBean;
+import com.ljkj.wellcover.utils.ConstantUtils;
+import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.Utils;
 
 import java.util.ArrayList;
@@ -27,6 +32,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * 文件名：LoginActivity
@@ -89,10 +100,42 @@ public class LoginActivity extends BaseActivity {
         startLocation();
     }
 
-    //TODO 网络请求 实现登录功能
     private void login(String userName, String password) {
-        startActivity(new Intent(mContext, MainActivity.class));
-        finish();
+        HttpServer.$().onLogin(userName, password)
+                .subscribeOn(Schedulers.io())
+                .flatMap(new Func1<BaseData<LoginBean>, Observable<BaseData<InfoBean>>>() {
+                    @Override
+                    public Observable<BaseData<InfoBean>> call(BaseData<LoginBean> loginBeanBaseData) {
+                        SPUtils.getInstance().put(ConstantUtils.COOKIE, loginBeanBaseData.getInfo().getCookie());
+                        return HttpServer.$().getInfo();
+                    }
+                })
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        showLoading();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<BaseData<InfoBean>>() {
+                    @Override
+                    public void call(BaseData<InfoBean> stringBaseData) {
+                        dismissLoading();
+                        if (stringBaseData.getSuccess()) {
+                            startActivity(new Intent(mContext, MainActivity.class));
+                            finish();
+                        } else {
+                            if (!TextUtils.isEmpty(stringBaseData.getMsg())) {
+                                toast(stringBaseData.getMsg());
+                            }
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        dismissLoading();
+                    }
+                });
     }
 
     private void startLocation() {

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -176,6 +177,10 @@ public abstract class BaseFragment extends Fragment {
                 }
             },200);
         }
+    }
+
+    public void toast(String message){
+        Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show();
     }
 
 }

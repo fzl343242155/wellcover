@@ -3,6 +3,7 @@ package com.ljkj.wellcover.activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -24,6 +25,8 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.ljkj.wellcover.R;
+import com.ljkj.wellcover.bean.BaseData;
+import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
 
 import java.util.ArrayList;
@@ -31,6 +34,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * 文件名：添加设备
@@ -60,10 +67,13 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
     EditText etLongitude;
     @BindView(R.id.et_latitude)
     EditText etLatitude;
+    @BindView(R.id.et_streetname)
+    EditText etStreetName;
     @BindView(R.id.mv_map)
     MapView mMapView;
 
     private AMap mAMap;
+    private String mStreetName;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -150,6 +160,8 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
     public void onLocationChanged(AMapLocation amapLocation) {
         if (mListener != null && amapLocation != null) {
             if (amapLocation != null && amapLocation.getErrorCode() == 0) {
+                mStreetName = amapLocation.getStreet();
+                etStreetName.setText(mStreetName);
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": "
@@ -210,8 +222,57 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
                 finish();
                 break;
             case R.id.tv_complete:
+                String number = etNumber.getText().toString().trim();
+                String latitude = etLongitude.getText().toString().trim();
+                String longitude = etLatitude.getText().toString().trim();
+                mStreetName = etStreetName.getText().toString().trim();
+                if (TextUtils.isEmpty(number)) {
+                    toast("编号不能为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(latitude)) {
+                    toast("纬度不能为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(longitude)) {
+                    toast("经度不能为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(mStreetName)) {
+                    toast("所属街道不能为空");
+                    return;
+                }
+
+                addEquipment(number, latitude, longitude, mStreetName);
                 break;
         }
+    }
+
+    private void addEquipment(String id, String latitude, String longitude, String streetName) {
+        HttpServer.$().addArticle(id, latitude, longitude, streetName)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        showLoading();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<BaseData>() {
+                    @Override
+                    public void call(BaseData response) {
+                        dismissLoading();
+                        if (!TextUtils.isEmpty(response.getMsg())) {
+                            toast(response.getMsg());
+                            finish();
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        dismissLoading();
+                    }
+                });
     }
 
     /**

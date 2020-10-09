@@ -12,7 +12,11 @@ public class BaseData<T> implements Serializable {
 
     private String code;
     private String msg;
-    private T data;
+    private T info;
+
+    public boolean getSuccess() {
+        return "100".equals(code);
+    }
 
     public String getCode() {
         return code;
@@ -30,11 +34,11 @@ public class BaseData<T> implements Serializable {
         this.msg = msg;
     }
 
-    public T getData() {
-        return data;
+    public T getInfo() {
+        return info;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setInfo(T info) {
+        this.info = info;
     }
 }

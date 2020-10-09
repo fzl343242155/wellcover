@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="请输入用户名"
+                android:text="admin"
                 android:textSize="28mm" />
         </RelativeLayout>
 
@@ -39,6 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="请输入密码"
+                android:inputType="textPassword"
+                android:text="123456"
                 android:textSize="28mm" />
         </RelativeLayout>
 
