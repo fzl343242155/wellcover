@@ -46,24 +46,27 @@ public class HomeAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean> {
         switch (lockStatus) {
             case "1":
                 holder.tvState.setText("开启");
+                holder.tvState.setTextColor(mContext.getResources().getColor(R.color._1afa29));
                 break;
             case "2":
                 holder.tvState.setText("关闭");
+                holder.tvState.setTextColor(mContext.getResources().getColor(R.color._d81e06));
                 break;
             case "3":
                 holder.tvState.setText("解除报警");
+                holder.tvState.setTextColor(mContext.getResources().getColor(R.color._f4ea2a));
                 break;
         }
         holder.tvUnit.setText(data.getCompany());
         holder.tvStreet.setText(data.getStreetName());
-        holder.rlAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, ActionActivity.class);
-                intent.putExtra(ConstantUtils.DATA, data);
-                mContext.startActivity(intent);
-            }
-        });
+//        holder.rlAction.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(mContext, ActionActivity.class);
+//                intent.putExtra(ConstantUtils.DATA, data);
+//                mContext.startActivity(intent);
+//            }
+//        });
     }
 
     class HomeHolder extends Holder {
@@ -76,8 +79,7 @@ public class HomeAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean> {
         TextView tvUnit;
         @BindView(R.id.tv_street)
         TextView tvStreet;
-        @BindView(R.id.rl_action)
-        RelativeLayout rlAction;
+
 
         public HomeHolder(View itemView) {
             super(itemView);

@@ -92,10 +92,10 @@ public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean
 
         if (isItemChecked(position)) {
             //true
-            holder.ivSelect.setBackgroundResource(R.color._07a0ed);
+            holder.ivSelect.setBackgroundResource(R.mipmap.selected);
         } else {
             //false
-            holder.ivSelect.setBackgroundResource(R.color.black);
+            holder.ivSelect.setBackgroundResource(R.mipmap.select);
         }
 
         holder.rlContent.setOnClickListener(new View.OnClickListener() {
@@ -110,9 +110,11 @@ public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean
         });
 
         if (getDatas().size() == getSelectedItem().size()) {
-            mIvSelect.setBackgroundResource(R.color._07a0ed);
-        }else{
-            mIvSelect.setBackgroundResource(R.color.black);
+            mIvSelect.setBackgroundResource(R.mipmap.selected);
+        } else if (getSelectedItem().size() == 0) {
+            mIvSelect.setBackgroundResource(R.mipmap.select);
+        } else {
+            mIvSelect.setBackgroundResource(R.mipmap.selectb);
         }
     }
 

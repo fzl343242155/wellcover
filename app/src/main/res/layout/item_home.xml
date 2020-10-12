@@ -7,9 +7,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10mm"
+        android:layout_marginBottom="10mm"
+        android:layout_marginLeft="20mm"
+        android:layout_marginRight="20mm"
+        android:gravity="center_vertical"
+        android:background="@drawable/shape_dialog_bg"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -18,41 +24,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32mm"
-                android:layout_marginTop="25mm"
+                android:layout_marginTop="20mm"
                 android:text="编号："
-                android:textColor="@color/black"
+                android:textColor="@color/_666666"
                 android:textSize="26mm" />
 
             <TextView
                 android:id="@+id/tv_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10mm"
+                android:layout_marginLeft="120mm"
                 android:layout_marginTop="20mm"
                 android:text="LJKJ1234567890"
-                android:textColor="@color/black"
+                android:textColor="@color/_333333"
                 android:textSize="26mm" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="90mm"
+                android:layout_marginLeft="500mm"
                 android:layout_marginTop="20mm"
                 android:text="状态："
-                android:textColor="@color/black"
+                android:textColor="@color/_666666"
                 android:textSize="26mm" />
 
             <TextView
                 android:id="@+id/tv_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10mm"
+                android:layout_marginLeft="590mm"
                 android:layout_marginTop="20mm"
                 android:text="关闭"
-                android:textColor="@color/black"
                 android:textSize="26mm" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,7 +70,7 @@
                 android:layout_marginLeft="32mm"
                 android:layout_marginTop="20mm"
                 android:text="所属单位："
-                android:textColor="@color/black"
+                android:textColor="@color/_666666"
                 android:textSize="26mm" />
 
             <TextView
@@ -75,7 +80,7 @@
                 android:layout_marginLeft="10mm"
                 android:layout_marginTop="20mm"
                 android:text="北京xx科技有限公司"
-                android:textColor="@color/black"
+                android:textColor="@color/_333333"
                 android:textSize="26mm" />
 
         </LinearLayout>
@@ -83,6 +88,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20mm"
             android:orientation="horizontal">
 
             <TextView
@@ -91,7 +97,7 @@
                 android:layout_marginLeft="32mm"
                 android:layout_marginTop="20mm"
                 android:text="所属街道："
-                android:textColor="@color/black"
+                android:textColor="@color/_666666"
                 android:textSize="26mm" />
 
             <TextView
@@ -101,40 +107,11 @@
                 android:layout_marginLeft="10mm"
                 android:layout_marginTop="20mm"
                 android:text="海淀区软件园"
-                android:textColor="@color/black"
+                android:textColor="@color/_333333"
                 android:textSize="26mm" />
 
         </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:id="@+id/rl_action"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20mm"
-                android:layout_marginBottom="20mm"
-                android:background="@color/_09B1FF">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="20mm"
-                    android:text="对该设备进行操作"
-                    android:textColor="@color/white"
-                    android:textSize="26mm" />
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2mm"
-            android:background="@color/line_color" />
-
     </LinearLayout>
+
 
 </LinearLayout>

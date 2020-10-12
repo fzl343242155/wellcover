@@ -119,12 +119,12 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
                     for (int i = 0; i < mEquipmentAdapter.getDatas().size(); i++) {
                         mEquipmentAdapter.setItemChecked(i, isAllSelect);
                     }
-                    ivSelect.setBackgroundResource(R.color._07a0ed);
+                    ivSelect.setBackgroundResource(R.mipmap.selected);
                 } else {
                     for (int i = 0; i < mEquipmentAdapter.getDatas().size(); i++) {
                         mEquipmentAdapter.setItemChecked(i, isAllSelect);
                     }
-                    ivSelect.setBackgroundResource(R.color.black);
+                    ivSelect.setBackgroundResource(R.mipmap.select);
                 }
                 isAllSelect = !isAllSelect;
                 break;

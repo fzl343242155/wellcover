@@ -286,7 +286,7 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
         MyLocationStyle myLocationStyle = new MyLocationStyle();
         // 自定义定位蓝点图标
         myLocationStyle.myLocationIcon(
-                BitmapDescriptorFactory.fromResource(R.mipmap.car));
+                BitmapDescriptorFactory.fromResource(R.mipmap.location));
         // 自定义精度范围的圆形边框颜色
         myLocationStyle.strokeColor(Color.argb(0, 0, 0, 0));
         // 自定义精度范围的圆形边框宽度

@@ -4,47 +4,65 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        android:background="@drawable/shape_dialog_bg"
+        android:orientation="horizontal"
+        android:layout_marginTop="10mm"
+        android:layout_marginBottom="10mm"
+        android:layout_marginLeft="20mm"
+        android:layout_marginRight="20mm"
+        android:paddingTop="20mm"
+        android:paddingBottom="20mm">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32mm"
-            android:layout_marginTop="25mm"
+            android:layout_marginLeft="20mm"
             android:text="编号："
-            android:textColor="@color/black"
+            android:textColor="@color/_666666"
             android:textSize="26mm" />
 
         <TextView
             android:id="@+id/tv_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10mm"
-            android:layout_marginTop="20mm"
+            android:layout_marginLeft="110mm"
             android:text="LJKJ1234567890"
-            android:textColor="@color/black"
+            android:textColor="@color/_333333"
             android:textSize="26mm" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32mm"
-            android:layout_marginTop="20mm"
-            android:layout_marginBottom="20mm"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20mm"
             android:text="有新消息"
             android:textColor="@color/red"
             android:textSize="26mm" />
 
-    </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2mm"
-        android:background="@color/line_color" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20mm"
+            android:layout_marginTop="50mm"
+            android:text="时间："
+            android:textColor="@color/_666666"
+            android:textSize="26mm" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110mm"
+            android:layout_marginTop="50mm"
+            android:text="2020-01-01 19:39:00"
+            android:textColor="@color/_333333"
+            android:textSize="26mm" />
+
+    </RelativeLayout>
 
 </LinearLayout>

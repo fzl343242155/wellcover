@@ -81,10 +81,10 @@
 
             <ImageView
                 android:id="@+id/iv_select"
-                android:layout_width="40mm"
-                android:layout_height="40mm"
+                android:layout_width="45mm"
+                android:layout_height="45mm"
                 android:layout_marginLeft="32mm"
-                android:background="@color/black" />
+                android:background="@mipmap/select" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="32mm"
-            android:background="@color/red">
+            android:background="@drawable/btn_delete_bg">
 
             <TextView
                 android:layout_width="wrap_content"

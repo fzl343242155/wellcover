@@ -1,10 +1,6 @@
 package com.ljkj.wellcover.activity;
 
-
 import com.ljkj.wellcover.R;
-
-import butterknife.OnClick;
-
 
 /**
  * 文件名：TestActivity
@@ -24,7 +20,4 @@ public class TestActivity extends BaseActivity {
         super.initViews();
     }
 
-    @OnClick(R.id.btn_connect)
-    public void onViewClicked() {
-    }
 }

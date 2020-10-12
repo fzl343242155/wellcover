@@ -1,6 +1,7 @@
 package com.ljkj.wellcover.fragment;
 
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -18,9 +19,12 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.ljkj.wellcover.R;
+import com.ljkj.wellcover.activity.ActionActivity;
+import com.ljkj.wellcover.adapter.BaseRecyclerAdapter;
 import com.ljkj.wellcover.adapter.HomeAdapter;
 import com.ljkj.wellcover.bean.BaseData;
 import com.ljkj.wellcover.bean.EquipmentBean;
+import com.ljkj.wellcover.utils.ConstantUtils;
 import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.LoadUtil;
 import com.ljkj.wellcover.view.LoadingLayout;
@@ -81,7 +85,6 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
         amap.getUiSettings().setMyLocationButtonEnabled(true);
         amap.setMyLocationEnabled(true);
 
-
         loadingLayout.setRetryListener(this);
         loadingLayout.setEmptyText("暂无记录");
         refreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
@@ -103,6 +106,16 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
         mHomeAdapter = new HomeAdapter(mContext);
         recycleLayout.setAdapter(mHomeAdapter);
         loadData();
+
+        mHomeAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, Object data) {
+                EquipmentBean.ListBean bean = (EquipmentBean.ListBean) data;
+                Intent intent = new Intent(mContext, ActionActivity.class);
+                intent.putExtra(ConstantUtils.DATA, bean);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -152,7 +165,7 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
                                 for (int i = 0; i < mList.size(); i++) {
                                     MarkerOptions markerOption = new MarkerOptions();
                                     markerOption.position(new LatLng(mList.get(i).getLongitude(), mList.get(i).getLatitude()));
-                                    markerOption.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car));//自定义标点的图片
+                                    markerOption.icon(BitmapDescriptorFactory.fromResource(R.mipmap.location));//自定义标点的图片
                                     amap.addMarker(markerOption);
                                 }
                             } else {

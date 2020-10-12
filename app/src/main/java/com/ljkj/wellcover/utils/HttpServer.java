@@ -107,7 +107,7 @@ public class HttpServer {
      */
     public Observable<BaseData> deleteArticle(String id) {
         Map<String, String> map = new HashMap<>();
-        map.put("id", id);
+        map.put("ids", id);
         return OkGo.<BaseData>post(URLs.DELETEARTICLE)
                 .headers("Cookie", SPUtils.getInstance().getString(ConstantUtils.COOKIE))
                 .upJson(new Gson().toJson(map))

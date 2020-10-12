@@ -14,13 +14,13 @@
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="2mm"
-        android:background="@color/_bcbcbc" />
+        android:background="@color/_cdcdcd" />
 
     <com.ljkj.wellcover.view.BottomBar
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="130mm"
+        android:layout_height="100mm"
         android:layout_gravity="bottom"
-        android:background="@color/_f8f8f8" />
+        android:background="@color/white" />
 
 </LinearLayout>

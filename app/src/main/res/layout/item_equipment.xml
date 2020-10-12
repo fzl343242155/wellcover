@@ -6,11 +6,11 @@
 
     <ImageView
         android:id="@+id/iv_select"
-        android:layout_width="50mm"
-        android:layout_height="50mm"
+        android:layout_width="45mm"
+        android:layout_height="45mm"
         android:layout_centerVertical="true"
         android:layout_marginLeft="32mm"
-        android:background="@color/black" />
+        android:background="@mipmap/select" />
 
     <LinearLayout
         android:layout_width="match_parent"

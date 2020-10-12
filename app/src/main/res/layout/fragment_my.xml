@@ -16,7 +16,7 @@
             android:layout_height="100mm"
             android:layout_marginLeft="32mm"
             android:layout_marginTop="70mm"
-            android:background="@mipmap/ic_launcher" />
+            android:background="@mipmap/headd" />
 
         <LinearLayout
             android:id="@+id/ll_userinfo"
@@ -91,14 +91,29 @@
         android:layout_marginTop="10mm"
         android:background="@color/white">
 
+        <ImageView
+            android:layout_width="50mm"
+            android:layout_height="50mm"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32mm"
+            android:background="@mipmap/my_icon1"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="32mm"
+            android:layout_marginLeft="100mm"
             android:text="设备管理"
             android:textColor="@color/black"
             android:textSize="32mm" />
+
+        <ImageView
+            android:layout_width="24mm"
+            android:layout_height="26mm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32mm"
+            android:background="@mipmap/next"/>
 
     </RelativeLayout>
 
@@ -109,14 +124,29 @@
         android:layout_marginTop="2mm"
         android:background="@color/white">
 
+        <ImageView
+            android:layout_width="50mm"
+            android:layout_height="50mm"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32mm"
+            android:background="@mipmap/my_icon2"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="32mm"
+            android:layout_marginLeft="100mm"
             android:text="修改密码"
             android:textColor="@color/black"
             android:textSize="32mm" />
+
+        <ImageView
+            android:layout_width="24mm"
+            android:layout_height="26mm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32mm"
+            android:background="@mipmap/next"/>
 
     </RelativeLayout>
 
@@ -127,14 +157,29 @@
         android:layout_marginTop="2mm"
         android:background="@color/white">
 
+        <ImageView
+            android:layout_width="50mm"
+            android:layout_height="50mm"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32mm"
+            android:background="@mipmap/my_icon3"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="32mm"
+            android:layout_marginLeft="100mm"
             android:text="权限申请"
             android:textColor="@color/black"
             android:textSize="32mm" />
+
+        <ImageView
+            android:layout_width="24mm"
+            android:layout_height="26mm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32mm"
+            android:background="@mipmap/next"/>
 
     </RelativeLayout>
 
@@ -145,14 +190,29 @@
         android:layout_marginTop="2mm"
         android:background="@color/white">
 
+        <ImageView
+            android:layout_width="50mm"
+            android:layout_height="50mm"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32mm"
+            android:background="@mipmap/my_icon4"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="32mm"
+            android:layout_marginLeft="100mm"
             android:text="关于我们"
             android:textColor="@color/black"
             android:textSize="32mm" />
+
+        <ImageView
+            android:layout_width="24mm"
+            android:layout_height="26mm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32mm"
+            android:background="@mipmap/next"/>
 
     </RelativeLayout>
 
@@ -163,14 +223,29 @@
         android:layout_marginTop="2mm"
         android:background="@color/white">
 
+        <ImageView
+            android:layout_width="50mm"
+            android:layout_height="50mm"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32mm"
+            android:background="@mipmap/my_icon5"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="32mm"
+            android:layout_marginLeft="100mm"
             android:text="检查更新"
             android:textColor="@color/black"
             android:textSize="32mm" />
+
+        <ImageView
+            android:layout_width="24mm"
+            android:layout_height="26mm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32mm"
+            android:background="@mipmap/next"/>
 
     </RelativeLayout>
 

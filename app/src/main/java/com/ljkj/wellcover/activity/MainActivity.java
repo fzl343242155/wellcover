@@ -40,20 +40,20 @@ public class MainActivity extends BaseActivity {
     protected void initViews() {
         mBottomBar.setContainer(R.id.fl_container)
                 .setTitleSize(13)
-                .setTitleBeforeAndAfterColor(getResources().getColor(R.color._363636),
-                        getResources().getColor(R.color._07a0ed))
+                .setTitleBeforeAndAfterColor(getResources().getColor(R.color._cdcdcd),
+                        getResources().getColor(R.color._515151))
                 .addItem(HomeFragment.class,
                         getString(R.string.main_home),
-                        R.mipmap.ic_launcher,
-                        R.mipmap.ic_launcher)
+                        R.mipmap.home,
+                        R.mipmap.homed)
                 .addItem(MessageFragment.class,
                         getString(R.string.main_messge),
-                        R.mipmap.ic_launcher,
-                        R.mipmap.ic_launcher)
+                        R.mipmap.message,
+                        R.mipmap.messaged)
                 .addItem(MyFragment.class,
                         getString(R.string.main_my),
-                        R.mipmap.ic_launcher,
-                        R.mipmap.ic_launcher)
+                        R.mipmap.my,
+                        R.mipmap.myed)
                 .setFirstChecked(0)
                 .build();
     }
