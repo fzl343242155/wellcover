@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.activity.EquipmentActivity;
+import com.ljkj.wellcover.activity.LoginActivity;
 import com.ljkj.wellcover.view.CircleImageView;
 
 import butterknife.BindView;
@@ -53,6 +54,8 @@ public class MyFragment extends BaseFragment {
             case R.id.rl_about:
                 break;
             case R.id.rl_logout:
+                startActivity(new Intent(mContext, LoginActivity.class));
+                getActivity().finish();
                 break;
             case R.id.rl_update:
                 break;
