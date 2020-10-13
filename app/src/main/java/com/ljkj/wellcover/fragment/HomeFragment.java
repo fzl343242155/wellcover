@@ -26,6 +26,7 @@ import com.ljkj.wellcover.bean.BaseData;
 import com.ljkj.wellcover.bean.EquipmentBean;
 import com.ljkj.wellcover.utils.ConstantUtils;
 import com.ljkj.wellcover.utils.HttpServer;
+import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.utils.LoadUtil;
 import com.ljkj.wellcover.view.LoadingLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -71,6 +72,11 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_home;
+    }
+
+    @Override
+    public void initImmersionBar() {
+        ImmersionBarUtils.initColorBar(getActivity());
     }
 
     @Override

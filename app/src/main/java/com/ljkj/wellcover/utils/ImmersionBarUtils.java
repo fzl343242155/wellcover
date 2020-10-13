@@ -65,6 +65,19 @@ public class ImmersionBarUtils {
                 .init();
     }
 
+    public static void initTranslBars(Fragment fragment) {
+//        ImmersionBar.with(fragment)
+//                .keyboardEnable(true)
+//                .fullScreen(true)
+//                .transparentStatusBar()
+//                .fitsSystemWindows(false)
+//                .autoDarkModeEnable(true)
+//                .navigationBarColor(R.color.transparent)
+//                .init();
+
+
+    }
+
     public static void initBaseBar(Activity activity) {
         ImmersionBar.with(activity)
                 .keyboardEnable(true)

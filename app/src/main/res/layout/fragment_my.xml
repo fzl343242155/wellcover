@@ -7,81 +7,83 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="350mm"
-        android:background="@color/_09B1FF">
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="320mm"
+            android:background="@mipmap/head_bg">
+
+            <LinearLayout
+                android:id="@+id/ll_userinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="290mm"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10mm"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18512349876"
+                    android:textColor="@color/white"
+                    android:textSize="28mm" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5mm">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="职位权限："
+                        android:textColor="@color/white"
+                        android:textSize="28mm" />
+
+                    <TextView
+                        android:id="@+id/tv_permissions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="可操作"
+                        android:textColor="@color/white"
+                        android:textSize="28mm" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_compayinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5mm"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="公司名："
+                        android:textColor="@color/white"
+                        android:textSize="28mm" />
+
+                    <TextView
+                        android:id="@+id/tv_compayname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="天津瓴建科技有限公司"
+                        android:textColor="@color/white"
+                        android:textSize="28mm" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
 
         <com.ljkj.wellcover.view.CircleImageView
             android:id="@+id/civ_head"
-            android:layout_width="100mm"
-            android:layout_height="100mm"
+            android:layout_width="225mm"
+            android:layout_height="225mm"
             android:layout_marginLeft="32mm"
-            android:layout_marginTop="70mm"
-            android:background="@mipmap/headd" />
-
-        <LinearLayout
-            android:id="@+id/ll_userinfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150mm"
-            android:layout_marginTop="80mm"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="18512349876"
-                android:textColor="@color/white"
-                android:textSize="28mm" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5mm">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="职位权限："
-                    android:textColor="@color/white"
-                    android:textSize="28mm" />
-
-                <TextView
-                    android:id="@+id/tv_permissions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="可操作"
-                    android:textColor="@color/white"
-                    android:textSize="28mm" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_compayinfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60mm"
-            android:layout_marginTop="240mm"
-            android:layout_marginRight="60mm"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="公司名："
-                android:textColor="@color/white"
-                android:textSize="28mm" />
-
-            <TextView
-                android:id="@+id/tv_compayname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="天津瓴建科技有限公司"
-                android:textColor="@color/white"
-                android:textSize="28mm" />
-        </LinearLayout>
-
+            android:layout_marginTop="150mm"
+            android:background="@mipmap/head" />
     </RelativeLayout>
 
     <RelativeLayout

@@ -1,7 +1,7 @@
 package com.ljkj.wellcover.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -77,10 +77,10 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
     @Override
     protected void initViews() {
         super.initViews();
-        ImmersionBarUtils.initColorBaseBar(EquipmentActivity.this, R.color._09B1FF);
+        ImmersionBarUtils.initColorBar(EquipmentActivity.this);
         loadingLayout.setRetryListener(this);
         loadingLayout.setEmptyText("暂无记录");
-
+        ivSelect.setColorFilter(Color.WHITE);
         refreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
@@ -124,7 +124,7 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
                     for (int i = 0; i < mEquipmentAdapter.getDatas().size(); i++) {
                         mEquipmentAdapter.setItemChecked(i, isAllSelect);
                     }
-                    ivSelect.setBackgroundResource(R.mipmap.select);
+                    ivSelect.setBackgroundResource(R.mipmap.all_select);
                 }
                 isAllSelect = !isAllSelect;
                 break;

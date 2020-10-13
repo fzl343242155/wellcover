@@ -13,6 +13,7 @@ import com.ljkj.wellcover.activity.ActionActivity;
 import com.ljkj.wellcover.adapter.BaseRecyclerAdapter;
 import com.ljkj.wellcover.adapter.HomeAdapter;
 import com.ljkj.wellcover.adapter.MessageAdapter;
+import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.view.LoadingLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -44,6 +45,11 @@ public class MessageFragment extends BaseFragment implements LoadingLayout.Retry
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_message;
+    }
+
+    @Override
+    public void initImmersionBar() {
+        ImmersionBarUtils.initColorBar(getActivity());
     }
 
     @Override

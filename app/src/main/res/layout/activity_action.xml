@@ -1,208 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="90mm"
-        android:background="@color/_09B1FF">
-
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="80mm"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/app_name"
-            android:paddingTop="25mm"
-            android:paddingBottom="25mm"
-            android:src="@mipmap/icon_back_w" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="智能操作"
-            android:textColor="@color/white"
-            android:textSize="36mm" />
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32mm"
-                android:layout_marginTop="25mm"
-                android:text="编号："
-                android:textColor="@color/black"
-                android:textSize="26mm" />
-
-            <TextView
-                android:id="@+id/tv_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10mm"
-                android:layout_marginTop="20mm"
-                android:text="LJKJ1234567890"
-                android:textColor="@color/black"
-                android:textSize="26mm" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32mm"
-                android:layout_marginTop="20mm"
-                android:text="状态："
-                android:textColor="@color/black"
-                android:textSize="26mm" />
-
-            <TextView
-                android:id="@+id/tv_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10mm"
-                android:layout_marginTop="20mm"
-                android:text="关闭"
-                android:textColor="@color/black"
-                android:textSize="26mm" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10mm"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:id="@+id/rl_open"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_weight="1"
-                android:background="@drawable/btn_action_bg"
-                android:paddingTop="10mm"
-                android:paddingBottom="10mm">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:padding="5mm"
-                    android:text="开启"
-                    android:textColor="@color/white"
-                    android:textSize="26mm" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:padding="5mm"
-                    android:text="解除报警"
-                    android:textColor="@color/white"
-                    android:textSize="26mm"
-                    android:visibility="invisible" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="10mm"
-                android:layout_height="match_parent"
-                android:background="@color/white" />
-
-            <RelativeLayout
-                android:id="@+id/rl_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_weight="1"
-                android:background="@drawable/btn_action_bg"
-                android:paddingTop="10mm"
-                android:paddingBottom="10mm">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:padding="5mm"
-                    android:text="关闭"
-                    android:textColor="@color/white"
-                    android:textSize="26mm" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:padding="5mm"
-                    android:text="解除报警"
-                    android:textColor="@color/white"
-                    android:textSize="26mm"
-                    android:visibility="invisible" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="10mm"
-                android:layout_height="match_parent"
-                android:background="@color/white" />
-
-            <RelativeLayout
-                android:id="@+id/rl_clear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_weight="1"
-                android:background="@drawable/btn_action_bg"
-                android:paddingTop="10mm"
-                android:paddingBottom="10mm">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:padding="5mm"
-                    android:text="解除报警"
-                    android:textColor="@color/white"
-                    android:textSize="26mm" />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2mm"
-            android:background="@color/line_color" />
-
-    </LinearLayout>
+        android:layout_height="325mm"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/equipment_bottom_bg" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/rl_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32mm"
-            android:layout_marginTop="20mm"
-            android:layout_marginBottom="20mm"
-            android:text="操作记录"
-            android:textColor="@color/black"
-            android:textSize="32mm" />
+            android:background="@mipmap/equipment_head_bg">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rl_content"
+            <com.ljkj.wellcover.view.StatusBarView
+                android:id="@+id/sbv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="90mm"
+                android:layout_below="@+id/sbv_content">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="80mm"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:paddingTop="25mm"
+                    android:paddingBottom="25mm"
+                    android:src="@mipmap/icon_back_w" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="智能操作"
+                    android:textColor="@color/white"
+                    android:textSize="36mm" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32mm"
+                    android:layout_marginTop="25mm"
+                    android:text="编号："
+                    android:textColor="@color/black"
+                    android:textSize="26mm" />
+
+                <TextView
+                    android:id="@+id/tv_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:layout_marginTop="20mm"
+                    android:text="LJKJ1234567890"
+                    android:textColor="@color/black"
+                    android:textSize="26mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32mm"
+                    android:layout_marginTop="20mm"
+                    android:text="状态："
+                    android:textColor="@color/black"
+                    android:textSize="26mm" />
+
+                <TextView
+                    android:id="@+id/tv_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:layout_marginTop="20mm"
+                    android:text="关闭"
+                    android:textColor="@color/black"
+                    android:textSize="26mm" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10mm"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_open"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_action_bg"
+                    android:paddingTop="10mm"
+                    android:paddingBottom="10mm">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="5mm"
+                        android:text="开启"
+                        android:textColor="@color/white"
+                        android:textSize="26mm" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="5mm"
+                        android:text="解除报警"
+                        android:textColor="@color/white"
+                        android:textSize="26mm"
+                        android:visibility="invisible" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="10mm"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_action_bg"
+                    android:paddingTop="10mm"
+                    android:paddingBottom="10mm">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="5mm"
+                        android:text="关闭"
+                        android:textColor="@color/white"
+                        android:textSize="26mm" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="5mm"
+                        android:text="解除报警"
+                        android:textColor="@color/white"
+                        android:textSize="26mm"
+                        android:visibility="invisible" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="10mm"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_action_bg"
+                    android:paddingTop="10mm"
+                    android:paddingBottom="10mm">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="5mm"
+                        android:text="解除报警"
+                        android:textColor="@color/white"
+                        android:textSize="26mm" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2mm"
+                android:background="@color/line_color" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="32mm"
-            android:layout_marginRight="32mm" />
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32mm"
+                android:layout_marginTop="20mm"
+                android:layout_marginBottom="20mm"
+                android:text="操作记录"
+                android:textColor="@color/black"
+                android:textSize="32mm" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rl_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="32mm"
+                android:layout_marginBottom="20mm"
+                android:layout_marginRight="32mm" />
+        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

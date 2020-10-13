@@ -112,7 +112,7 @@ public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean
         if (getDatas().size() == getSelectedItem().size()) {
             mIvSelect.setBackgroundResource(R.mipmap.selected);
         } else if (getSelectedItem().size() == 0) {
-            mIvSelect.setBackgroundResource(R.mipmap.select);
+            mIvSelect.setBackgroundResource(R.mipmap.all_select);
         } else {
             mIvSelect.setBackgroundResource(R.mipmap.selectb);
         }

@@ -83,7 +83,7 @@ public class ActionActivity extends BaseActivity {
                     break;
             }
         }
-        ImmersionBarUtils.initColorBaseBar(ActionActivity.this, R.color._09B1FF);
+        ImmersionBarUtils.initColorBar(ActionActivity.this);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         rlContent.setLayoutManager(mLayoutManager);
         rlContent.setItemAnimator(new DefaultItemAnimator());

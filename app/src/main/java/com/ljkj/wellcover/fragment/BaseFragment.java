@@ -31,7 +31,7 @@ import butterknife.Unbinder;
  * 时间： 2020-10-05 16:52
  * 蚁穴虽小，溃之千里。
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends SimpleImmersionFragment {
 
     public View mRootView;
     protected Context mContext = null;
@@ -93,7 +93,7 @@ public abstract class BaseFragment extends Fragment {
             EventBus.getDefault().register(this);
         }
 
-        ImmersionBarUtils.initColorBaseBar(getActivity(), R.color._09B1FF);
+        ImmersionBarUtils.initTranslBars(this);
     }
 
     @Override

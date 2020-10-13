@@ -2,49 +2,65 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="325mm"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/equipment_bottom_bg" />
 
     <RelativeLayout
+        android:id="@+id/rl_head"
         android:layout_width="match_parent"
-        android:layout_height="90mm"
-        android:background="@color/_09B1FF">
+        android:layout_height="wrap_content"
+        android:background="@mipmap/equipment_head_bg">
 
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="80mm"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/app_name"
-            android:paddingTop="25mm"
-            android:paddingBottom="25mm"
-            android:src="@mipmap/icon_back_w" />
+        <com.ljkj.wellcover.view.StatusBarView
+            android:id="@+id/sbv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="设备管理"
-            android:textColor="@color/white"
-            android:textSize="36mm" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90mm"
+            android:layout_below="@+id/sbv_content">
 
-        <TextView
-            android:id="@+id/tv_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="32mm"
-            android:text="添加"
-            android:textColor="@color/white"
-            android:textSize="30mm" />
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="80mm"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:paddingTop="25mm"
+                android:paddingBottom="25mm"
+                android:src="@mipmap/icon_back_w" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="设备管理"
+                android:textColor="@color/white"
+                android:textSize="36mm" />
+
+            <TextView
+                android:id="@+id/tv_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="32mm"
+                android:text="添加"
+                android:textColor="@color/white"
+                android:textSize="30mm" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="90mm"
+        android:layout_below="@+id/rl_head"
         android:layout_marginBottom="130mm">
 
         <com.ljkj.wellcover.view.LoadingLayout
@@ -67,11 +83,6 @@
         android:layout_height="130mm"
         android:layout_alignParentBottom="true">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2mm"
-            android:background="@color/line_color" />
-
         <LinearLayout
             android:id="@+id/ll_select"
             android:layout_width="wrap_content"
@@ -84,14 +95,14 @@
                 android:layout_width="45mm"
                 android:layout_height="45mm"
                 android:layout_marginLeft="32mm"
-                android:background="@mipmap/select" />
+                android:background="@mipmap/all_select" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20mm"
                 android:text="全选"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="32mm" />
         </LinearLayout>
 
@@ -111,9 +122,7 @@
                 android:text="删除"
                 android:textColor="@color/white"
                 android:textSize="32mm" />
-
         </RelativeLayout>
-
     </RelativeLayout>
 
 </RelativeLayout>

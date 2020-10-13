@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.activity.EquipmentActivity;
 import com.ljkj.wellcover.activity.LoginActivity;
+import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.view.CircleImageView;
 
 import butterknife.BindView;
@@ -39,6 +40,11 @@ public class MyFragment extends BaseFragment {
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_my;
+    }
+
+    @Override
+    public void initImmersionBar() {
+        ImmersionBarUtils.initColorBar(getActivity());
     }
 
     @OnClick({R.id.rl_equipment, R.id.rl_editpassword, R.id.rl_permissions, R.id.rl_about, R.id.rl_logout, R.id.rl_update})
