@@ -172,6 +172,10 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
                                     MarkerOptions markerOption = new MarkerOptions();
                                     markerOption.position(new LatLng(mList.get(i).getLongitude(), mList.get(i).getLatitude()));
                                     markerOption.icon(BitmapDescriptorFactory.fromResource(R.mipmap.location));//自定义标点的图片
+                                    markerOption.title("编号：" + mList.get(i).getId()
+                                            + "\n所属单位：" + mList.get(i).getCompany()
+                                            + "\n所属街道：" + mList.get(i).getStreetName()
+                                            + "\n状态：" + getLockStatus(mList.get(i).getLockStatus()));
                                     amap.addMarker(markerOption);
                                 }
                             } else {
@@ -185,6 +189,23 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
                         dismissLoading();
                     }
                 });
+    }
+
+    private String getLockStatus(String lockStatus) {
+        String result = "";
+        //设备状态：1：开启  2 ： 关闭 3： 解除报警
+        switch (lockStatus) {
+            case "1":
+                result = "开启";
+                break;
+            case "2":
+                result = "关闭";
+                break;
+            case "3":
+                result = "解除报警";
+                break;
+        }
+        return result;
     }
 
     @OnClick(R.id.tv_map)
