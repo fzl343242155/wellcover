@@ -8,15 +8,15 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_dialog_bg"
+        android:background="@drawable/shape_dialog_bg_new"
         android:gravity="center"
         android:orientation="vertical">
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="60mm"
             android:layout_height="60mm"
-            android:indeterminateDrawable="@drawable/anim"
-            />
+            android:indeterminateDrawable="@drawable/anim" />
     </LinearLayout>
 
 </LinearLayout>
