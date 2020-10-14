@@ -14,9 +14,7 @@ import com.ljkj.wellcover.BuildConfig;
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.activity.EquipmentActivity;
 import com.ljkj.wellcover.activity.LoginActivity;
-import com.ljkj.wellcover.utils.ConstantUtils;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
-import com.ljkj.wellcover.utils.update.OnCheckUpdateListener;
 import com.ljkj.wellcover.utils.update.OnUpdateListener;
 import com.ljkj.wellcover.utils.update.UpdateManager;
 import com.ljkj.wellcover.view.CircleImageView;
@@ -92,7 +90,7 @@ public class MyFragment extends BaseFragment {
 //
 //                    @Override
 //                    public void onNewest() {
-//                       toast("app is newest version.");
+//                       toast("已经是最新版本");
 //                        dismissProgressDialog();
 //                    }
 //                });
@@ -161,7 +159,6 @@ public class MyFragment extends BaseFragment {
         public void onApkDownloadFinish(String apkPath) {
             toast("newest apk download finish. apkPath: " + apkPath);
             dismissProgressDialog();
-            //所有的更新全部在updateManager中完成，Activity在这里只是做一些界面上的处理
         }
 
         @Override
