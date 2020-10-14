@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.bean.EventCenter;
@@ -175,7 +176,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .into(imageView);
     }
 
-    public void toast(String message){
-        Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show();
+    public void toast(String message) {
+        ToastUtils.showShort(message);
     }
 }

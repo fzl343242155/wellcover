@@ -1,6 +1,8 @@
 package com.ljkj.wellcover;
 
 import android.app.Application;
+import android.content.Context;
+import android.os.Handler;
 
 import androidx.multidex.MultiDex;
 
@@ -29,6 +31,9 @@ import okhttp3.OkHttpClient;
 public class WellCoverApplication extends Application {
 
     private static WellCoverApplication mInstance = null;
+    protected static Context context;
+    protected static Handler handler;
+    protected static int mainThreadId;
 
     //全局一次性设置默认属性和默认Header
     static {//使用static代码段可以防止内存泄漏
@@ -66,6 +71,9 @@ public class WellCoverApplication extends Application {
         MultiDex.install(this);
         initAutoSize();
         initOkGo(this);
+        context = getApplicationContext();
+        handler = new Handler();
+        mainThreadId = android.os.Process.myTid();
     }
 
     public static WellCoverApplication getInstance() {
@@ -102,5 +110,32 @@ public class WellCoverApplication extends Application {
                 .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)
                 .setRetryCount(3)
                 .addCommonHeaders(headers);
+    }
+
+    /**
+     * 获取上下文对象
+     *
+     * @return context
+     */
+    public static Context getContext() {
+        return context;
+    }
+
+    /**
+     * 获取全局handler
+     *
+     * @return 全局handler
+     */
+    public static Handler getHandler() {
+        return handler;
+    }
+
+    /**
+     * 获取主线程id
+     *
+     * @return 主线程id
+     */
+    public static int getMainThreadId() {
+        return mainThreadId;
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.activity.AddEquipmentActivity;
 import com.ljkj.wellcover.bean.EventCenter;
@@ -180,7 +181,7 @@ public abstract class BaseFragment extends SimpleImmersionFragment {
     }
 
     public void toast(String message){
-        Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(message);
     }
 
 }
