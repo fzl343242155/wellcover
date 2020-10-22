@@ -8,96 +8,58 @@ package com.ljkj.wellcover.bean;
  */
 public class UpdateBean {
 
+
     /**
-     * data : {"content":"更新内容如下：\n   1.xxxxxx;\n   2.xxxxxx;\n   3.xxxxxx;\n","id":"1","api_key":"android","version_code":"2","version_name":"1.0.2"}
-     * msg : 获取成功
-     * status : 1
+     * appVersion : 1.0.0
+     * createTime : 2020-10-19 16:44:25
+     * appName : wellcover apk
+     * appUrl : http://101.200.202.152:9090/group1/M00/00/00/ZcjKmF-NUeaABEzSAAAB2CUWDTU495.bak
+     * id : 4
      */
 
-    private DataBean data;
-    private String msg;
-    private int status;
+    private int appVersion;
+    private String createTime;
+    private String appName;
+    private String appUrl;
+    private int id;
 
-    public DataBean getData() {
-        return data;
+    public int getAppVersion() {
+        return appVersion;
     }
 
-    public void setData(DataBean data) {
-        this.data = data;
+    public void setAppVersion(int appVersion) {
+        this.appVersion = appVersion;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
-    public int getStatus() {
-        return status;
+    public String getAppName() {
+        return appName;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setAppName(String appName) {
+        this.appName = appName;
     }
 
-    public static class DataBean {
-        /**
-         * content : 更新内容如下：
-         1.xxxxxx;
-         2.xxxxxx;
-         3.xxxxxx;
-         * id : 1
-         * api_key : android
-         * version_code : 2
-         * version_name : 1.0.2
-         */
+    public String getAppUrl() {
+        return appUrl;
+    }
 
-        private String content;
-        private String id;
-        private String api_key;
-        private int version_code;
-        private String version_name;
+    public void setAppUrl(String appUrl) {
+        this.appUrl = appUrl;
+    }
 
-        public String getContent() {
-            return content;
-        }
+    public int getId() {
+        return id;
+    }
 
-        public void setContent(String content) {
-            this.content = content;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getApi_key() {
-            return api_key;
-        }
-
-        public void setApi_key(String api_key) {
-            this.api_key = api_key;
-        }
-
-        public int getVersion_code() {
-            return version_code;
-        }
-
-        public void setVersion_code(int version_code) {
-            this.version_code = version_code;
-        }
-
-        public String getVersion_name() {
-            return version_name;
-        }
-
-        public void setVersion_name(String version_name) {
-            this.version_name = version_name;
-        }
+    public void setId(int id) {
+        this.id = id;
     }
 }

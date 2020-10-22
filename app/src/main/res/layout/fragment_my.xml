@@ -120,10 +120,43 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_editpassword"
+        android:id="@+id/rl_searchnear"
         android:layout_width="match_parent"
         android:layout_height="100mm"
         android:layout_marginTop="2mm"
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="50mm"
+            android:layout_height="50mm"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32mm"
+            android:background="@mipmap/search"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100mm"
+            android:text="搜附近"
+            android:textColor="@color/black"
+            android:textSize="32mm" />
+
+        <ImageView
+            android:layout_width="24mm"
+            android:layout_height="26mm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32mm"
+            android:background="@mipmap/next"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_editpassword"
+        android:layout_width="match_parent"
+        android:layout_height="100mm"
+        android:layout_marginTop="10mm"
         android:background="@color/white">
 
         <ImageView

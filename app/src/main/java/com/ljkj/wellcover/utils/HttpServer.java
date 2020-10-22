@@ -3,11 +3,13 @@ package com.ljkj.wellcover.utils;
 import com.blankj.utilcode.util.SPUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ljkj.wellcover.BuildConfig;
 import com.ljkj.wellcover.URLs;
 import com.ljkj.wellcover.bean.BaseData;
 import com.ljkj.wellcover.bean.EquipmentBean;
 import com.ljkj.wellcover.bean.InfoBean;
 import com.ljkj.wellcover.bean.LoginBean;
+import com.ljkj.wellcover.bean.UpdateBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okrx.adapter.ObservableBody;
 
@@ -114,6 +116,21 @@ public class HttpServer {
                 .converter(new GenericConverter<BaseData>((new TypeToken<BaseData>() {
                 }.getType())))
                 .adapt(new ObservableBody<BaseData>());
+    }
+
+    /**
+     * 检查版本更新
+     *
+     * @return
+     */
+    public Observable<BaseData<UpdateBean>> checkAppUpdate() {
+        Map<String, String> map = new HashMap<>();
+        map.put("appVersion", BuildConfig.VERSION_CODE + "");
+        return OkGo.<BaseData<UpdateBean>>post(URLs.LOGIN)
+                .upJson(new Gson().toJson(map))
+                .converter(new GenericConverter<BaseData<UpdateBean>>((new TypeToken<BaseData<UpdateBean>>() {
+                }.getType())))
+                .adapt(new ObservableBody<BaseData<UpdateBean>>());
     }
 
 

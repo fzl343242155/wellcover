@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/_f2f3f5"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/equipment_head_bg">
+
+        <com.ljkj.wellcover.view.StatusBarView
+            android:id="@+id/sbv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90mm"
+            android:layout_below="@+id/sbv_content">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="80mm"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:paddingTop="25mm"
+                android:paddingBottom="25mm"
+                android:src="@mipmap/icon_back_w" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="搜附近"
+                android:textColor="@color/white"
+                android:textSize="36mm" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/mv_map"
+        android:layout_width="match_parent"
+        android:layout_height="500mm" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70mm">
+
+        <View
+            android:layout_width="200mm"
+            android:layout_height="2mm"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40mm"
+            android:background="@color/_707070" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="以下是周边设备信息"
+            android:textColor="@color/_333333"
+            android:textSize="28mm" />
+
+        <View
+            android:layout_width="200mm"
+            android:layout_height="2mm"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40mm"
+            android:background="@color/_707070" />
+    </RelativeLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.ljkj.wellcover.view.LoadingLayout
+            android:id="@+id/loadlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:llEmptyImage="@mipmap/img_nodata"
+            app:llErrorImage="@mipmap/img_nonetwork">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_base"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </com.ljkj.wellcover.view.LoadingLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

@@ -13,8 +13,10 @@ import androidx.core.content.FileProvider;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.ljkj.wellcover.BuildConfig;
+import com.ljkj.wellcover.bean.BaseData;
 import com.ljkj.wellcover.bean.UpdateBean;
 import com.ljkj.wellcover.utils.AppUtils;
+import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.SpUtils;
 import com.ljkj.wellcover.utils.download.DownloadHelper;
 import com.ljkj.wellcover.utils.download.DownloadManager;
@@ -28,7 +30,11 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 import static com.ljkj.wellcover.utils.ConstantUtils.SP_KEY_CACHE_APK_VERSION_CODE;
 import static com.ljkj.wellcover.utils.ConstantUtils.SP_KEY_CACHE_VALID_TIME;
@@ -117,11 +123,11 @@ public class UpdateManager {
                     break;
 
                 case MSG_ON_FIND_NEW_VERSION:
-                    UpdateBean.DataBean dataBean = (UpdateBean.DataBean) msg.obj;
+                    UpdateBean dataBean = (UpdateBean) msg.obj;
 //
-                    mNewestVersionCode = dataBean.getVersion_code();
-                    mNewestVersionName = dataBean.getVersion_name();
-                    mNewVersionContent = dataBean.getContent();
+//                    mNewestVersionCode = dataBean.getAppVersion();
+//                    mNewestVersionName = dataBean.getVersion_name();
+//                    mNewVersionContent = dataBean.getContent();
 
                     if (mOnCheckUpdateListener != null)
                         mOnCheckUpdateListener.onFindNewVersion(mNewestVersionName,
@@ -144,31 +150,59 @@ public class UpdateManager {
      */
     public void checkUpdate(String apkInfoUrl, OnCheckUpdateListener onCheckUpdateListener) {
         mOnCheckUpdateListener = onCheckUpdateListener;
-        sendOkHttpRequest(apkInfoUrl, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                ToastUtils.showShort("check update failed.");
-            }
+//        sendOkHttpRequest(apkInfoUrl, new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                ToastUtils.showShort("check update failed.");
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String strJson = response.body().string();
+//                Log.e("onResponse", "response.body().string() = " + strJson);
+//                if (parseJson(strJson).getVersion_code() > AppUtils.getAppVersionCode()) {
+//                    //最后一次缓存的时间超过缓存文件有效期，或者最后一次缓存的apk不是最新版本的apk，删除缓存apk
+//                    if ((System.currentTimeMillis() - mLastCacheSaveTime > getCacheSaveValidTime())
+//                            || (getCacheApkVersionCode() != parseJson(strJson).getVersion_code())) {
+//                        clearCacheApkFile();
+//                        setCacheApkVersionCode(parseJson(strJson).getVersion_code());
+//                    }
+//                    sendMessage(MSG_ON_FIND_NEW_VERSION, parseJson(strJson));
+//                } else {
+//                    sendMessage(MSG_ON_NEWEST, null);
+//                    //当前已经是最新版本APK，清除本地已经缓存的apk安装包
+//                    clearCacheApkFile();
+//                }
+//            }
+//        });
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String strJson = response.body().string();
-                Log.e("onResponse", "response.body().string() = " + strJson);
-                if (parseJson(strJson).getVersion_code() > AppUtils.getAppVersionCode()) {
+        HttpServer.$().checkAppUpdate()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<BaseData<UpdateBean>>() {
+                    @Override
+                    public void call(BaseData<UpdateBean> updateBeanBaseData) {
+
+                                        if (updateBeanBaseData.getInfo().getAppVersion() > AppUtils.getAppVersionCode()) {
                     //最后一次缓存的时间超过缓存文件有效期，或者最后一次缓存的apk不是最新版本的apk，删除缓存apk
                     if ((System.currentTimeMillis() - mLastCacheSaveTime > getCacheSaveValidTime())
-                            || (getCacheApkVersionCode() != parseJson(strJson).getVersion_code())) {
+                            || (getCacheApkVersionCode() != updateBeanBaseData.getInfo().getAppVersion())) {
                         clearCacheApkFile();
-                        setCacheApkVersionCode(parseJson(strJson).getVersion_code());
+                        setCacheApkVersionCode(updateBeanBaseData.getInfo().getAppVersion());
                     }
-                    sendMessage(MSG_ON_FIND_NEW_VERSION, parseJson(strJson));
+                    sendMessage(MSG_ON_FIND_NEW_VERSION, updateBeanBaseData.getInfo());
                 } else {
                     sendMessage(MSG_ON_NEWEST, null);
                     //当前已经是最新版本APK，清除本地已经缓存的apk安装包
                     clearCacheApkFile();
                 }
-            }
-        });
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                    }
+                });
     }
 
     /**
@@ -306,17 +340,6 @@ public class UpdateManager {
     }
 
     /**
-     * 解析json数据
-     *
-     * @param jsonData json数据
-     * @return dataBean
-     */
-    private UpdateBean.DataBean parseJson(String jsonData) {
-        UpdateBean updateBean = new Gson().fromJson(jsonData, UpdateBean.class);
-        return updateBean.getData();
-    }
-
-    /**
      * 获取带版本名称的apk文件名
      *
      * @param apkName apk原名
@@ -359,14 +382,6 @@ public class UpdateManager {
             intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
         }
         AppUtils.getContext().startActivity(intent);
-    }
-
-    private void sendOkHttpRequest(final String address, final okhttp3.Callback callback) {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(address)
-                .build();
-        client.newCall(request).enqueue(callback);
     }
 
     /**

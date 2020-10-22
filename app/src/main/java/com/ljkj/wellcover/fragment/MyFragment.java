@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.activity.EquipmentActivity;
 import com.ljkj.wellcover.activity.LoginActivity;
+import com.ljkj.wellcover.activity.SearchNearActivity;
 import com.ljkj.wellcover.utils.AppUpdateUtils;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.view.CircleImageView;
@@ -50,7 +51,8 @@ public class MyFragment extends BaseFragment {
         ImmersionBarUtils.initColorBar(getActivity());
     }
 
-    @OnClick({R.id.rl_equipment, R.id.rl_editpassword, R.id.rl_permissions, R.id.rl_about, R.id.rl_logout, R.id.rl_update})
+    @OnClick({R.id.rl_equipment, R.id.rl_editpassword, R.id.rl_permissions,
+            R.id.rl_about, R.id.rl_logout, R.id.rl_update, R.id.rl_searchnear})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_equipment:
@@ -69,6 +71,9 @@ public class MyFragment extends BaseFragment {
             case R.id.rl_update:
                 toast("改功能正在开发");
 //                new AppUpdateUtils().update(mContext, true);
+                break;
+            case R.id.rl_searchnear:
+                startActivity(new Intent(mContext, SearchNearActivity.class));
                 break;
         }
     }
