@@ -80,13 +80,6 @@ public class MessageFragment extends BaseFragment implements LoadingLayout.Retry
         recycleLayout.setAdapter(mMessageAdapter);
 
         loadData();
-
-        mMessageAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, Object data) {
-                startActivity(new Intent(mContext, ActionActivity.class));
-            }
-        });
     }
 
     private void loadData() {

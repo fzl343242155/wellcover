@@ -9,12 +9,8 @@
     <RelativeLayout
         android:id="@+id/rl_head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="160mm"
-            android:background="@mipmap/public_head_bg" />
+        android:layout_height="wrap_content"
+        android:background="@mipmap/equipment_head_bg">
 
         <com.ljkj.wellcover.view.StatusBarView
             android:id="@+id/sbv_content"
@@ -24,7 +20,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="90mm"
-            android:layout_below="@+id/sbv_content">
+            android:layout_below="@+id/sbv_content"
+            android:layout_marginTop="10mm">
 
             <TextView
                 android:layout_width="wrap_content"

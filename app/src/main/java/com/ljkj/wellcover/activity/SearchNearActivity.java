@@ -28,6 +28,7 @@ import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.adapter.HomeAdapter;
 import com.ljkj.wellcover.bean.BaseData;
 import com.ljkj.wellcover.bean.EquipmentBean;
+import com.ljkj.wellcover.bean.EquipmentInfoBean;
 import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.utils.LoadUtil;
@@ -64,7 +65,7 @@ public class SearchNearActivity extends BaseActivity implements LoadingLayout.Re
 
     private int page = 1;
     private HomeAdapter mHomeAdapter;
-    private List<EquipmentBean.ListBean> mList = new ArrayList<>();
+    private List<EquipmentInfoBean> mList = new ArrayList<>();
     private AMap mAMap;
 
     private AMapLocationClient mlocationClient;
@@ -337,6 +338,44 @@ public class SearchNearActivity extends BaseActivity implements LoadingLayout.Re
         String latitude = centerLatLng.latitude + "";
         String longitude = centerLatLng.longitude + "";
 
-        toast("latitude = " + latitude + "\nlongitude = " + longitude);
+        loadData(latitude, longitude);
+    }
+
+    private void loadData(String latitude, String longitude) {
+        HttpServer.$().onSearchNear(longitude, latitude)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        showLoading();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<BaseData<List<EquipmentInfoBean>>>() {
+                    @Override
+                    public void call(BaseData<List<EquipmentInfoBean>> response) {
+                        dismissLoading();
+                        if (response != null) {
+                            if (response.getSuccess()) {
+                                mList.clear();
+                                mList = response.getInfo();
+                                if (mList.size() == 0) {
+                                    refreshLayout.finishRefresh();
+                                    loadingLayout.showEmpty();
+                                    LoadUtil.forbidLoadMore(mList, refreshLayout, loadingLayout);
+                                    return;
+                                }
+                                mHomeAdapter.addDatas(mList);
+                            } else {
+                                loadingLayout.showEmpty();
+                            }
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        dismissLoading();
+                    }
+                });
     }
 }

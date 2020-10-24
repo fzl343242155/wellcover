@@ -5,43 +5,56 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_head"
         android:layout_width="match_parent"
-        android:layout_height="90mm"
-        android:background="@color/_09B1FF">
+        android:layout_height="wrap_content"
+        android:background="@mipmap/equipment_head_bg">
 
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="80mm"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/app_name"
-            android:paddingTop="25mm"
-            android:paddingBottom="25mm"
-            android:src="@mipmap/icon_back_w" />
+        <com.ljkj.wellcover.view.StatusBarView
+            android:id="@+id/sbv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="添加设备"
-            android:textColor="@color/white"
-            android:textSize="36mm" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90mm"
+            android:layout_below="@+id/sbv_content"
+            android:layout_marginTop="10mm">
 
-        <TextView
-            android:id="@+id/tv_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="32mm"
-            android:text="完成"
-            android:textColor="@color/white"
-            android:textSize="30mm" />
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="80mm"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:paddingTop="25mm"
+                android:paddingBottom="25mm"
+                android:src="@mipmap/icon_back_w" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="添加设备"
+                android:textColor="@color/white"
+                android:textSize="36mm" />
+
+            <TextView
+                android:id="@+id/tv_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="32mm"
+                android:text="完成"
+                android:textColor="@color/white"
+                android:textSize="30mm" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="90mm"
+        android:layout_below="@+id/rl_head"
         android:orientation="vertical">
 
         <TextView

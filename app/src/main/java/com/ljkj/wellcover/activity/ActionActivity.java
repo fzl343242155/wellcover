@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.adapter.ActionAdapter;
 import com.ljkj.wellcover.bean.EquipmentBean;
+import com.ljkj.wellcover.bean.EquipmentInfoBean;
 import com.ljkj.wellcover.utils.ConstantUtils;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
 
@@ -35,7 +36,7 @@ public class ActionActivity extends BaseActivity {
 
     private List<String> mList = new ArrayList<>();
     private ActionAdapter mActionAdapter;
-    private EquipmentBean.ListBean mBean;
+    private EquipmentInfoBean mBean;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -66,7 +67,7 @@ public class ActionActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
-        mBean = (EquipmentBean.ListBean) getIntent().getSerializableExtra(ConstantUtils.DATA);
+        mBean = (EquipmentInfoBean) getIntent().getSerializableExtra(ConstantUtils.DATA);
         if (null != mBean) {
             tvNumber.setText(mBean.getId());
             String lockStatus = mBean.getLockStatus();

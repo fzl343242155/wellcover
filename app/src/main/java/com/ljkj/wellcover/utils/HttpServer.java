@@ -7,6 +7,7 @@ import com.ljkj.wellcover.BuildConfig;
 import com.ljkj.wellcover.URLs;
 import com.ljkj.wellcover.bean.BaseData;
 import com.ljkj.wellcover.bean.EquipmentBean;
+import com.ljkj.wellcover.bean.EquipmentInfoBean;
 import com.ljkj.wellcover.bean.InfoBean;
 import com.ljkj.wellcover.bean.LoginBean;
 import com.ljkj.wellcover.bean.UpdateBean;
@@ -14,6 +15,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okrx.adapter.ObservableBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
@@ -103,7 +105,7 @@ public class HttpServer {
     }
 
     /**
-     * 添加设备
+     * 删除设备
      *
      * @return
      */
@@ -131,6 +133,24 @@ public class HttpServer {
                 .converter(new GenericConverter<BaseData<UpdateBean>>((new TypeToken<BaseData<UpdateBean>>() {
                 }.getType())))
                 .adapt(new ObservableBody<BaseData<UpdateBean>>());
+    }
+
+    /**
+     * 搜附近
+     *
+     * @return
+     */
+    public Observable<BaseData<List<EquipmentInfoBean>>> onSearchNear(String userLon, String userLat) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userLon", userLon);
+        map.put("userLat", userLat);
+        map.put("distance", "5000");
+        return OkGo.<BaseData<List<EquipmentInfoBean>>>post(URLs.FINDNEARDEVICE)
+                .headers("Cookie", SPUtils.getInstance().getString(ConstantUtils.COOKIE))
+                .upJson(new Gson().toJson(map))
+                .converter(new GenericConverter<BaseData<List<EquipmentInfoBean>>>((new TypeToken<BaseData<List<EquipmentInfoBean>>>() {
+                }.getType())))
+                .adapt(new ObservableBody<BaseData<List<EquipmentInfoBean>>>());
     }
 
 

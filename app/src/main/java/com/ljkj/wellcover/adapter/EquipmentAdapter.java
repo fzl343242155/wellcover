@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.bean.EquipmentBean;
+import com.ljkj.wellcover.bean.EquipmentInfoBean;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ import butterknife.ButterKnife;
  * 时间： 2020-10-05 18:18
  * 蚁穴虽小，溃之千里。
  */
-public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean> {
+public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentInfoBean> {
 
     private Context mContext;
     private ImageView mIvSelect;
@@ -37,14 +38,14 @@ public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean
     }
 
     //更新adpter的数据和选择状态
-    public void updateDataSet(ArrayList<EquipmentBean.ListBean> list) {
+    public void updateDataSet(ArrayList<EquipmentInfoBean> list) {
         mSelectedPositions = new SparseBooleanArray();
         addDatas(list);
     }
 
     //获得选中条目的结果
-    public ArrayList<EquipmentBean.ListBean> getSelectedItem() {
-        ArrayList<EquipmentBean.ListBean> selectList = new ArrayList<>();
+    public ArrayList<EquipmentInfoBean> getSelectedItem() {
+        ArrayList<EquipmentInfoBean> selectList = new ArrayList<>();
         for (int i = 0; i < getDatas().size(); i++) {
             if (isItemChecked(i)) {
                 selectList.add(getDatas().get(i));
@@ -70,7 +71,7 @@ public class EquipmentAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean
     }
 
     @Override
-    public void onBind(RecyclerView.ViewHolder viewHolder, int position, EquipmentBean.ListBean data) {
+    public void onBind(RecyclerView.ViewHolder viewHolder, int position, EquipmentInfoBean data) {
         HomeHolder holder = (HomeHolder) viewHolder;
 
         holder.tvNumber.setText(data.getId());

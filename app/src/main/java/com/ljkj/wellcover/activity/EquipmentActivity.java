@@ -16,6 +16,7 @@ import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.adapter.EquipmentAdapter;
 import com.ljkj.wellcover.bean.BaseData;
 import com.ljkj.wellcover.bean.EquipmentBean;
+import com.ljkj.wellcover.bean.EquipmentInfoBean;
 import com.ljkj.wellcover.bean.EventCenter;
 import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
@@ -56,7 +57,7 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
 
     private int page = 1;
     private EquipmentAdapter mEquipmentAdapter;
-    private List<EquipmentBean.ListBean> mList = new ArrayList<>();
+    private List<EquipmentInfoBean> mList = new ArrayList<>();
     private boolean isAllSelect = true;
 
     @Override
@@ -129,7 +130,7 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
                 isAllSelect = !isAllSelect;
                 break;
             case R.id.rl_delect:
-                List<EquipmentBean.ListBean> list = mEquipmentAdapter.getSelectedItem();
+                List<EquipmentInfoBean> list = mEquipmentAdapter.getSelectedItem();
                 StringBuffer stringBuffer = new StringBuffer();
                 for (int i = 0; i < list.size(); i++) {
                     stringBuffer.append(list.get(i).getId() + ",");

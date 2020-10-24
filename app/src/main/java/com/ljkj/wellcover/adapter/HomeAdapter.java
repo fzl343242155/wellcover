@@ -1,19 +1,15 @@
 package com.ljkj.wellcover.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ljkj.wellcover.R;
-import com.ljkj.wellcover.activity.ActionActivity;
-import com.ljkj.wellcover.bean.EquipmentBean;
-import com.ljkj.wellcover.utils.ConstantUtils;
+import com.ljkj.wellcover.bean.EquipmentInfoBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +20,7 @@ import butterknife.ButterKnife;
  * 时间： 2020-10-05 18:18
  * 蚁穴虽小，溃之千里。
  */
-public class HomeAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean> {
+public class HomeAdapter extends BaseRecyclerAdapter<EquipmentInfoBean> {
 
     private Context mContext;
 
@@ -38,7 +34,7 @@ public class HomeAdapter extends BaseRecyclerAdapter<EquipmentBean.ListBean> {
     }
 
     @Override
-    public void onBind(RecyclerView.ViewHolder viewHolder, int position, EquipmentBean.ListBean data) {
+    public void onBind(RecyclerView.ViewHolder viewHolder, int position, EquipmentInfoBean data) {
         HomeHolder holder = (HomeHolder) viewHolder;
         holder.tvNumber.setText(data.getId());
         String lockStatus = data.getLockStatus();

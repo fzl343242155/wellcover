@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -14,8 +16,14 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 
+import com.ljkj.wellcover.WellCoverApplication;
+
+import java.lang.reflect.Field;
+
 
 public class StatusBarUtil {
+
+    private static final String TAG = "StatusBarUtil";
 
     public static void setTransparentForWindowH(Activity activity, boolean forWindowH) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -137,17 +145,56 @@ public class StatusBarUtil {
      *
      * @param context 目标Context
      */
-    private static int mStatusBarHeight = 0;
+
 
     public static int getStatusBarHeight(Context context) {
-        if (mStatusBarHeight == 0) {
-            Resources res = context.getResources();
-            int resourceId = res.getIdentifier("status_bar_height", "dimen", "android");
-            if (resourceId > 0) {
-                mStatusBarHeight = res.getDimensionPixelSize(resourceId);
-            }
-        }
-        return mStatusBarHeight;
+//        int mStatusBarHeight = 0;
+//        if (mStatusBarHeight == 0) {
+//            Resources res = context.getResources();
+//            int resourceId = res.getIdentifier("status_bar_height", "dimen", "android");
+//            if (resourceId > 0) {
+//                mStatusBarHeight = res.getDimensionPixelSize(resourceId);
+//            }
+//        }
+//        Log.e(TAG, "状态栏-方法1:" + mStatusBarHeight);
+//
+//        /**
+//         * 获取状态栏高度——方法2
+//         * */
+//        int statusBarHeight2 = -1;
+//        try {
+//            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+//            Object object = clazz.newInstance();
+//            int height = Integer.parseInt(clazz.getField("status_bar_height")
+//                    .get(object).toString());
+//            statusBarHeight2 = context.getResources().getDimensionPixelSize(height);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.e(TAG, "状态栏-方法2:");
+//        }
+//        Log.e(TAG, "状态栏-方法2:" + statusBarHeight2);
+//
+//
+//        Class<?> c = null;
+//        Object obj = null;
+//        Field field = null;
+//        int x = 0, statusBarHeight = 0;
+//        try {
+//            c = Class.forName("com.android.internal.R$dimen");
+//            obj = c.newInstance();
+//            field = c.getField("status_bar_height");
+//            x = Integer.parseInt(field.get(obj).toString());
+//            statusBarHeight = context.getResources().getDimensionPixelSize(x);
+//        } catch (Exception e1) {
+//            e1.printStackTrace();
+//        }
+//        Log.e(TAG, "状态栏-方法3:" + statusBarHeight);
+
+        int statusBarHeight = (int)Math.ceil(25 * context.getResources().getDisplayMetrics().density);
+
+        Log.e(TAG, "状态栏-方法4:" + context.getResources().getDisplayMetrics().density);
+        Log.e(TAG, "状态栏-方法4:" + statusBarHeight);
+        return statusBarHeight;
     }
 
 }

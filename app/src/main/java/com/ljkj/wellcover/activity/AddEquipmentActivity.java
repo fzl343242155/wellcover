@@ -83,7 +83,7 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
     @Override
     protected void initViews() {
         super.initViews();
-        ImmersionBarUtils.initColorBaseBar(AddEquipmentActivity.this, R.color._09B1FF);
+        ImmersionBarUtils.initColorBar(AddEquipmentActivity.this);
         mMapView.onCreate(getSavedInstanceState());
         markerOption = new MarkerOptions().draggable(true);
         if (mAMap == null) {

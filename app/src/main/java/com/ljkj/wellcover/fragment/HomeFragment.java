@@ -2,7 +2,6 @@ package com.ljkj.wellcover.fragment;
 
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +14,6 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.ljkj.wellcover.R;
@@ -24,6 +22,7 @@ import com.ljkj.wellcover.adapter.BaseRecyclerAdapter;
 import com.ljkj.wellcover.adapter.HomeAdapter;
 import com.ljkj.wellcover.bean.BaseData;
 import com.ljkj.wellcover.bean.EquipmentBean;
+import com.ljkj.wellcover.bean.EquipmentInfoBean;
 import com.ljkj.wellcover.utils.ConstantUtils;
 import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
@@ -67,7 +66,7 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
     private boolean isPlayListOrMap = false;
     private AMap amap;
     private MyLocationStyle myLocationStyle;
-    private List<EquipmentBean.ListBean> mList = new ArrayList<>();
+    private List<EquipmentInfoBean> mList = new ArrayList<>();
 
     @Override
     protected int getContentViewLayoutID() {
@@ -116,7 +115,7 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
         mHomeAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, Object data) {
-                EquipmentBean.ListBean bean = (EquipmentBean.ListBean) data;
+                EquipmentInfoBean bean = (EquipmentInfoBean) data;
                 Intent intent = new Intent(mContext, ActionActivity.class);
                 intent.putExtra(ConstantUtils.DATA, bean);
                 mContext.startActivity(intent);
