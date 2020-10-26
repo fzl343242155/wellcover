@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/equipment_head_bg">
+
+        <com.ljkj.wellcover.view.StatusBarView
+            android:id="@+id/sbv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90mm"
+            android:layout_below="@+id/sbv_content"
+            android:layout_marginTop="10mm">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="80mm"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:paddingTop="25mm"
+                android:paddingBottom="25mm"
+                android:src="@mipmap/icon_back_w" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="扫描二维码"
+                android:textColor="@color/white"
+                android:textSize="36mm" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <cn.bingoogolapple.qrcode.zxing.ZXingView
+            android:id="@+id/zxingview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:qrcv_animTime="1000"
+            app:qrcv_barCodeTipText="将条码放入框内，即可自动扫描"
+            app:qrcv_barcodeRectHeight="240mm"
+            app:qrcv_borderColor="@android:color/white"
+            app:qrcv_borderSize="2mm"
+            app:qrcv_cornerColor="@color/_09B1FF"
+            app:qrcv_cornerDisplayType="center"
+            app:qrcv_cornerLength="40mm"
+            app:qrcv_cornerSize="6mm"
+            app:qrcv_customScanLineDrawable="@mipmap/scan_icon_scanline"
+            app:qrcv_isAutoZoom="true"
+            app:qrcv_isBarcode="false"
+            app:qrcv_isOnlyDecodeScanBoxArea="true"
+            app:qrcv_isScanLineReverse="true"
+            app:qrcv_isShowDefaultGridScanLineDrawable="false"
+            app:qrcv_isShowDefaultScanLineDrawable="true"
+            app:qrcv_isShowLocationPoint="true"
+            app:qrcv_isShowTipBackground="true"
+            app:qrcv_isShowTipTextAsSingleLine="false"
+            app:qrcv_isTipTextBelowRect="false"
+            app:qrcv_maskColor="@color/transparent"
+            app:qrcv_qrCodeTipText="将二维码/条码放入框内，即可自动扫描"
+            app:qrcv_rectWidth="440mm"
+            app:qrcv_scanLineColor="@color/_09B1FF"
+            app:qrcv_scanLineMargin="0mm"
+            app:qrcv_scanLineSize="1mm"
+            app:qrcv_tipTextColor="@android:color/white"
+            app:qrcv_tipTextMargin="70mm"
+            app:qrcv_tipTextSize="28mm"
+            app:qrcv_toolbarHeight="112mm"
+            app:qrcv_topOffset="200mm"
+            app:qrcv_verticalBias="-1" />
+
+        <CheckBox
+            android:id="@+id/light_switch"
+            android:layout_width="90mm"
+            android:layout_height="90mm"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="250mm"
+            android:background="@drawable/capture_light_icon"
+            android:button="@null"
+            android:checked="false" />
+    </FrameLayout>
+
+</LinearLayout>

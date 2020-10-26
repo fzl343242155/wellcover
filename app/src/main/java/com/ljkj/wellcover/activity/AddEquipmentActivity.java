@@ -1,12 +1,14 @@
 package com.ljkj.wellcover.activity;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.annotation.Nullable;
 
 import com.amap.api.fence.GeoFence;
 import com.amap.api.fence.GeoFenceListener;
@@ -23,9 +25,9 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.model.MyLocationStyle;
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.bean.BaseData;
+import com.ljkj.wellcover.utils.ConstantUtils;
 import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
 
@@ -46,6 +48,8 @@ import rx.schedulers.Schedulers;
  * 蚁穴虽小，溃之千里。
  */
 public class AddEquipmentActivity extends BaseActivity implements GeoFenceListener, AMap.OnMapClickListener, LocationSource, AMapLocationListener {
+
+    private static final String TAG = "AddEquipmentActivity";
 
     private AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
@@ -215,7 +219,7 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
     }
 
 
-    @OnClick({R.id.ivBack, R.id.tv_complete})
+    @OnClick({R.id.ivBack, R.id.tv_complete, R.id.iv_scan_code})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ivBack:
@@ -245,6 +249,22 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
 
                 addEquipment(number, latitude, longitude, mStreetName);
                 break;
+            case R.id.iv_scan_code:
+                Intent intent = new Intent(mContext, CaptureActivity.class);
+                startActivityForResult(intent, ConstantUtils.ADDEQUIPMENT2CAPTURE);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ConstantUtils.CAPTURE2ADDEQUIPMENT) {
+            String result = data.getStringExtra(ConstantUtils.SCANQRCODESUCCESS);
+            Log.e(TAG, "onActivityResult: result = " + result);
+            if(!TextUtils.isEmpty(result)){
+                etNumber.setText(result);
+            }
         }
     }
 

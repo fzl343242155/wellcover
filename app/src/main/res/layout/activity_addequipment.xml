@@ -68,28 +68,44 @@
             android:textColor="@color/black"
             android:textSize="32mm" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80mm"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="32mm"
-                android:text="编号："
-                android:textColor="@color/black"
-                android:textSize="32mm" />
-
-            <EditText
-                android:id="@+id/et_number"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="32mm"
+                    android:text="编号："
+                    android:textColor="@color/black"
+                    android:textSize="32mm" />
+
+                <EditText
+                    android:id="@+id/et_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="100mm"
+                    android:hint="请输入编号"
+                    android:textSize="32mm" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_scan_code"
+                android:layout_width="50mm"
+                android:layout_height="50mm"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="20mm"
-                android:hint="请输入编号"
-                android:textSize="32mm" />
-        </LinearLayout>
+                android:background="@mipmap/scan_code" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -160,16 +176,19 @@
                 android:textSize="32mm" />
         </LinearLayout>
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="20mm"
-            android:layout_marginBottom="20mm"
-            android:gravity="center_horizontal"
-            android:text="地图选择地址"
-            android:textColor="@color/black"
-            android:textSize="32mm" />
+            android:layout_height="80mm"
+            android:background="#ADD8E6">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="地图选择地址"
+                android:textColor="@color/black"
+                android:textSize="32mm" />
+        </RelativeLayout>
 
         <com.amap.api.maps.MapView
             android:id="@+id/mv_map"

@@ -17,4 +17,9 @@ public class ConstantUtils {
     public static final String APK_URL = "http://192.168.16.113:8080/update_demo/demo.apk";
 
     public static final String VERSION_INFO_URL = "http://192.168.16.113:8080/update_demo/update_demo_info.json";
+
+    public static final String SCANQRCODESUCCESS = "ScanQRCodeSuccess";
+
+    public static final int ADDEQUIPMENT2CAPTURE = 10001;
+    public static final int CAPTURE2ADDEQUIPMENT = 10002;
 }
