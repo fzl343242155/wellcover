@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/et_mac"
+        android:layout_width="match_parent"
+        android:layout_height="100mm"
+        android:hint="输入mac地址"
+        android:text="20:20:08:27:08:5A" />
+
+    <EditText
+        android:id="@+id/et_input"
+        android:layout_width="match_parent"
+        android:layout_height="100mm"
+        android:hint="要发送的内容" />
+
+    <Button
+        android:id="@+id/btn_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="连接" />    <Button
+        android:id="@+id/btn_disconnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="断开连接" />
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送数据" />
+
+    <EditText
+        android:id="@+id/et_output"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="接收的内容" />
+</LinearLayout>
