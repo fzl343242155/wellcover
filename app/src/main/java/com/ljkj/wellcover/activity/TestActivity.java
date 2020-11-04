@@ -15,6 +15,7 @@ import com.inuker.bluetooth.library.model.BleGattCharacter;
 import com.inuker.bluetooth.library.model.BleGattProfile;
 import com.inuker.bluetooth.library.model.BleGattService;
 import com.ljkj.wellcover.R;
+import com.ljkj.wellcover.utils.CRCUtils;
 
 import java.util.List;
 import java.util.UUID;
@@ -128,19 +129,73 @@ public class TestActivity extends BaseActivity {
                 btnConnect.setText("连接");
                 break;
             case R.id.btn_send:
-                String content = etInput.getText().toString();
+//                String content = etInput.getText().toString();
+//
+//                mBluetoothClient.write(mMac, mBleGattServiceNotify,
+//                        mCharacterNotify, content.getBytes(),
+//                        new BleWriteResponse() {
+//                            @Override
+//                            public void onResponse(int code) {
+//                                Log.e(TAG, "onResponse: write  code = " + code);
+//                            }
+//                        });
 
 
-                mBluetoothClient.write(mMac, mBleGattServiceNotify,
-                        mCharacterNotify, content.getBytes(),
-                        new BleWriteResponse() {
-                            @Override
-                            public void onResponse(int code) {
-                                Log.e(TAG, "onResponse: write  code = " + code);
-                            }
-                        });
+//                String str = "Java生成CRC16数据校验码";
+//                byte[] data = str.getBytes();
+//                System.out.println(CRCUtils.Make_CRC(data));
+//
+//                Log.e("turbo", "onViewClicked: "+CRCUtils.Make_CRC(data));
+
+                byte[] b = new byte[7];
+                b[0] = (byte) 0xfd;
+                b[1] = (byte) 0xfc;
+                b[2] = (byte) 0x08;
+                b[3] = (byte) 0x80;
+                b[4] = (byte) 0x02;
+                b[5] = (byte) 0x00;
+                b[6] = (byte) 0x0a;
+                byte result = sumCheck(b, 7);
+
+                Log.e(TAG, "onViewClicked: " + result);
+
+
+                StringBuffer stringBuffer = new StringBuffer();
+                byte[] key = new byte[]{0x20, 0x10, 0x23, 0x22, 0x46, 0x30};
+                for (int i = 0; i < key.length; i++) {
+                    stringBuffer.append(String.format("%02x", key[i]));
+                }
+
+                Log.e(TAG, "onViewClicked: stringBuffer = " + stringBuffer.toString());
+
 
                 break;
         }
     }
+
+
+    /**
+     * 求校验和的算法
+     *
+     * @param b 需要求校验和的字节数组
+     * @return 校验和
+     */
+    private byte sumCheck(byte[] b, int len) {
+        int sum = 0;
+        for (int i = 0; i < len; i++) {
+            sum = sum + b[i];
+        }
+//        if(sum > 0xff){ //超过了255，使用补码（补码 = 原码取反 + 1）
+//            sum = ~sum;
+//            sum = sum + 1;
+//        }
+//        return (byte) (sum & 0xff);
+
+        sum = ~sum + 1;
+        if (sum > 0xf0) {
+            sum -= 16;
+        }
+        return (byte) sum;
+    }
+
 }
