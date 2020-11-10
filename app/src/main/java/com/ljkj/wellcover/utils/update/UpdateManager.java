@@ -10,8 +10,6 @@ import android.util.Log;
 
 import androidx.core.content.FileProvider;
 
-import com.blankj.utilcode.util.ToastUtils;
-import com.google.gson.Gson;
 import com.ljkj.wellcover.BuildConfig;
 import com.ljkj.wellcover.bean.BaseData;
 import com.ljkj.wellcover.bean.UpdateBean;
@@ -24,14 +22,7 @@ import com.ljkj.wellcover.utils.download.OnDownloadListener;
 
 
 import java.io.File;
-import java.io.IOException;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -56,9 +47,9 @@ public class UpdateManager {
     private OnUpdateListener mOnUpdateListener;
     private OnCheckUpdateListener mOnCheckUpdateListener;
 
-    private int mNewestVersionCode;
     private String mNewestVersionName;
     private String mNewVersionContent;
+    private String mAppUrl;
 
     /**
      * 最后一次保存cache的时间
@@ -124,14 +115,13 @@ public class UpdateManager {
 
                 case MSG_ON_FIND_NEW_VERSION:
                     UpdateBean dataBean = (UpdateBean) msg.obj;
-//
-//                    mNewestVersionCode = dataBean.getAppVersion();
-//                    mNewestVersionName = dataBean.getVersion_name();
-//                    mNewVersionContent = dataBean.getContent();
+                    mNewestVersionName = dataBean.getVersionName();
+                    mNewVersionContent = dataBean.getUpdateContent();
+                    mAppUrl = dataBean.getAppUrl();
 
                     if (mOnCheckUpdateListener != null)
                         mOnCheckUpdateListener.onFindNewVersion(mNewestVersionName,
-                                mNewVersionContent);
+                                mNewVersionContent, mAppUrl);
                     break;
 
                 case MSG_ON_NEWEST:
@@ -145,36 +135,10 @@ public class UpdateManager {
     /**
      * 检查更新
      *
-     * @param apkInfoUrl            服务器端保存新版apk相关信息json的url
      * @param onCheckUpdateListener onCheckUpdateListener
      */
-    public void checkUpdate(String apkInfoUrl, OnCheckUpdateListener onCheckUpdateListener) {
+    public void checkUpdate(OnCheckUpdateListener onCheckUpdateListener) {
         mOnCheckUpdateListener = onCheckUpdateListener;
-//        sendOkHttpRequest(apkInfoUrl, new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                ToastUtils.showShort("check update failed.");
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String strJson = response.body().string();
-//                Log.e("onResponse", "response.body().string() = " + strJson);
-//                if (parseJson(strJson).getVersion_code() > AppUtils.getAppVersionCode()) {
-//                    //最后一次缓存的时间超过缓存文件有效期，或者最后一次缓存的apk不是最新版本的apk，删除缓存apk
-//                    if ((System.currentTimeMillis() - mLastCacheSaveTime > getCacheSaveValidTime())
-//                            || (getCacheApkVersionCode() != parseJson(strJson).getVersion_code())) {
-//                        clearCacheApkFile();
-//                        setCacheApkVersionCode(parseJson(strJson).getVersion_code());
-//                    }
-//                    sendMessage(MSG_ON_FIND_NEW_VERSION, parseJson(strJson));
-//                } else {
-//                    sendMessage(MSG_ON_NEWEST, null);
-//                    //当前已经是最新版本APK，清除本地已经缓存的apk安装包
-//                    clearCacheApkFile();
-//                }
-//            }
-//        });
 
         HttpServer.$().checkAppUpdate()
                 .subscribeOn(Schedulers.io())
@@ -183,19 +147,20 @@ public class UpdateManager {
                     @Override
                     public void call(BaseData<UpdateBean> updateBeanBaseData) {
 
-                                        if (updateBeanBaseData.getInfo().getAppVersion() > AppUtils.getAppVersionCode()) {
-                    //最后一次缓存的时间超过缓存文件有效期，或者最后一次缓存的apk不是最新版本的apk，删除缓存apk
-                    if ((System.currentTimeMillis() - mLastCacheSaveTime > getCacheSaveValidTime())
-                            || (getCacheApkVersionCode() != updateBeanBaseData.getInfo().getAppVersion())) {
-                        clearCacheApkFile();
-                        setCacheApkVersionCode(updateBeanBaseData.getInfo().getAppVersion());
-                    }
-                    sendMessage(MSG_ON_FIND_NEW_VERSION, updateBeanBaseData.getInfo());
-                } else {
-                    sendMessage(MSG_ON_NEWEST, null);
-                    //当前已经是最新版本APK，清除本地已经缓存的apk安装包
-                    clearCacheApkFile();
-                }
+                        int versionCode = Integer.parseInt(updateBeanBaseData.getInfo().getVersionCode());
+                        if (versionCode > AppUtils.getAppVersionCode()) {
+                            //最后一次缓存的时间超过缓存文件有效期，或者最后一次缓存的apk不是最新版本的apk，删除缓存apk
+                            if ((System.currentTimeMillis() - mLastCacheSaveTime > getCacheSaveValidTime())
+                                    || (getCacheApkVersionCode() != versionCode)) {
+                                clearCacheApkFile();
+                                setCacheApkVersionCode(versionCode);
+                            }
+                            sendMessage(MSG_ON_FIND_NEW_VERSION, updateBeanBaseData.getInfo());
+                        } else {
+                            sendMessage(MSG_ON_NEWEST, null);
+                            //当前已经是最新版本APK，清除本地已经缓存的apk安装包
+                            clearCacheApkFile();
+                        }
                     }
                 }, new Action1<Throwable>() {
                     @Override
@@ -216,10 +181,10 @@ public class UpdateManager {
     public void startToUpdate(String apkUrl, OnUpdateListener onUpdateListener) {
         mOnUpdateListener = onUpdateListener;
 
-        if (isEmpty(mNewestVersionName) || mNewestVersionCode == 0)
+        if (isEmpty(mNewestVersionName))
             return;
 
-        downloadNewestApkFile(apkUrl, mNewestVersionCode, mNewestVersionName);
+        downloadNewestApkFile(apkUrl, mNewestVersionName);
     }
 
     /**
@@ -282,54 +247,48 @@ public class UpdateManager {
      * 下载最新版本的APK文件
      *
      * @param url               服务端最新apk文件url
-     * @param newestVersionCode 最新版本APK版本号
      * @param newestVersionName 最新版本APK版本名称
      */
-    private void downloadNewestApkFile(String url, int newestVersionCode, String
-            newestVersionName) {
-        String apkFileName = getApkNameWithVersionName(DownloadHelper.getUrlFileName(url),
-                newestVersionName);
-
+    private void downloadNewestApkFile(String url, String newestVersionName) {
+        String apkFileName = getApkNameWithVersionName(DownloadHelper.getUrlFileName(url), newestVersionName);
         sendMessage(MSG_ON_START, null);
+        mDownloadManager.startDownload(url, apkFileName, new OnDownloadListener() {
+            @Override
+            public void onException() {
+                sendMessage(MSG_ON_UPDATE_EXCEPTION, null);
+            }
 
-        mDownloadManager.startDownload(url, apkFileName, new
-                OnDownloadListener() {
-                    @Override
-                    public void onException() {
-                        sendMessage(MSG_ON_UPDATE_EXCEPTION, null);
-                    }
+            @Override
+            public void onProgress(int progress) {
+                sendMessage(MSG_ON_PROGRESS, progress);
+            }
 
-                    @Override
-                    public void onProgress(int progress) {
-                        sendMessage(MSG_ON_PROGRESS, progress);
-                    }
+            @Override
+            public void onSuccess() {
+                mLastCacheSaveTime = System.currentTimeMillis();
+                sendMessage(MSG_ON_DOWNLOAD_FINISH, mDownloadManager.getDownloadFilePath());
+            }
 
-                    @Override
-                    public void onSuccess() {
-                        mLastCacheSaveTime = System.currentTimeMillis();
-                        sendMessage(MSG_ON_DOWNLOAD_FINISH, mDownloadManager.getDownloadFilePath());
-                    }
+            @Override
+            public void onFailed() {
+                mLastCacheSaveTime = System.currentTimeMillis();
+                sendMessage(MSG_ON_FAILED, null);
+            }
 
-                    @Override
-                    public void onFailed() {
-                        mLastCacheSaveTime = System.currentTimeMillis();
-                        sendMessage(MSG_ON_FAILED, null);
-                    }
+            @Override
+            public void onPaused() {
+                mLastCacheSaveTime = System.currentTimeMillis();
+                //取消升级时，调用download pause，保留已下载的部分apk文件
+                sendMessage(MSG_ON_CANCLE, null);
+            }
 
-                    @Override
-                    public void onPaused() {
-                        mLastCacheSaveTime = System.currentTimeMillis();
-                        //取消升级时，调用download pause，保留已下载的部分apk文件
-                        sendMessage(MSG_ON_CANCLE, null);
-                    }
-
-                    @Override
-                    public void onCanceled() {
-                        //为了保证断点续传，升级时，调用download pause，不使用cancle，onCancle不会被调用
-                        mLastCacheSaveTime = System.currentTimeMillis();
-                        sendMessage(MSG_ON_CANCLE, null);
-                    }
-                });
+            @Override
+            public void onCanceled() {
+                //为了保证断点续传，升级时，调用download pause，不使用cancle，onCancle不会被调用
+                mLastCacheSaveTime = System.currentTimeMillis();
+                sendMessage(MSG_ON_CANCLE, null);
+            }
+        });
     }
 
     private void sendMessage(int msgWhat, Object o) {
@@ -349,8 +308,7 @@ public class UpdateManager {
         if (isEmpty(apkName))
             return apkName;
 
-        apkName = apkName.substring(apkName.lastIndexOf("/") + 1, apkName.indexOf("" +
-                ".apk"));
+        apkName = apkName.substring(apkName.lastIndexOf("/") + 1, apkName.indexOf("" + ".apk"));
         Log.e("tag", "newApkName = " + apkName + "_v" + versionName + ".apk");
         return apkName + "_v" + versionName + ".apk";
     }

@@ -1,5 +1,6 @@
 package com.ljkj.wellcover.activity;
 
+import android.os.Environment;
 import android.view.KeyEvent;
 
 import com.ljkj.wellcover.R;
@@ -8,6 +9,8 @@ import com.ljkj.wellcover.fragment.MessageFragment;
 import com.ljkj.wellcover.fragment.MyFragment;
 import com.ljkj.wellcover.utils.AppUpdateUtils;
 import com.ljkj.wellcover.view.BottomBar;
+
+import java.io.File;
 
 import butterknife.BindView;
 
@@ -57,6 +60,15 @@ public class MainActivity extends BaseActivity {
                         R.mipmap.myed)
                 .setFirstChecked(0)
                 .build();
-        new AppUpdateUtils().update(mContext, false);
+        makeDir();//创建文件夹
     }
+
+    private void makeDir() {
+        File dirFirstFolder = new File(Folder_NAME);//方法二：通过变量文件来获取需要创建的文件夹名字
+        if (!dirFirstFolder.exists()) { //如果该文件夹不存在，则进行创建
+            dirFirstFolder.mkdirs();//创建文件夹
+        }
+    }
+
+    public String Folder_NAME = Environment.getExternalStorageDirectory() + File.separator + "wellcover";
 }

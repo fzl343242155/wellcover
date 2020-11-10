@@ -8,26 +8,31 @@ package com.ljkj.wellcover.bean;
  */
 public class UpdateBean {
 
-
     /**
      * appVersion : 1.0.0
      * createTime : 2020-10-19 16:44:25
      * appName : wellcover apk
-     * appUrl : http://101.200.202.152:9090/group1/M00/00/00/ZcjKmF-NUeaABEzSAAAB2CUWDTU495.bak
+     * appUrl : http://101.200.202.152:9090/group1/M00/00/00/ZcjKmF-TxcCAbCKRAXgKfLthR2A620.jar
      * id : 4
+     * versionName : 11
+     * updateContent : 31
+     * versionCode : 121
      */
 
-    private int appVersion;
+    private String appVersion;
     private String createTime;
     private String appName;
     private String appUrl;
     private int id;
+    private String versionName;
+    private String updateContent;
+    private String versionCode;
 
-    public int getAppVersion() {
+    public String getAppVersion() {
         return appVersion;
     }
 
-    public void setAppVersion(int appVersion) {
+    public void setAppVersion(String appVersion) {
         this.appVersion = appVersion;
     }
 
@@ -61,5 +66,29 @@ public class UpdateBean {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getVersionName() {
+        return versionName;
+    }
+
+    public void setVersionName(String versionName) {
+        this.versionName = versionName;
+    }
+
+    public String getUpdateContent() {
+        return updateContent;
+    }
+
+    public void setUpdateContent(String updateContent) {
+        this.updateContent = updateContent;
+    }
+
+    public String getVersionCode() {
+        return versionCode;
+    }
+
+    public void setVersionCode(String versionCode) {
+        this.versionCode = versionCode;
     }
 }

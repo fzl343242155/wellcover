@@ -19,4 +19,5 @@ public class URLs {
     public static final String ADDARTICLE = BASEURL + "/article/addArticle";
     public static final String DELETEARTICLE = BASEURL + "/article/deleteArticle";
     public static final String FINDNEARDEVICE = BASEURL + "/article/findNearDevice";
+    public static final String FINDAPPBYVERSION = BASEURL + "/app/findAppByVersion";
 }

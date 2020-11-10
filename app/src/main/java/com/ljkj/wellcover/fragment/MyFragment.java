@@ -69,8 +69,7 @@ public class MyFragment extends BaseFragment {
                 getActivity().finish();
                 break;
             case R.id.rl_update:
-                toast("改功能正在开发");
-//                new AppUpdateUtils().update(mContext, true);
+                new AppUpdateUtils().update(mContext);
                 break;
             case R.id.rl_searchnear:
                 startActivity(new Intent(mContext, SearchNearActivity.class));

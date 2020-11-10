@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ljkj.wellcover.R;
@@ -22,26 +24,23 @@ public class AppUpdateUtils {
     private UpdateManager mUpdateManager;
     private ProgressDialog mProgressDialog;
     private Context mContext;
-    private boolean mIsNewAPPVersion;
 
-    public void update(Context context, boolean isNewAPPVersion) {
+
+    public void update(Context context) {
         mContext = context;
-        mIsNewAPPVersion = isNewAPPVersion;
         initProgressDialog();
         mUpdateManager = UpdateManager.getInstance();
 
-        mUpdateManager.checkUpdate(ConstantUtils.VERSION_INFO_URL, new OnCheckUpdateListener() {
+        mUpdateManager.checkUpdate(new OnCheckUpdateListener() {
             @Override
-            public void onFindNewVersion(String versionName, String newVersionContent) {
+            public void onFindNewVersion(String versionName, String newVersionContent, String apkUrl) {
                 String content = "最新版: V" + versionName + "\n" + newVersionContent;
-                buildNewVersionDialog(content);
+                buildNewVersionDialog(content, apkUrl);
             }
 
             @Override
             public void onNewest() {
-                if (mIsNewAPPVersion) {
-                    ToastUtils.showShort("已经是最新版本");
-                }
+                ToastUtils.showShort("已经是最新版本");
                 dismissProgressDialog();
             }
         });
@@ -68,7 +67,7 @@ public class AppUpdateUtils {
      *
      * @param message dialog显示消息
      */
-    private void buildNewVersionDialog(String message) {
+    private void buildNewVersionDialog(String message, String apkUrl) {
         AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setTitle("发现新版本")
                 .setMessage(message)
@@ -76,7 +75,11 @@ public class AppUpdateUtils {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        mUpdateManager.startToUpdate(ConstantUtils.APK_URL, mOnUpdateListener);
+                        if (TextUtils.isEmpty(apkUrl)) {
+                            Log.e("turbo", "onClick: apkUrl不能为空");
+                            return;
+                        }
+                        mUpdateManager.startToUpdate(apkUrl, mOnUpdateListener);
                     }
                 })
                 .setNegativeButton("取消", null)
@@ -97,25 +100,21 @@ public class AppUpdateUtils {
 
         @Override
         public void onApkDownloadFinish(String apkPath) {
-            ToastUtils.showShort("newest apk download finish. apkPath: " + apkPath);
             dismissProgressDialog();
         }
 
         @Override
         public void onUpdateFailed() {
-            ToastUtils.showShort("update failed.");
             dismissProgressDialog();
         }
 
         @Override
         public void onUpdateCanceled() {
-            ToastUtils.showShort("update cancled.");
             dismissProgressDialog();
         }
 
         @Override
         public void onUpdateException() {
-            ToastUtils.showShort("update exception.");
             dismissProgressDialog();
         }
     };

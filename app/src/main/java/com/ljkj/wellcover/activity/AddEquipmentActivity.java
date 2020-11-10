@@ -247,7 +247,7 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
                     return;
                 }
 
-                addEquipment(number, latitude, longitude, mStreetName);
+//                addEquipment(number, latitude, longitude, mStreetName);
                 break;
             case R.id.iv_scan_code:
                 Intent intent = new Intent(mContext, CaptureActivity.class);
@@ -262,14 +262,17 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
         if (resultCode == ConstantUtils.CAPTURE2ADDEQUIPMENT) {
             String result = data.getStringExtra(ConstantUtils.SCANQRCODESUCCESS);
             Log.e(TAG, "onActivityResult: result = " + result);
-            if(!TextUtils.isEmpty(result)){
-                etNumber.setText(result);
+            if (!TextUtils.isEmpty(result)) {
+//                etNumber.setText(result);
+
             }
         }
     }
 
-    private void addEquipment(String id, String latitude, String longitude, String streetName) {
-        HttpServer.$().addArticle(id, latitude, longitude, streetName)
+    private void addEquipment(String id, String latitude, String longitude, String streetName,
+                              String bluetoothMac, String deviceType, String electricityQuantity,
+                              String simInfo, String versionNum, String lockStatus) {
+        HttpServer.$().addArticle(id, latitude, longitude, streetName, bluetoothMac, deviceType, electricityQuantity, simInfo, versionNum, lockStatus)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override

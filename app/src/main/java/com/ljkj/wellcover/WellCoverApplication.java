@@ -2,6 +2,7 @@ package com.ljkj.wellcover;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
 import android.os.Handler;
 
 import androidx.multidex.MultiDex;
@@ -15,6 +16,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
