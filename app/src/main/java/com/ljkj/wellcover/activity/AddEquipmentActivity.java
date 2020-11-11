@@ -94,7 +94,9 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
             mAMap = mMapView.getMap();
             mAMap.getUiSettings().setRotateGesturesEnabled(false);
             mAMap.moveCamera(CameraUpdateFactory.zoomBy(6));
+
             setUpMap();
+             
         }
     }
 
