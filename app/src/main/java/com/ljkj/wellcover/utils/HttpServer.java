@@ -88,21 +88,35 @@ public class HttpServer {
      *
      * @return
      */
-    public Observable<BaseData> addArticle(String id, String latitude, String longitude, String streetName,
-                                           String bluetoothMac, String deviceType, String electricityQuantity,
-                                           String simInfo, String versionNum, String lockStatus) {
+    public Observable<BaseData> addArticle(String id, String latitude, String longitude, String streetName) {
+//        public Observable<BaseData> addArticle(String id, String latitude, String longitude, String streetName,
+//                                           String bluetoothMac, String deviceType, String electricityQuantity,
+//                                           String simInfo, String versionNum, String lockStatus) {
+//        Map<String, String> map = new HashMap<>();
+//        map.put("company", "天津瓴建科技有限公司");
+//        map.put("id", id);
+//        map.put("latitude", latitude);
+//        map.put("lockStatus", lockStatus);
+//        map.put("longitude", longitude);
+//        map.put("streetName", streetName);
+//        map.put("bluetoothMac", bluetoothMac);
+//        map.put("deviceType", deviceType);
+//        map.put("electricityQuantity", electricityQuantity);
+//        map.put("simInfo", simInfo);
+//        map.put("versionNum", versionNum);
+//
         Map<String, String> map = new HashMap<>();
         map.put("company", "天津瓴建科技有限公司");
         map.put("id", id);
         map.put("latitude", latitude);
-        map.put("lockStatus", lockStatus);
+//        map.put("lockStatus", lockStatus);
         map.put("longitude", longitude);
         map.put("streetName", streetName);
-        map.put("bluetoothMac", bluetoothMac);
-        map.put("deviceType", deviceType);
-        map.put("electricityQuantity", electricityQuantity);
-        map.put("simInfo", simInfo);
-        map.put("versionNum", versionNum);
+//        map.put("bluetoothMac", bluetoothMac);
+//        map.put("deviceType", deviceType);
+//        map.put("electricityQuantity", electricityQuantity);
+//        map.put("simInfo", simInfo);
+//        map.put("versionNum", versionNum);
         return OkGo.<BaseData>post(URLs.ADDARTICLE)
                 .headers("Cookie", SPUtils.getInstance().getString(ConstantUtils.COOKIE))
                 .upJson(new Gson().toJson(map))

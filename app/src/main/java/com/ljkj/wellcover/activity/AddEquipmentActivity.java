@@ -94,9 +94,7 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
             mAMap = mMapView.getMap();
             mAMap.getUiSettings().setRotateGesturesEnabled(false);
             mAMap.moveCamera(CameraUpdateFactory.zoomBy(6));
-
             setUpMap();
-             
         }
     }
 
@@ -248,8 +246,7 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
                     toast("所属街道不能为空");
                     return;
                 }
-
-//                addEquipment(number, latitude, longitude, mStreetName);
+                addEquipment(number, latitude, longitude, mStreetName);
                 break;
             case R.id.iv_scan_code:
                 Intent intent = new Intent(mContext, CaptureActivity.class);
@@ -271,10 +268,8 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
         }
     }
 
-    private void addEquipment(String id, String latitude, String longitude, String streetName,
-                              String bluetoothMac, String deviceType, String electricityQuantity,
-                              String simInfo, String versionNum, String lockStatus) {
-        HttpServer.$().addArticle(id, latitude, longitude, streetName, bluetoothMac, deviceType, electricityQuantity, simInfo, versionNum, lockStatus)
+    private void addEquipment(String id, String latitude, String longitude, String streetName) {
+        HttpServer.$().addArticle(id, latitude, longitude, streetName)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override
