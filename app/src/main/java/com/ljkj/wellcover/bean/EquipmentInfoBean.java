@@ -9,26 +9,75 @@ import java.io.Serializable;
  * 蚁穴虽小，溃之千里。
  */
 public class EquipmentInfoBean implements Serializable {
-
     /**
-     * streetName : 步行街1
-     * lockStatus : 2
-     * createTime : 2020-10-08 09:57:59
-     * company : 大乐透1
-     * id : 99xxxxxx
+     * deviceType : jg
+     * versionNum : 2.1
+     * latitude : 116.492536
+     * bluetoothMac : 10xx
      * userId : 10003
-     * dimension : 11112
-     * longitude : 121
+     * streetName : 缘好来
+     * lockStatus : 1
+     * createTime : 2020-10-24 11:34:07
+     * simInfo : 电信
+     * company : null
+     * id : Z
+     * electricityQuantity : 29
+     * longitude : 39.903693
      */
 
+    private String deviceType;
+    private String versionNum;
+    private double latitude;
+    private String bluetoothMac;
+    private int userId;
     private String streetName;
     private String lockStatus;
     private String createTime;
+    private String simInfo;
     private String company;
     private String id;
-    private int userId;
-    private double latitude;
+    private String electricityQuantity;
     private double longitude;
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public String getVersionNum() {
+        return versionNum;
+    }
+
+    public void setVersionNum(String versionNum) {
+        this.versionNum = versionNum;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getBluetoothMac() {
+        return bluetoothMac;
+    }
+
+    public void setBluetoothMac(String bluetoothMac) {
+        this.bluetoothMac = bluetoothMac;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getStreetName() {
         return streetName;
@@ -54,6 +103,14 @@ public class EquipmentInfoBean implements Serializable {
         this.createTime = createTime;
     }
 
+    public String getSimInfo() {
+        return simInfo;
+    }
+
+    public void setSimInfo(String simInfo) {
+        this.simInfo = simInfo;
+    }
+
     public String getCompany() {
         return company;
     }
@@ -70,20 +127,12 @@ public class EquipmentInfoBean implements Serializable {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getElectricityQuantity() {
+        return electricityQuantity;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setElectricityQuantity(String electricityQuantity) {
+        this.electricityQuantity = electricityQuantity;
     }
 
     public double getLongitude() {
@@ -93,4 +142,5 @@ public class EquipmentInfoBean implements Serializable {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
 }
