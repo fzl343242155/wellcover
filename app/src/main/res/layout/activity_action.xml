@@ -28,8 +28,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="90mm"
-                android:layout_marginTop="10mm"
-                android:layout_below="@+id/sbv_content">
+                android:layout_below="@+id/sbv_content"
+                android:layout_marginTop="10mm">
 
                 <ImageView
                     android:id="@+id/ivBack"
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10mm"
-                    android:layout_marginTop="20mm"
+                    android:layout_marginTop="25mm"
                     android:text="LJKJ1234567890"
                     android:textColor="@color/black"
                     android:textSize="26mm" />
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32mm"
-                    android:layout_marginTop="20mm"
+                    android:layout_marginTop="25mm"
                     android:text="状态："
                     android:textColor="@color/black"
                     android:textSize="26mm" />
@@ -93,10 +93,101 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10mm"
-                    android:layout_marginTop="20mm"
+                    android:layout_marginTop="25mm"
                     android:text="关闭"
                     android:textColor="@color/black"
                     android:textSize="26mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32mm"
+                    android:layout_marginTop="25mm"
+                    android:text="连接状态："
+                    android:textColor="@color/black"
+                    android:textSize="26mm" />
+
+                <TextView
+                    android:id="@+id/tv_connect_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:layout_marginTop="25mm"
+                    android:text="未连接"
+                    android:textColor="@color/black"
+                    android:textSize="26mm" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10mm"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_conn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_action_bg"
+                    android:paddingTop="10mm"
+                    android:paddingBottom="10mm">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="5mm"
+                        android:text="连接"
+                        android:textColor="@color/white"
+                        android:textSize="26mm" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="5mm"
+                        android:text="解除报警"
+                        android:textColor="@color/white"
+                        android:textSize="26mm"
+                        android:visibility="invisible" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="10mm"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_disconn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_action_bg"
+                    android:paddingTop="10mm"
+                    android:paddingBottom="10mm">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="5mm"
+                        android:text="断开"
+                        android:textColor="@color/white"
+                        android:textSize="26mm" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="5mm"
+                        android:text="解除报警"
+                        android:textColor="@color/white"
+                        android:textSize="26mm"
+                        android:visibility="invisible" />
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -222,8 +313,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="32mm"
-                android:layout_marginBottom="20mm"
-                android:layout_marginRight="32mm" />
+                android:layout_marginRight="32mm"
+                android:layout_marginBottom="20mm" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

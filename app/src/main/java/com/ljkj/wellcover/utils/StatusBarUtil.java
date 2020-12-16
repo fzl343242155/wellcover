@@ -145,55 +145,8 @@ public class StatusBarUtil {
      *
      * @param context 目标Context
      */
-
-
     public static int getStatusBarHeight(Context context) {
-//        int mStatusBarHeight = 0;
-//        if (mStatusBarHeight == 0) {
-//            Resources res = context.getResources();
-//            int resourceId = res.getIdentifier("status_bar_height", "dimen", "android");
-//            if (resourceId > 0) {
-//                mStatusBarHeight = res.getDimensionPixelSize(resourceId);
-//            }
-//        }
-//        Log.e(TAG, "状态栏-方法1:" + mStatusBarHeight);
-//
-//        /**
-//         * 获取状态栏高度——方法2
-//         * */
-//        int statusBarHeight2 = -1;
-//        try {
-//            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
-//            Object object = clazz.newInstance();
-//            int height = Integer.parseInt(clazz.getField("status_bar_height")
-//                    .get(object).toString());
-//            statusBarHeight2 = context.getResources().getDimensionPixelSize(height);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Log.e(TAG, "状态栏-方法2:");
-//        }
-//        Log.e(TAG, "状态栏-方法2:" + statusBarHeight2);
-//
-//
-//        Class<?> c = null;
-//        Object obj = null;
-//        Field field = null;
-//        int x = 0, statusBarHeight = 0;
-//        try {
-//            c = Class.forName("com.android.internal.R$dimen");
-//            obj = c.newInstance();
-//            field = c.getField("status_bar_height");
-//            x = Integer.parseInt(field.get(obj).toString());
-//            statusBarHeight = context.getResources().getDimensionPixelSize(x);
-//        } catch (Exception e1) {
-//            e1.printStackTrace();
-//        }
-//        Log.e(TAG, "状态栏-方法3:" + statusBarHeight);
-
-        int statusBarHeight = (int)Math.ceil(25 * context.getResources().getDisplayMetrics().density);
-
-        Log.e(TAG, "状态栏-方法4:" + context.getResources().getDisplayMetrics().density);
-        Log.e(TAG, "状态栏-方法4:" + statusBarHeight);
+        int statusBarHeight = (int) Math.ceil(25 * context.getResources().getDisplayMetrics().density);
         return statusBarHeight;
     }
 

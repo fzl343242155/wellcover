@@ -27,9 +27,9 @@ public class EquipmentInfoBean implements Serializable {
 
     private String deviceType;
     private String versionNum;
-    private double latitude;
+    private String latitude;
     private String bluetoothMac;
-    private int userId;
+    private String userId;
     private String streetName;
     private String lockStatus;
     private String createTime;
@@ -37,7 +37,7 @@ public class EquipmentInfoBean implements Serializable {
     private String company;
     private String id;
     private String electricityQuantity;
-    private double longitude;
+    private String longitude;
 
     public String getDeviceType() {
         return deviceType;
@@ -56,10 +56,10 @@ public class EquipmentInfoBean implements Serializable {
     }
 
     public double getLatitude() {
-        return latitude;
+        return Double.parseDouble(latitude);
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
@@ -71,11 +71,11 @@ public class EquipmentInfoBean implements Serializable {
         this.bluetoothMac = bluetoothMac;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -136,10 +136,10 @@ public class EquipmentInfoBean implements Serializable {
     }
 
     public double getLongitude() {
-        return longitude;
+        return Double.parseDouble(longitude);
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 

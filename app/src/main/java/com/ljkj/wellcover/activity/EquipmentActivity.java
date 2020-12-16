@@ -21,6 +21,7 @@ import com.ljkj.wellcover.bean.EventCenter;
 import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.utils.LoadUtil;
+import com.ljkj.wellcover.utils.Logger;
 import com.ljkj.wellcover.view.LoadingLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -136,7 +137,7 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
                     stringBuffer.append(list.get(i).getId() + ",");
                 }
                 String result = stringBuffer.toString().substring(0, stringBuffer.length() - 1);
-                Log.e(TAG, "onViewClicked: " + result);
+                Logger.e(TAG, "onViewClicked: " + result);
                 deleteData(result);
                 break;
         }

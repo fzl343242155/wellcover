@@ -62,7 +62,6 @@ public class TestActivity extends BaseActivity {
     protected void initViews() {
         super.initViews();
         mBluetoothClient = new BluetoothClient(mContext);
-
         mMac = etMac.getText().toString();
     }
 
@@ -79,12 +78,11 @@ public class TestActivity extends BaseActivity {
                 mBluetoothClient.connect(mMac, options, new BleConnectResponse() {
                     @Override
                     public void onResponse(int code, BleGattProfile data) {
-                        Log.e(TAG, "onResponse: connect code = " + code);
+                        Log.e(TAG, "connect code = " + code);
                         if (code == 0) {
+                            Log.e(TAG, "已经连接");
                             btnConnect.setText("已经连接");
-
                             mBleGattProfile = data;
-
                             for (BleGattService service : data.getServices()) {
                                 List<BleGattCharacter> characterList = service.getCharacters();
                                 for (BleGattCharacter character : characterList) {
@@ -94,11 +92,8 @@ public class TestActivity extends BaseActivity {
                                     }
                                 }
                             }
-
                             mBluetoothClient.notify(mMac, mBleGattServiceNotify,
                                     mCharacterNotify, new BleNotifyResponse() {
-
-
                                         @Override
                                         public void onResponse(int code) {
                                             Log.e(TAG, "onResponse: notify code = " + code);
@@ -111,14 +106,12 @@ public class TestActivity extends BaseActivity {
 
                                         @Override
                                         public void onNotify(UUID service, UUID character, byte[] value) {
-
                                             Log.e(TAG, "接收数据:" + new String(value));
-
                                             etOutput.setText(new String(value));
                                         }
                                     });
-
                         } else {
+                            Log.e(TAG, "没连通");
                             btnConnect.setText("没连通");
                         }
                     }
@@ -147,55 +140,20 @@ public class TestActivity extends BaseActivity {
 //
 //                Log.e("turbo", "onViewClicked: "+CRCUtils.Make_CRC(data));
 
-                byte[] b = new byte[7];
-                b[0] = (byte) 0xfd;
-                b[1] = (byte) 0xfc;
-                b[2] = (byte) 0x08;
-                b[3] = (byte) 0x80;
-                b[4] = (byte) 0x02;
-                b[5] = (byte) 0x00;
-                b[6] = (byte) 0x0a;
-                byte result = sumCheck(b, 7);
-
-                Log.e(TAG, "onViewClicked: " + result);
 
 
-                StringBuffer stringBuffer = new StringBuffer();
-                byte[] key = new byte[]{0x20, 0x10, 0x23, 0x22, 0x46, 0x30};
-                for (int i = 0; i < key.length; i++) {
-                    stringBuffer.append(String.format("%02x", key[i]));
-                }
-
-                Log.e(TAG, "onViewClicked: stringBuffer = " + stringBuffer.toString());
-
+//                StringBuffer stringBuffer = new StringBuffer();
+//                byte[] key = new byte[]{0x20, 0x10, 0x23, 0x22, 0x46, 0x30};
+//                for (int i = 0; i < key.length; i++) {
+//                    stringBuffer.append(String.format("%02x", key[i]));
+//                }
+//
+//                Log.e(TAG, "onViewClicked: stringBuffer = " + stringBuffer.toString());
+//
 
                 break;
         }
     }
 
-
-    /**
-     * 求校验和的算法
-     *
-     * @param b 需要求校验和的字节数组
-     * @return 校验和
-     */
-    private byte sumCheck(byte[] b, int len) {
-        int sum = 0;
-        for (int i = 0; i < len; i++) {
-            sum = sum + b[i];
-        }
-//        if(sum > 0xff){ //超过了255，使用补码（补码 = 原码取反 + 1）
-//            sum = ~sum;
-//            sum = sum + 1;
-//        }
-//        return (byte) (sum & 0xff);
-
-        sum = ~sum + 1;
-        if (sum > 0xf0) {
-            sum -= 16;
-        }
-        return (byte) sum;
-    }
 
 }

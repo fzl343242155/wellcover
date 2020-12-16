@@ -25,6 +25,7 @@ import com.ljkj.wellcover.bean.InfoBean;
 import com.ljkj.wellcover.bean.LoginBean;
 import com.ljkj.wellcover.utils.ConstantUtils;
 import com.ljkj.wellcover.utils.HttpServer;
+import com.ljkj.wellcover.utils.Logger;
 import com.ljkj.wellcover.utils.Utils;
 
 import java.util.ArrayList;
@@ -218,9 +219,9 @@ public class LoginActivity extends BaseActivity {
             if (null != aMapLocation) {
                 //解析定位结果
                 String result = Utils.getLocationStr(aMapLocation);
-                Log.e("定位", "aMapLocation is " + result);
+                Logger.e("定位", "aMapLocation is " + result);
             } else {
-                Log.e("定位失败", "aMapLocation is null");
+                Logger.e("定位失败", "aMapLocation is null");
             }
         }
     };

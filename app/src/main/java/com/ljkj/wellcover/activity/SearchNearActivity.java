@@ -32,6 +32,7 @@ import com.ljkj.wellcover.bean.EquipmentInfoBean;
 import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.utils.LoadUtil;
+import com.ljkj.wellcover.utils.Logger;
 import com.ljkj.wellcover.view.LoadingLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -256,7 +257,7 @@ public class SearchNearActivity extends BaseActivity implements LoadingLayout.Re
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": "
                         + amapLocation.getErrorInfo();
-                Log.e("AmapErr", errText);
+                Logger.e("AmapErr", errText);
             }
         }
     }

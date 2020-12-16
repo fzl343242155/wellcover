@@ -30,6 +30,7 @@ import com.ljkj.wellcover.bean.BaseData;
 import com.ljkj.wellcover.utils.ConstantUtils;
 import com.ljkj.wellcover.utils.HttpServer;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
+import com.ljkj.wellcover.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -170,7 +171,7 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": "
                         + amapLocation.getErrorInfo();
-                Log.e("AmapErr", errText);
+                Logger.e("AmapErr", errText);
             }
         }
     }
@@ -260,7 +261,7 @@ public class AddEquipmentActivity extends BaseActivity implements GeoFenceListen
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ConstantUtils.CAPTURE2ADDEQUIPMENT) {
             String result = data.getStringExtra(ConstantUtils.SCANQRCODESUCCESS);
-            Log.e(TAG, "onActivityResult: result = " + result);
+            Logger.e(TAG, "onActivityResult: result = " + result);
             if (!TextUtils.isEmpty(result)) {
 //                etNumber.setText(result);
 
