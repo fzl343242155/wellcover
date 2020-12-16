@@ -1,13 +1,13 @@
 package com.ljkj.wellcover.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.Nullable;
 
 import com.inuker.bluetooth.library.BluetoothClient;
 import com.inuker.bluetooth.library.connect.options.BleConnectOptions;
@@ -18,48 +18,79 @@ import com.inuker.bluetooth.library.model.BleGattCharacter;
 import com.inuker.bluetooth.library.model.BleGattProfile;
 import com.inuker.bluetooth.library.model.BleGattService;
 import com.ljkj.wellcover.R;
-import com.ljkj.wellcover.adapter.ActionAdapter;
-import com.ljkj.wellcover.bean.EquipmentInfoBean;
 import com.ljkj.wellcover.utils.ActionUtils;
 import com.ljkj.wellcover.utils.ConstantUtils;
 import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.utils.Logger;
 import com.ljkj.wellcover.utils.ToolUtils;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 文件名：ActionActivity
+ * 文件名：SetLockConfigActivity
  * 作者：Turbo
- * 时间： 2020-10-05 19:09
+ * 时间： 12/16/20 11:17 AM
  * 蚁穴虽小，溃之千里。
  */
-public class ActionActivity extends BaseActivity {
+public class SetLockConfigActivity extends BaseActivity {
 
-    private static final String TAG = "ActionActivity";
+    private static final String TAG = "SetLockConfigActivity";
 
-    @BindView(R.id.tv_number)
-    TextView tvNumber;
+    @BindView(R.id.tv_id)
+    TextView tvId;
+    @BindView(R.id.tv_mac)
+    TextView tvMac;
+    @BindView(R.id.rl_getconfig)
+    RelativeLayout rlGetconfig;
+    @BindView(R.id.rl_setconfig)
+    RelativeLayout rlSetconfig;
+    @BindView(R.id.et_1)
+    EditText et1;
+    @BindView(R.id.et_2)
+    EditText et2;
+    @BindView(R.id.et_3)
+    EditText et3;
+    @BindView(R.id.et_4)
+    EditText et4;
+    @BindView(R.id.et_5)
+    EditText et5;
+    @BindView(R.id.et_6)
+    EditText et6;
+    @BindView(R.id.et_7)
+    EditText et7;
+    @BindView(R.id.et_8)
+    EditText et8;
+    @BindView(R.id.et_9)
+    EditText et9;
+    @BindView(R.id.et_10)
+    EditText et10;
+    @BindView(R.id.et_11)
+    EditText et11;
+    @BindView(R.id.et_12)
+    EditText et12;
+    @BindView(R.id.et_13)
+    EditText et13;
+    @BindView(R.id.et_14)
+    EditText et14;
+    @BindView(R.id.et_15)
+    EditText et15;
+    @BindView(R.id.et_16)
+    EditText et16;
+    @BindView(R.id.et_17)
+    EditText et17;
+    @BindView(R.id.et_18)
+    EditText et18;
     @BindView(R.id.tv_state)
     TextView tvState;
-    @BindView(R.id.rl_content)
-    RecyclerView rlContent;
     @BindView(R.id.rl_conn)
     RelativeLayout rlConn;
     @BindView(R.id.rl_disconn)
     RelativeLayout rlDisconn;
 
-    private List<String> mList = new ArrayList<>();
-    private ActionAdapter mActionAdapter;
-    private EquipmentInfoBean mBean;
     private BleGattProfile mBleGattProfile;
     private BluetoothClient mBluetoothClient;
     private String mMac = "";
@@ -67,79 +98,51 @@ public class ActionActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_action;
-    }
-
-    @OnClick({R.id.ivBack, R.id.rl_open, R.id.rl_close, R.id.rl_clear, R.id.rl_conn, R.id.rl_disconn})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.rl_open:
-                sendAction(1);
-                mList.add(getTime() + ": 开启");
-                mActionAdapter.addDatas(mList);
-                break;
-            case R.id.rl_close:
-                sendAction(2);
-                mList.add(getTime() + ": 关闭");
-                mActionAdapter.addDatas(mList);
-                break;
-            case R.id.rl_clear:
-                sendAction(3);
-                mList.add(getTime() + ": 解除报警");
-                mActionAdapter.addDatas(mList);
-                break;
-            case R.id.rl_conn:
-                connection();
-                mList.add(getTime() + ": 开始连接");
-                mActionAdapter.addDatas(mList);
-                break;
-            case R.id.rl_disconn:
-                disConnection();
-                mList.add(getTime() + ": 断开连接");
-                mActionAdapter.addDatas(mList);
-                break;
-        }
-    }
-
-    private String getTime() {
-        Date now = new Date();
-        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return f.format(now);
+        return R.layout.activity_setlockconfig;
     }
 
     @Override
     protected void initViews() {
         super.initViews();
-        mBluetoothClient = new BluetoothClient(mContext);
-        mBean = (EquipmentInfoBean) getIntent().getSerializableExtra(ConstantUtils.DATA);
-//        connection();
-        if (null != mBean) {
-            tvNumber.setText(mBean.getId());
-            String lockStatus = mBean.getLockStatus();
-            //设备状态：1：开启  2 ： 关闭 3： 解除报警
-            switch (lockStatus) {
-                case "1":
-                    tvState.setText("开启");
-                    break;
-                case "2":
-                    tvState.setText("关闭");
-                    break;
-                case "3":
-                    tvState.setText("解除报警");
-                    break;
+        ImmersionBarUtils.initColorBar(SetLockConfigActivity.this);
+    }
+
+    @OnClick({R.id.ivBack, R.id.btn_getIDorMAC, R.id.rl_getconfig, R.id.rl_setconfig, R.id.rl_conn, R.id.rl_disconn})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ivBack:
+                finish();
+                break;
+            case R.id.btn_getIDorMAC:
+                Intent intent = new Intent(mContext, CaptureActivity.class);
+                startActivityForResult(intent, ConstantUtils.ADDEQUIPMENT2CAPTURE);
+                break;
+            case R.id.rl_getconfig:
+                sendAction(2);
+                break;
+            case R.id.rl_setconfig:
+                sendAction(1);
+                break;
+            case R.id.rl_conn:
+                connection();
+                break;
+            case R.id.rl_disconn:
+                disConnection();
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ConstantUtils.CAPTURE2ADDEQUIPMENT) {
+            String result = data.getStringExtra(ConstantUtils.SCANQRCODESUCCESS);
+            Logger.e(TAG, "onActivityResult: result = " + result);
+            if (!TextUtils.isEmpty(result)) {
+//                tvId.setText("");
+//                tvMac.setText("");
             }
         }
-        ImmersionBarUtils.initColorBar(ActionActivity.this);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
-        rlContent.setLayoutManager(mLayoutManager);
-        rlContent.setItemAnimator(new DefaultItemAnimator());
-
-        mActionAdapter = new ActionAdapter(mContext);
-        rlContent.setAdapter(mActionAdapter);
-
     }
 
     /**
@@ -175,7 +178,7 @@ public class ActionActivity extends BaseActivity {
                                     Logger.e(TAG, "onResponse: notify code = " + code);
                                     if (code == 0) {
                                         Logger.e(TAG, "订阅蓝牙通知成功");
-                                        sendAction(4);
+                                        sendAction(3);
                                     } else {
                                         Logger.e(TAG, "订阅蓝牙通知失败");
                                     }
@@ -204,21 +207,38 @@ public class ActionActivity extends BaseActivity {
     /**
      * 发送指令
      *
-     * @param type 1解锁 2关锁 3解除报警 4认证
+     * @param type 1写入 2查询  3认证
      */
     private void sendAction(int type) {
         byte result[] = null;
         switch (type) {
             case 1:
-                result = ActionUtils.onLock(1);
+                String str1 = et1.getText().toString().trim();
+                String str2 = et2.getText().toString().trim();
+                String str3 = et3.getText().toString().trim();
+                String str4 = et4.getText().toString().trim();
+                String str5 = et5.getText().toString().trim();
+                String str6 = et6.getText().toString().trim();
+                String str7 = et7.getText().toString().trim();
+                String str8 = et8.getText().toString().trim();
+                String str9 = et9.getText().toString().trim();
+                String str10 = et10.getText().toString().trim();
+                String str11 = et11.getText().toString().trim();
+                String str12 = et12.getText().toString().trim();
+                String str13 = et13.getText().toString().trim();
+                String str14 = et14.getText().toString().trim();
+                String str15 = et15.getText().toString().trim();
+                String str16 = et16.getText().toString().trim();
+                String str17 = et17.getText().toString().trim();
+                String str18 = et18.getText().toString().trim();
+
+                result = ActionUtils.setLockConfig(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11, str12,
+                        str13, str14, str15, str16, str17, str18);
                 break;
             case 2:
-                result = ActionUtils.onLock(2);
+                result = ActionUtils.getLockConfig();
                 break;
             case 3:
-                result = ActionUtils.onLock(3);
-                break;
-            case 4:
                 result = ActionUtils.onCertification();
                 break;
         }
@@ -240,7 +260,6 @@ public class ActionActivity extends BaseActivity {
         } else {
             Logger.e(TAG, "蓝牙mac地址为空");
         }
-
     }
 
     /**
@@ -258,37 +277,6 @@ public class ActionActivity extends BaseActivity {
         if (yuan == yan) { //判断校验为
             Logger.e(TAG, "数据校验成功");
             switch (value[4]) {
-                case 1:
-                    Logger.e(TAG, "蓝牙认证信息");
-                    if ("00".equals(data[8])) {
-                        Logger.e(TAG, "蓝牙认证信息      成功");
-                    } else {
-                        Logger.e(TAG, "蓝牙认证信息      失败");
-                    }
-                    break;
-                case 2:
-                    Logger.e(TAG, "蓝牙解锁/关锁指令");
-                    switch (data[8]) {
-                        case "00":
-                            Logger.e(TAG, "蓝牙解锁/关锁指令      密码错误");
-                            break;
-                        case "01":
-                            Logger.e(TAG, "蓝牙解锁/关锁指令      操作成功");
-                            break;
-                        case "02":
-                            Logger.e(TAG, "蓝牙解锁/关锁指令      因报警状态,解锁失败");
-                            break;
-                        case "03":
-                            Logger.e(TAG, "蓝牙解锁/关锁指令      因电压过低,上锁失败(锁电低于3300mV,禁止上锁操作)");
-                            break;
-                        case "04":
-                            Logger.e(TAG, "蓝牙解锁/关锁指令      响应超时，电机未到位");
-                            break;
-                        case "05":
-                            Logger.e(TAG, "蓝牙解锁/关锁指令      锁杆不在位，不允许上锁");
-                            break;
-                    }
-                    break;
                 case 3:
                     Logger.e(TAG, "蓝牙配置指令");
                     if ("00".equals(data[8])) {

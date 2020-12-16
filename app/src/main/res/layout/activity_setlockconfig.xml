@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/equipment_head_bg">
+
+        <com.ljkj.wellcover.view.StatusBarView
+            android:id="@+id/sbv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90mm"
+            android:layout_below="@+id/sbv_content"
+            android:layout_marginTop="10mm">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="80mm"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:paddingTop="25mm"
+                android:paddingBottom="25mm"
+                android:src="@mipmap/icon_back_w" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="智能操作"
+                android:textColor="@color/white"
+                android:textSize="36mm" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_getIDorMAC"
+            android:layout_width="match_parent"
+            android:layout_height="80mm"
+            android:text="扫码获取ID和MAC地址"
+            android:textSize="28mm" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50mm"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20mm"
+                android:text="设备ID："
+                android:textSize="28mm" />
+
+            <TextView
+                android:id="@+id/tv_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="28mm" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50mm"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20mm"
+                android:text="设备Mac地址："
+                android:textSize="28mm" />
+
+            <TextView
+                android:id="@+id/tv_mac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="28mm" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50mm"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20mm"
+                android:text="连接状态："
+                android:textSize="28mm" />
+
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="28mm" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2mm"
+        android:background="@color/_09B1FF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90mm"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_conn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="连接设备"
+                android:textSize="30mm" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="2mm"
+            android:layout_height="match_parent"
+            android:background="@color/_09B1FF" />
+
+        <RelativeLayout
+            android:id="@+id/rl_disconn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="断开连接"
+                android:textSize="30mm" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2mm"
+        android:background="@color/_09B1FF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90mm"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_getconfig"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="获取配置信息"
+                android:textSize="30mm" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="2mm"
+            android:layout_height="match_parent"
+            android:background="@color/_09B1FF" />
+
+        <RelativeLayout
+            android:id="@+id/rl_setconfig"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="写入配置信息"
+                android:textSize="30mm" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2mm"
+        android:background="@color/_09B1FF" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_1"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="主服务器地址,IP或域名"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_2"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="服务器TCP端口"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_3"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="定时汇报间隔，单位为min > 0"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_4"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="定位模式"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_5"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="终端心跳发送间隔，单位为秒（s）"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_6"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="APN名称（SIM卡1）"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_7"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="APN用户名（SIM卡1）"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_8"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="APN密码（SIM卡1）"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_9"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="短信中心号码"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_10"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="终端告警电压值，单位为10MV"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_11"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="SMS访问密码（8字节）"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_12"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="倾角检测阈值，单位为度"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_13"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="实时时钟时间（在无GPS功能时校准用）"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_14"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="00：锁杆闭合不上物理锁\n01:锁杆闭合自动上物理锁"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_15"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="01：终端还原出厂值（终端会自动重启）\n02：终端10秒后强制重启\n03：清除终端盲点数据"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_16"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="蓝牙设备名称更改（ASSIC）"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_17"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="蓝牙配对密码更改"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+            <EditText
+                android:id="@+id/et_18"
+                android:layout_width="match_parent"
+                android:layout_height="80mm"
+                android:hint="设置蓝牙通讯报文AES128（16字节）密码"
+                android:paddingLeft="20mm"
+                android:textSize="28mm" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
