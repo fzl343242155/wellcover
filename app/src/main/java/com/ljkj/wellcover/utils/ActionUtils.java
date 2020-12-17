@@ -351,7 +351,7 @@ public class ActionUtils {
     private static byte[] onActionCode() {
         byte[] result = new byte[8];
         for (int i = 0; i < 8; i++) {
-            result[i] = (byte) 0x01;
+            result[i] = (byte) 0x00;
         }
         return result;
     }

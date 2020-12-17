@@ -224,6 +224,7 @@
                 android:layout_height="80mm"
                 android:hint="主服务器地址,IP或域名"
                 android:paddingLeft="20mm"
+                android:text="1"
                 android:textSize="28mm" />
 
             <EditText
@@ -233,6 +234,7 @@
                 android:hint="服务器TCP端口"
                 android:inputType="number"
                 android:paddingLeft="20mm"
+                android:text="2"
                 android:textSize="28mm" />
 
             <EditText
@@ -241,6 +243,7 @@
                 android:layout_height="80mm"
                 android:hint="定时汇报间隔，单位为min > 0"
                 android:paddingLeft="20mm"
+                android:text="3"
                 android:textSize="28mm" />
 
             <EditText
@@ -249,6 +252,7 @@
                 android:layout_height="80mm"
                 android:hint="定位模式"
                 android:paddingLeft="20mm"
+                android:text="4"
                 android:textSize="28mm" />
 
             <EditText
@@ -256,8 +260,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="80mm"
                 android:hint="终端心跳发送间隔，单位为秒（s）"
-                android:paddingLeft="20mm"
                 android:inputType="number"
+                android:paddingLeft="20mm"
+                android:text="5"
                 android:textSize="28mm" />
 
             <EditText
@@ -266,6 +271,7 @@
                 android:layout_height="80mm"
                 android:hint="APN名称（SIM卡1）"
                 android:paddingLeft="20mm"
+                android:text="6"
                 android:textSize="28mm" />
 
             <EditText
@@ -274,6 +280,7 @@
                 android:layout_height="80mm"
                 android:hint="APN用户名（SIM卡1）"
                 android:paddingLeft="20mm"
+                android:text="7"
                 android:textSize="28mm" />
 
             <EditText
@@ -282,6 +289,7 @@
                 android:layout_height="80mm"
                 android:hint="APN密码（SIM卡1）"
                 android:paddingLeft="20mm"
+                android:text="8"
                 android:textSize="28mm" />
 
             <EditText
@@ -290,12 +298,12 @@
                 android:layout_height="80mm"
                 android:hint="短信中心号码"
                 android:paddingLeft="20mm"
+                android:text="9"
                 android:textSize="28mm" />
 
             <EditText
                 android:id="@+id/et_10"
                 android:layout_width="match_parent"
-
                 android:layout_height="80mm"
                 android:hint="终端告警电压值，单位为10MV"
                 android:paddingLeft="20mm"

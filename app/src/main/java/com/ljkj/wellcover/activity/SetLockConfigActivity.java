@@ -43,7 +43,7 @@ import butterknife.OnClick;
  */
 public class SetLockConfigActivity extends BaseActivity {
 
-    private static final String TAG = "SetLockConfigActivity";
+    private static final String TAG = "turbo";
 
     @BindView(R.id.tv_id)
     TextView tvId;
@@ -98,7 +98,7 @@ public class SetLockConfigActivity extends BaseActivity {
 
     private BleGattProfile mBleGattProfile;
     private BluetoothClient mBluetoothClient;
-    private String mMac = "";
+    private String mMac = "20:20:09:11:18:5E";
     private UUID mBleGattServiceNotify, mCharacterNotify;
 
     @Override
@@ -109,6 +109,7 @@ public class SetLockConfigActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
+        mBluetoothClient = new BluetoothClient(mContext);
         ImmersionBarUtils.initColorBar(SetLockConfigActivity.this);
     }
 
@@ -129,12 +130,13 @@ public class SetLockConfigActivity extends BaseActivity {
                 sendAction(1);
                 break;
             case R.id.rl_conn:
-                mMac = tvMac.getText().toString().trim();
+//                mMac = tvMac.getText().toString().trim();
                 connection();
                 break;
             case R.id.rl_disconn:
-                disConnection();
+//                disConnection();
 //                onProcessData(ceshi());
+                ceshi();
                 break;
         }
     }
@@ -400,5 +402,32 @@ public class SetLockConfigActivity extends BaseActivity {
 //
 //        return b;
 //    }
+
+
+    private void ceshi(){
+//        F3 3F FF FF 03 00 00 01 00 EE F4 4F
+
+        byte[] b = new byte[14];
+        b[0] =(byte) 0xF3;
+        b[1] =(byte) 0x3F;
+
+        b[2] =(byte) 0xFF;
+        b[3] =(byte) 0xFF;
+
+        b[4] =(byte) 0x03;
+        b[5] =(byte) 0x00;
+
+        b[6] =(byte) 0x00;
+        b[7] =(byte) 0x01;
+
+        b[8] =(byte) 0x00;
+
+        b[9] =(byte) 0xEE;
+
+        b[10] =(byte) 0xF4;
+        b[11] =(byte) 0x4F;
+
+        b[12] = ToolUtils.sumCheck(b,8,2);
+    }
 
 }

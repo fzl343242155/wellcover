@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.UUID;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -44,12 +43,14 @@ import butterknife.OnClick;
  */
 public class ActionActivity extends BaseActivity {
 
-    private static final String TAG = "ActionActivity";
+    private static final String TAG = "turbo";
 
     @BindView(R.id.tv_number)
     TextView tvNumber;
     @BindView(R.id.tv_state)
     TextView tvState;
+    @BindView(R.id.tv_connect_state)
+    TextView tvConnectState;
     @BindView(R.id.rl_content)
     RecyclerView rlContent;
     @BindView(R.id.rl_conn)
@@ -62,7 +63,7 @@ public class ActionActivity extends BaseActivity {
     private EquipmentInfoBean mBean;
     private BleGattProfile mBleGattProfile;
     private BluetoothClient mBluetoothClient;
-    private String mMac = "";
+    private String mMac = "20:20:09:11:18:5E";
     private UUID mBleGattServiceNotify, mCharacterNotify;
 
     @Override
@@ -175,9 +176,17 @@ public class ActionActivity extends BaseActivity {
                                     Logger.e(TAG, "onResponse: notify code = " + code);
                                     if (code == 0) {
                                         Logger.e(TAG, "订阅蓝牙通知成功");
+                                        tvConnectState.setText("已连接");
+                                        mList.add(getTime() + ": 已连接");
+                                        mActionAdapter.addDatas(mList);
                                         sendAction(4);
+                                        mList.add(getTime() + ": 正在认证");
+                                        mActionAdapter.addDatas(mList);
                                     } else {
                                         Logger.e(TAG, "订阅蓝牙通知失败");
+                                        tvConnectState.setText("连接失败");
+                                        mList.add(getTime() + ": 连接失败");
+                                        mActionAdapter.addDatas(mList);
                                     }
                                 }
 
@@ -189,6 +198,9 @@ public class ActionActivity extends BaseActivity {
                             });
                 } else {
                     Logger.e(TAG, "没连通");
+                    tvConnectState.setText("连接失败");
+                    mList.add(getTime() + ": 连接失败");
+                    mActionAdapter.addDatas(mList);
                 }
             }
         });
@@ -198,6 +210,7 @@ public class ActionActivity extends BaseActivity {
      * 断开连接
      */
     private void disConnection() {
+        tvConnectState.setText("未连接");
         mBluetoothClient.disconnect(mMac);
     }
 
@@ -250,6 +263,8 @@ public class ActionActivity extends BaseActivity {
      */
     private void onProcessData(byte[] value) {
         Logger.e(TAG, "开始处理接收到的数据");
+        mList.add(getTime() + ": 开始处理接收到的数据");
+        mActionAdapter.addDatas(mList);
         String result = ToolUtils.byteToHex(value);
         String data[] = result.split(" ");
         byte yuan = value[value.length - 3];
@@ -262,32 +277,45 @@ public class ActionActivity extends BaseActivity {
                     Logger.e(TAG, "蓝牙认证信息");
                     if ("00".equals(data[8])) {
                         Logger.e(TAG, "蓝牙认证信息      成功");
+                        mList.add(getTime() + ": 蓝牙认证信息      成功");
+                        mActionAdapter.addDatas(mList);
                     } else {
                         Logger.e(TAG, "蓝牙认证信息      失败");
+                        mList.add(getTime() + ": 蓝牙认证信息      失败");
+                        mActionAdapter.addDatas(mList);
                     }
                     break;
                 case 2:
                     Logger.e(TAG, "蓝牙解锁/关锁指令");
+                    String str = "";
                     switch (data[8]) {
                         case "00":
                             Logger.e(TAG, "蓝牙解锁/关锁指令      密码错误");
+                            str = "密码错误";
                             break;
                         case "01":
                             Logger.e(TAG, "蓝牙解锁/关锁指令      操作成功");
+                            str = "操作成功";
                             break;
                         case "02":
                             Logger.e(TAG, "蓝牙解锁/关锁指令      因报警状态,解锁失败");
+                            str = "因报警状态,解锁失败";
                             break;
                         case "03":
                             Logger.e(TAG, "蓝牙解锁/关锁指令      因电压过低,上锁失败(锁电低于3300mV,禁止上锁操作)");
+                            str = "因电压过低,上锁失败(锁电低于3300mV,禁止上锁操作)";
                             break;
                         case "04":
                             Logger.e(TAG, "蓝牙解锁/关锁指令      响应超时，电机未到位");
+                            str = "响应超时，电机未到位";
                             break;
                         case "05":
                             Logger.e(TAG, "蓝牙解锁/关锁指令      锁杆不在位，不允许上锁");
+                            str = "锁杆不在位，不允许上锁";
                             break;
                     }
+                    mList.add(getTime() + ": " + str);
+                    mActionAdapter.addDatas(mList);
                     break;
                 case 3:
                     Logger.e(TAG, "蓝牙配置指令");
