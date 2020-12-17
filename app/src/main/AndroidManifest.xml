@@ -41,7 +41,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.SetLockConfigActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,7 +55,7 @@
         <activity android:name=".activity.AddEquipmentActivity" />
         <activity android:name=".activity.SearchNearActivity" />
         <activity android:name=".activity.CaptureActivity" />
-<!--        <activity android:name=".activity.SetLockConfigActivity" />-->
+        <activity android:name=".activity.SetLockConfigActivity" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"

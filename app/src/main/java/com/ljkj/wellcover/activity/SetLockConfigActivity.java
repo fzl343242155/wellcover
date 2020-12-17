@@ -24,6 +24,9 @@ import com.ljkj.wellcover.utils.ImmersionBarUtils;
 import com.ljkj.wellcover.utils.Logger;
 import com.ljkj.wellcover.utils.ToolUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -124,6 +127,7 @@ public class SetLockConfigActivity extends BaseActivity {
                 sendAction(1);
                 break;
             case R.id.rl_conn:
+                mMac = tvMac.getText().toString().trim();
                 connection();
                 break;
             case R.id.rl_disconn:
@@ -139,8 +143,16 @@ public class SetLockConfigActivity extends BaseActivity {
             String result = data.getStringExtra(ConstantUtils.SCANQRCODESUCCESS);
             Logger.e(TAG, "onActivityResult: result = " + result);
             if (!TextUtils.isEmpty(result)) {
-//                tvId.setText("");
-//                tvMac.setText("");
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String lockId = jsonObject.getString("id");
+                    String mac = jsonObject.getString("mac");
+                    tvId.setText(lockId);
+                    tvMac.setText(mac);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
