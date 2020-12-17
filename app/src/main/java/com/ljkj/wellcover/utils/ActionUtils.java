@@ -262,7 +262,7 @@ public class ActionUtils {
                         b[(in + i + 3) + j] = str1b[j];
                     }
                     in += str.getBytes().length + 2;
-                }else{
+                } else {
                     in += str.getBytes().length;
                 }
             } else {
