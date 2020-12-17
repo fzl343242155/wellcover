@@ -231,6 +231,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="80mm"
                 android:hint="服务器TCP端口"
+                android:inputType="number"
                 android:paddingLeft="20mm"
                 android:textSize="28mm" />
 
@@ -256,6 +257,7 @@
                 android:layout_height="80mm"
                 android:hint="终端心跳发送间隔，单位为秒（s）"
                 android:paddingLeft="20mm"
+                android:inputType="number"
                 android:textSize="28mm" />
 
             <EditText
@@ -293,6 +295,7 @@
             <EditText
                 android:id="@+id/et_10"
                 android:layout_width="match_parent"
+
                 android:layout_height="80mm"
                 android:hint="终端告警电压值，单位为10MV"
                 android:paddingLeft="20mm"
@@ -325,7 +328,7 @@
             <EditText
                 android:id="@+id/et_14"
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
+                android:layout_height="wrap_content"
                 android:hint="00：锁杆闭合不上物理锁\n01:锁杆闭合自动上物理锁"
                 android:paddingLeft="20mm"
                 android:textSize="28mm" />
@@ -333,7 +336,7 @@
             <EditText
                 android:id="@+id/et_15"
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
+                android:layout_height="wrap_content"
                 android:hint="01：终端还原出厂值（终端会自动重启）\n02：终端10秒后强制重启\n03：清除终端盲点数据"
                 android:paddingLeft="20mm"
                 android:textSize="28mm" />

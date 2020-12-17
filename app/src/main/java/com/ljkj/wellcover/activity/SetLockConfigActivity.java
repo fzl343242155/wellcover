@@ -27,7 +27,9 @@ import com.ljkj.wellcover.utils.ToolUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import butterknife.BindView;
@@ -132,6 +134,7 @@ public class SetLockConfigActivity extends BaseActivity {
                 break;
             case R.id.rl_disconn:
                 disConnection();
+//                onProcessData(ceshi());
                 break;
         }
     }
@@ -213,7 +216,9 @@ public class SetLockConfigActivity extends BaseActivity {
      * 断开连接
      */
     private void disConnection() {
-        mBluetoothClient.disconnect(mMac);
+        if (!TextUtils.isEmpty(mMac)) {
+            mBluetoothClient.disconnect(mMac);
+        }
     }
 
     /**
@@ -299,12 +304,101 @@ public class SetLockConfigActivity extends BaseActivity {
                     break;
                 case 4:
                     Logger.e(TAG, "蓝牙查询配置指令");
-                    break;
+                    int index = 9;
+                    Map<Byte, byte[]> hashMap = new HashMap<Byte, byte[]>();
+                    for (int i = 0; i < value[8]; i++) {
+                        if (i == 0) {
+                            byte action = value[index + i];
+                            byte[] bytes = subBytes(value, index + i + 2, value[index + i + 1]);
+                            index += 1 + value[index + i + 1];
+                            hashMap.put(action, bytes);
+                        } else {
+                            byte action = value[index + 1];
+                            byte len = value[index + 1 + 1];
+                            byte[] bytes = subBytes(value, index + 1 + 2, len);
+                            index += 2 + len;
+                            hashMap.put(action, bytes);
+                        }
+                    }
+
+                    for (Map.Entry<Byte, byte[]> entry : hashMap.entrySet()) {
+                        Logger.e(TAG, "key = " + entry.getKey() + ", value = " + ToolUtils.byteToHex(entry.getValue()));
+                    }
             }
         } else {
             Logger.e(TAG, "数据校验失败");
         }
         Logger.e(TAG, "处理接收到的数据已经完成");
     }
+
+    /**
+     * 从一个byte[]数组中截取一部分
+     *
+     * @param src
+     * @param begin
+     * @param count
+     * @return
+     */
+    private byte[] subBytes(byte[] src, int begin, int count) {
+        byte[] bs = new byte[count];
+        for (int i = begin; i < begin + count; i++) bs[i - begin] = src[i];
+        return bs;
+    }
+
+
+//    private byte[] ceshi() {
+//        byte[] b = new byte[38];
+//        b[0] = (byte) 0xf3;
+//        b[1] = (byte) 0x3f;
+//
+//        b[2] = (byte) 0xff;
+//        b[3] = (byte) 0xff;
+//
+//        b[4] = (byte) 0x04;
+//        b[5] = (byte) 0x00;
+//
+//        b[6] = (byte) 0x00;//长度
+//        b[7] = (byte) 0x15;
+//
+//        b[8] = (byte) 0x05;
+//
+//        b[9] = (byte) 0x01;
+//        b[10] = (byte) 0x03;
+//        b[11] = (byte) 0x05;
+//        b[12] = (byte) 0x06;
+//        b[13] = (byte) 0x07;
+//
+//        b[14] = (byte) 0x02;
+//        b[15] = (byte) 0x02;
+//        b[16] = (byte) 0x09;
+//        b[17] = (byte) 0x09;
+//
+//        b[18] = (byte) 0x03;
+//        b[19] = (byte) 0x03;
+//        b[20] = (byte) 0x05;
+//        b[21] = (byte) 0x05;
+//        b[22] = (byte) 0x05;
+//
+//        b[23] = (byte) 0x04;
+//        b[24] = (byte) 0x04;
+//        b[25] = (byte) 0x06;
+//        b[26] = (byte) 0x06;
+//        b[27] = (byte) 0x06;
+//        b[28] = (byte) 0x06;
+//
+//        b[29] = (byte) 0x05;
+//        b[30] = (byte) 0x04;
+//        b[31] = (byte) 0x0a;
+//        b[32] = (byte) 0x09;
+//        b[33] = (byte) 0x09;
+//        b[34] = (byte) 0x09;
+//
+//
+//        b[35] = ToolUtils.sumCheck(b, 34, 2);
+//        b[36] = (byte) 0xf4;
+//        b[37] = (byte) 0x4f;
+//
+//        return b;
+//    }
 
 }
