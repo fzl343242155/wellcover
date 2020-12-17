@@ -149,64 +149,83 @@ public class ActionUtils {
                                        String str17, String str18) {
         int length1 = 0, length2 = 0, length3 = 0, length4 = 0, length5 = 0, length6 = 0, length7 = 0, length8 = 0, length9 = 0,
                 length10 = 0, length11 = 0, length12 = 0, length13 = 0, length14 = 0, length15 = 0, length16 = 0, length17 = 0, length18 = 0;
+        int index = 0;
         if (!TextUtils.isEmpty(str1)) {
+            index++;
             length1 = str1.getBytes().length;
         }
         if (!TextUtils.isEmpty(str2)) {
+            index++;
             length2 = str2.getBytes().length;
         }
         if (!TextUtils.isEmpty(str3)) {
+            index++;
             length3 = str3.getBytes().length;
         }
         if (!TextUtils.isEmpty(str4)) {
+            index++;
             length4 = str4.getBytes().length;
         }
         if (!TextUtils.isEmpty(str5)) {
+            index++;
             length5 = str5.getBytes().length;
         }
         if (!TextUtils.isEmpty(str6)) {
+            index++;
             length6 = str6.getBytes().length;
         }
         if (!TextUtils.isEmpty(str7)) {
+            index++;
             length7 = str7.getBytes().length;
         }
         if (!TextUtils.isEmpty(str8)) {
+            index++;
             length8 = str8.getBytes().length;
         }
         if (!TextUtils.isEmpty(str9)) {
+            index++;
             length9 = str9.getBytes().length;
         }
         if (!TextUtils.isEmpty(str10)) {
+            index++;
             length10 = str10.getBytes().length;
         }
         if (!TextUtils.isEmpty(str11)) {
+            index++;
             length11 = str11.getBytes().length;
         }
         if (!TextUtils.isEmpty(str12)) {
+            index++;
             length12 = str12.getBytes().length;
         }
         if (!TextUtils.isEmpty(str13)) {
+            index++;
             length13 = str13.getBytes().length;
         }
         if (!TextUtils.isEmpty(str14)) {
+            index++;
             length14 = str14.getBytes().length;
         }
         if (!TextUtils.isEmpty(str15)) {
+            index++;
             length15 = str15.getBytes().length;
         }
         if (!TextUtils.isEmpty(str16)) {
+            index++;
             length16 = str16.getBytes().length;
         }
         if (!TextUtils.isEmpty(str17)) {
+            index++;
             length17 = str17.getBytes().length;
         }
         if (!TextUtils.isEmpty(str18)) {
+            index++;
             length18 = str18.getBytes().length;
         }
 
         int result = length1 + length2 + length3 + length4 + length5 + length6 + length7 + length8 +
                 length9 + length10 + length11 + length12 + length13 + length14 + length15 + length16 + length17 + length18;
-        byte[] b = new byte[11 + result];
+        byte[] b = new byte[20 + result + index * 2];
 
         b[0] = (byte) 0xf1;
         b[1] = (byte) 0x1f;
@@ -217,18 +236,55 @@ public class ActionUtils {
         b[4] = (byte) 0x03;
         b[5] = (byte) 0x00;
 
+
         b[6] = (byte) 0x00; //长度
-        b[7] = (byte) 0x00;
+        b[7] = (byte) Integer.parseInt(b.length - 11 + "", 16);
 
         byte[] actionCode = onActionCode();
         for (int i = 0; i < actionCode.length; i++) {
             b[8 + i] = actionCode[i];
         }
 
-        b[16] = (byte) 0x11;//总参数条数 TODO
+        b[16] = (byte) Integer.parseInt(index + "", 16);//总参数条数
 
-        b[17] = (byte) 0x01;
+        String strs[] = {str1, str2, str3, str4, str5, str6, str7, str8,
+                str9, str10, str11, str12, str13, str14, str15, str16,
+                str17, str18};
+        int in = 16;
+        for (int i = 0; i < strs.length; i++) {
+            String str = strs[i];
+            if (i == 0) {
+                if (!TextUtils.isEmpty(str)) {
+                    b[in + i + 1] = (byte) Integer.parseInt((i + 1) + "", 16);
+                    b[in + i + 2] = (byte) Integer.parseInt(str.getBytes().length + "", 16);
+                    byte str1b[] = str.getBytes();
+                    for (int j = 0; j < str1b.length; j++) {
+                        b[(in + i + 3) + j] = str1b[j];
+                    }
+                    in += str.getBytes().length + 2;
+                }else{
+                    in += str.getBytes().length;
+                }
+            } else {
+                if (TextUtils.isEmpty(str)) {
+                    in += str.getBytes().length - 1;
+                    if (in < 16) in = 17;
+                } else {
+                    b[in + i] = (byte) Integer.parseInt((i + 1) + "", 16);
+                    b[in + i + 1] = (byte) Integer.parseInt(str.getBytes().length + "", 16);
+                    byte str1b[] = str.getBytes();
+                    for (int j = 0; j < str1b.length; j++) {
+                        b[(in + i + 2) + j] = str1b[j];
+                    }
+                    in += str.getBytes().length + 1;
+                }
 
+            }
+        }
+
+        b[b.length - 3] = ToolUtils.sumCheck(b, b.length - 4, 2);
+        b[b.length - 2] = (byte) 0xf2;
+        b[b.length - 1] = (byte) 0x2f;
 
         Logger.e("turbo", "蓝牙配置指令    发送数据 = " + ToolUtils.byteToHex(b));
         return b;
