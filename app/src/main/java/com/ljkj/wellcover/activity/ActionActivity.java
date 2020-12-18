@@ -57,6 +57,12 @@ public class ActionActivity extends BaseActivity {
     RelativeLayout rlConn;
     @BindView(R.id.rl_disconn)
     RelativeLayout rlDisconn;
+    @BindView(R.id.rl_open)
+    RelativeLayout rlOpen;
+    @BindView(R.id.rl_close)
+    RelativeLayout rlClose;
+    @BindView(R.id.rl_clear)
+    RelativeLayout rlClear;
 
     private List<String> mList = new ArrayList<>();
     private ActionAdapter mActionAdapter;
@@ -141,6 +147,8 @@ public class ActionActivity extends BaseActivity {
         mActionAdapter = new ActionAdapter(mContext);
         rlContent.setAdapter(mActionAdapter);
 
+        setBtnState(false);
+        setActionBtnState(false);
     }
 
     /**
@@ -177,6 +185,7 @@ public class ActionActivity extends BaseActivity {
                                     if (code == 0) {
                                         Logger.e(TAG, "订阅蓝牙通知成功");
                                         tvConnectState.setText("已连接");
+                                        setBtnState(true);
                                         mList.add(getTime() + ": 已连接");
                                         mActionAdapter.addDatas(mList);
                                         sendAction(4);
@@ -187,6 +196,7 @@ public class ActionActivity extends BaseActivity {
                                         tvConnectState.setText("连接失败");
                                         mList.add(getTime() + ": 连接失败");
                                         mActionAdapter.addDatas(mList);
+                                        setBtnState(false);
                                     }
                                 }
 
@@ -201,6 +211,7 @@ public class ActionActivity extends BaseActivity {
                     tvConnectState.setText("连接失败");
                     mList.add(getTime() + ": 连接失败");
                     mActionAdapter.addDatas(mList);
+                    setBtnState(false);
                 }
             }
         });
@@ -213,6 +224,7 @@ public class ActionActivity extends BaseActivity {
         if (!TextUtils.isEmpty(mMac)) {
             tvConnectState.setText("未连接");
             mBluetoothClient.disconnect(mMac);
+            setBtnState(false);
         }
     }
 
@@ -280,10 +292,12 @@ public class ActionActivity extends BaseActivity {
                     if ("00".equals(data[8])) {
                         Logger.e(TAG, "蓝牙认证信息      成功");
                         mList.add(getTime() + ": 蓝牙认证信息      成功");
+                        setActionBtnState(true);
                         mActionAdapter.addDatas(mList);
                     } else {
                         Logger.e(TAG, "蓝牙认证信息      失败");
                         mList.add(getTime() + ": 蓝牙认证信息      失败");
+                        setActionBtnState(false);
                         mActionAdapter.addDatas(mList);
                     }
                     break;
@@ -319,17 +333,6 @@ public class ActionActivity extends BaseActivity {
                     mList.add(getTime() + ": " + str);
                     mActionAdapter.addDatas(mList);
                     break;
-                case 3:
-                    Logger.e(TAG, "蓝牙配置指令");
-                    if ("00".equals(data[8])) {
-                        Logger.e(TAG, "蓝牙配置指令      密钥验证失败");
-                    } else {
-                        Logger.e(TAG, "蓝牙配置指令      成功");
-                    }
-                    break;
-                case 4:
-                    Logger.e(TAG, "蓝牙查询配置指令");
-                    break;
             }
         } else {
             Logger.e(TAG, "数据校验失败");
@@ -337,9 +340,52 @@ public class ActionActivity extends BaseActivity {
         Logger.e(TAG, "处理接收到的数据已经完成");
     }
 
+    /**
+     * 设置连接和断开按钮状态
+     *
+     * @param type
+     */
+    private void setBtnState(boolean type) {
+        if (type) {
+            rlConn.setBackgroundResource(R.drawable.btn_action_bg_g);
+            rlConn.setEnabled(false);
+            rlDisconn.setEnabled(true);
+            rlDisconn.setBackgroundResource(R.drawable.btn_action_bg);
+        } else {
+            rlConn.setBackgroundResource(R.drawable.btn_action_bg);
+            rlConn.setEnabled(true);
+            rlDisconn.setEnabled(false);
+            rlDisconn.setBackgroundResource(R.drawable.btn_action_bg_g);
+        }
+    }
+
+    /**
+     * 设置动作按钮的状态
+     *
+     * @param type
+     */
+    private void setActionBtnState(boolean type) {
+        if (type) {
+            rlOpen.setEnabled(true);
+            rlOpen.setBackgroundResource(R.drawable.btn_action_bg);
+            rlClose.setEnabled(true);
+            rlClose.setBackgroundResource(R.drawable.btn_action_bg);
+            rlClear.setEnabled(true);
+            rlClear.setBackgroundResource(R.drawable.btn_action_bg);
+        } else {
+            rlOpen.setEnabled(false);
+            rlOpen.setBackgroundResource(R.drawable.btn_action_bg_g);
+            rlClose.setEnabled(false);
+            rlClose.setBackgroundResource(R.drawable.btn_action_bg_g);
+            rlClear.setEnabled(false);
+            rlClear.setBackgroundResource(R.drawable.btn_action_bg_g);
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         disConnection();
     }
+
 }

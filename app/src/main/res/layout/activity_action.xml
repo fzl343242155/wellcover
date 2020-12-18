@@ -85,6 +85,7 @@
                     android:layout_marginLeft="32mm"
                     android:layout_marginTop="25mm"
                     android:text="状态："
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="26mm" />
 
@@ -95,6 +96,7 @@
                     android:layout_marginLeft="10mm"
                     android:layout_marginTop="25mm"
                     android:text="关闭"
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="26mm" />
 
@@ -165,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_action_bg"
+                    android:background="@drawable/btn_action_bg_g"
                     android:paddingTop="10mm"
                     android:paddingBottom="10mm">
 
@@ -202,7 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_action_bg"
+                    android:background="@drawable/btn_action_bg_g"
                     android:paddingTop="10mm"
                     android:paddingBottom="10mm">
 
@@ -237,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_action_bg"
+                    android:background="@drawable/btn_action_bg_g"
                     android:paddingTop="10mm"
                     android:paddingBottom="10mm">
 
@@ -272,7 +274,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_action_bg"
+                    android:background="@drawable/btn_action_bg_g"
                     android:paddingTop="10mm"
                     android:paddingBottom="10mm">
 
