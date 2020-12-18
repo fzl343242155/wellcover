@@ -10,14 +10,14 @@ package com.ljkj.wellcover.utils;
 public class ToolUtils {
 
     /**
-     * 求校验和的算法
+     * 异或运算和
      *
-     * @param b     需要求校验和的字节数组
+     * @param b     需要求校验的字节数组
      * @param len   结束的下标
      * @param start 开始的下标
-     * @return 校验和
+     * @return 校验结果
      */
-    public static byte sumCheck(byte[] b, int len, int start) {
+    public static byte byteOrbyte(byte[] b, int len, int start) {
         byte value = b[start];
         for (int i = start; i <= len; i++) {
             value = (byte) (value^b[i]);

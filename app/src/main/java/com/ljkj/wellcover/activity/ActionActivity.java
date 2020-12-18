@@ -223,7 +223,10 @@ public class ActionActivity extends BaseActivity {
     private void disConnection() {
         if (!TextUtils.isEmpty(mMac)) {
             tvConnectState.setText("未连接");
-            mBluetoothClient.disconnect(mMac);
+            if(mBluetoothClient!=null){
+                setActionBtnState(false);
+                mBluetoothClient.disconnect(mMac);
+            }
             setBtnState(false);
         }
     }
@@ -282,7 +285,7 @@ public class ActionActivity extends BaseActivity {
         String result = ToolUtils.byteToHex(value);
         String data[] = result.split(" ");
         byte yuan = value[value.length - 3];
-        byte yan = ToolUtils.sumCheck(value, value.length - 4, 2);
+        byte yan = ToolUtils.byteOrbyte(value, value.length - 4, 2);
         Logger.e(TAG, "onProcessData: yuan = " + yuan + "        yan = " + yan);
         if (yuan == yan) { //判断校验为
             Logger.e(TAG, "数据校验成功");
@@ -384,8 +387,8 @@ public class ActionActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         disConnection();
+        super.onDestroy();
     }
 
 }

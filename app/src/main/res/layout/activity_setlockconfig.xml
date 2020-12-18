@@ -49,7 +49,10 @@
             android:id="@+id/btn_getIDorMAC"
             android:layout_width="match_parent"
             android:layout_height="80mm"
+            android:layout_margin="5mm"
+            android:background="@drawable/btn_action_bg"
             android:text="扫码获取ID和MAC地址"
+            android:textColor="@color/white"
             android:textSize="28mm" />
 
         <LinearLayout
@@ -119,7 +122,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2mm"
-        android:background="@color/_09B1FF" />
+        android:background="@color/_666666" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -130,40 +133,36 @@
             android:id="@+id/rl_conn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_margin="5mm"
+            android:layout_weight="1"
+            android:background="@drawable/btn_action_bg">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="连接设备"
+                android:textColor="@color/white"
                 android:textSize="30mm" />
         </RelativeLayout>
-
-        <View
-            android:layout_width="2mm"
-            android:layout_height="match_parent"
-            android:background="@color/_09B1FF" />
 
         <RelativeLayout
             android:id="@+id/rl_disconn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_margin="5mm"
+            android:layout_weight="1"
+            android:background="@drawable/btn_action_bg_g">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="断开连接"
+                android:textColor="@color/white"
                 android:textSize="30mm" />
         </RelativeLayout>
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2mm"
-        android:background="@color/_09B1FF" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -174,32 +173,33 @@
             android:id="@+id/rl_getconfig"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_margin="5mm"
+            android:layout_weight="1"
+            android:background="@drawable/btn_action_bg_g">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="获取配置信息"
+                android:textColor="@color/white"
                 android:textSize="30mm" />
         </RelativeLayout>
-
-        <View
-            android:layout_width="2mm"
-            android:layout_height="match_parent"
-            android:background="@color/_09B1FF" />
 
         <RelativeLayout
             android:id="@+id/rl_setconfig"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_margin="5mm"
+            android:layout_weight="1"
+            android:background="@drawable/btn_action_bg_g">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="写入配置信息"
+                android:textColor="@color/white"
                 android:textSize="30mm" />
         </RelativeLayout>
     </LinearLayout>
@@ -207,7 +207,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2mm"
-        android:background="@color/_09B1FF" />
+        android:background="@color/_666666" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -218,171 +218,403 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/et_1"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="主服务器地址,IP或域名"
-                android:paddingLeft="20mm"
-                android:text="1"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_2"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="服务器地址:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="主服务器地址,IP或域名"
+                    android:paddingLeft="20mm"
+                    android:text="1"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="服务器TCP端口"
-                android:inputType="number"
-                android:paddingLeft="20mm"
-                android:text="2"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_3"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="端口号:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="服务器TCP端口"
+                    android:inputType="number"
+                    android:paddingLeft="20mm"
+                    android:text="2"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="定时汇报间隔，单位为min > 0"
-                android:paddingLeft="20mm"
-                android:text="3"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_4"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="定时汇报间隔:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="定时汇报间隔，单位为min > 0"
+                    android:paddingLeft="20mm"
+                    android:text="3"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="定位模式"
-                android:paddingLeft="20mm"
-                android:text="4"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_5"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="定位模式:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="定位模式"
+                    android:paddingLeft="20mm"
+                    android:text="4"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="终端心跳发送间隔，单位为秒（s）"
-                android:inputType="number"
-                android:paddingLeft="20mm"
-                android:text="5"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_6"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="终端心跳间隔:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="终端心跳发送间隔，单位为秒（s）"
+                    android:inputType="number"
+                    android:paddingLeft="20mm"
+                    android:text="5"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="APN名称（SIM卡1）"
-                android:paddingLeft="20mm"
-                android:text="6"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_7"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="APN名称:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="APN名称（SIM卡1）"
+                    android:paddingLeft="20mm"
+                    android:text="6"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="APN用户名（SIM卡1）"
-                android:paddingLeft="20mm"
-                android:text="7"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_8"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="APN用户名:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="APN用户名（SIM卡1）"
+                    android:paddingLeft="20mm"
+                    android:text="7"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="APN密码（SIM卡1）"
-                android:paddingLeft="20mm"
-                android:text="8"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_9"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="APN密码:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="APN密码（SIM卡1）"
+                    android:paddingLeft="20mm"
+                    android:text="8"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="短信中心号码"
-                android:paddingLeft="20mm"
-                android:text="9"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_10"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="短信中心号码:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_9"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="短信中心号码"
+                    android:paddingLeft="20mm"
+                    android:text="9"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="终端告警电压值，单位为10MV"
-                android:paddingLeft="20mm"
-                android:text="0"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_11"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="终端告警电压:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="终端告警电压值，单位为10MV"
+                    android:paddingLeft="20mm"
+                    android:text="0"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="SMS访问密码（8字节）"
-                android:text="1"
-                android:paddingLeft="20mm"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_12"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="SMS访问密码:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_11"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="SMS访问密码（8字节）"
+                    android:paddingLeft="20mm"
+                    android:text="1"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="倾角检测阈值，单位为度"
-                android:paddingLeft="20mm"
-                android:text="1"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_13"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="倾角检测值:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="倾角检测阈值，单位为度"
+                    android:paddingLeft="20mm"
+                    android:text="1"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:text="1"
-                android:hint="实时时钟时间（在无GPS功能时校准用）"
-                android:paddingLeft="20mm"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_14"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="实时时间:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_13"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="实时时钟时间（在无GPS功能时校准用）"
+                    android:paddingLeft="20mm"
+                    android:text="1"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="00：锁杆闭合不上物理锁\n01:锁杆闭合自动上物理锁"
-                android:paddingLeft="20mm"
-                android:text="1"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_15"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="锁杆闭合设置:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="00：锁杆闭合不上物理锁\n01:锁杆闭合自动上物理锁"
+                    android:paddingLeft="20mm"
+                    android:text="1"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="01：终端还原出厂值（终端会自动重启）\n02：终端10秒后强制重启\n03：清除终端盲点数据"
-                android:paddingLeft="20mm"
-                android:text="1"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_16"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="终端设置:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="01：终端还原出厂值（终端会自动重启）\n02：终端10秒后强制重启\n03：清除终端盲点数据"
+                    android:paddingLeft="20mm"
+                    android:text="1"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:text="1"
-                android:hint="蓝牙设备名称更改（ASSIC）"
-                android:paddingLeft="20mm"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_17"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="蓝牙设备名:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_16"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="蓝牙设备名称更改（ASSIC）"
+                    android:paddingLeft="20mm"
+                    android:text="1"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="蓝牙配对密码更改"
-                android:text="1"
-                android:paddingLeft="20mm"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
-            <EditText
-                android:id="@+id/et_18"
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="蓝牙配对密码:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_17"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="蓝牙配对密码更改"
+                    android:paddingLeft="20mm"
+                    android:text="1"
+                    android:textSize="28mm" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80mm"
-                android:hint="设置蓝牙通讯报文AES128（16字节）密码"
-                android:paddingLeft="20mm"
-                android:text="1"
-                android:textSize="28mm" />
+                android:layout_height="80mm">
 
+                <TextView
+                    android:layout_width="200mm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10mm"
+                    android:gravity="right"
+                    android:text="蓝牙通讯报文:"
+                    android:textSize="28mm" />
+
+                <EditText
+                    android:id="@+id/et_18"
+                    android:layout_width="match_parent"
+                    android:layout_height="80mm"
+                    android:hint="设置蓝牙通讯报文AES128（16字节）密码"
+                    android:paddingLeft="20mm"
+                    android:text="1"
+                    android:textSize="28mm" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

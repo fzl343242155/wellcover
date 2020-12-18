@@ -111,6 +111,8 @@ public class SetLockConfigActivity extends BaseActivity {
         super.initViews();
         mBluetoothClient = new BluetoothClient(mContext);
         ImmersionBarUtils.initColorBar(SetLockConfigActivity.this);
+        setBtnState(false);
+        setActionBtnState(false);
     }
 
     @OnClick({R.id.ivBack, R.id.btn_getIDorMAC, R.id.rl_getconfig, R.id.rl_setconfig, R.id.rl_conn, R.id.rl_disconn})
@@ -134,7 +136,7 @@ public class SetLockConfigActivity extends BaseActivity {
                 connection();
                 break;
             case R.id.rl_disconn:
-//                disConnection();
+                disConnection();
 //                onProcessData(ceshi());
                 ceshi();
                 break;
@@ -196,8 +198,10 @@ public class SetLockConfigActivity extends BaseActivity {
                                     if (code == 0) {
                                         Logger.e(TAG, "订阅蓝牙通知成功");
                                         sendAction(3);
+                                        setBtnState(true);
                                     } else {
                                         Logger.e(TAG, "订阅蓝牙通知失败");
+                                        setBtnState(false);
                                     }
                                 }
 
@@ -209,6 +213,7 @@ public class SetLockConfigActivity extends BaseActivity {
                             });
                 } else {
                     Logger.e(TAG, "没连通");
+                    setBtnState(false);
                 }
             }
         });
@@ -219,7 +224,11 @@ public class SetLockConfigActivity extends BaseActivity {
      */
     private void disConnection() {
         if (!TextUtils.isEmpty(mMac)) {
-            mBluetoothClient.disconnect(mMac);
+            if (mBluetoothClient != null) {
+                setActionBtnState(false);
+                mBluetoothClient.disconnect(mMac);
+            }
+            setBtnState(false);
         }
     }
 
@@ -291,11 +300,21 @@ public class SetLockConfigActivity extends BaseActivity {
         String result = ToolUtils.byteToHex(value);
         String data[] = result.split(" ");
         byte yuan = value[value.length - 3];
-        byte yan = ToolUtils.sumCheck(value, value.length - 4, 2);
+        byte yan = ToolUtils.byteOrbyte(value, value.length - 4, 2);
         Logger.e(TAG, "onProcessData: yuan = " + yuan + "        yan = " + yan);
         if (yuan == yan) { //判断校验为
             Logger.e(TAG, "数据校验成功");
             switch (value[4]) {
+                case 1:
+                    Logger.e(TAG, "蓝牙认证信息");
+                    if ("00".equals(data[8])) {
+                        Logger.e(TAG, "蓝牙认证信息      成功");
+                        setActionBtnState(true);
+                    } else {
+                        Logger.e(TAG, "蓝牙认证信息      失败");
+                        setActionBtnState(false);
+                    }
+                    break;
                 case 3:
                     Logger.e(TAG, "蓝牙配置指令");
                     if ("00".equals(data[8])) {
@@ -347,6 +366,44 @@ public class SetLockConfigActivity extends BaseActivity {
         return bs;
     }
 
+    /**
+     * 设置连接和断开按钮状态
+     *
+     * @param type
+     */
+    private void setBtnState(boolean type) {
+        if (type) {
+            rlConn.setBackgroundResource(R.drawable.btn_action_bg_g);
+            rlConn.setEnabled(false);
+            rlDisconn.setEnabled(true);
+            rlDisconn.setBackgroundResource(R.drawable.btn_action_bg);
+        } else {
+            rlConn.setBackgroundResource(R.drawable.btn_action_bg);
+            rlConn.setEnabled(true);
+            rlDisconn.setEnabled(false);
+            rlDisconn.setBackgroundResource(R.drawable.btn_action_bg_g);
+        }
+    }
+
+    /**
+     * 设置动作按钮的状态
+     *
+     * @param type
+     */
+    private void setActionBtnState(boolean type) {
+        if (type) {
+            rlGetconfig.setEnabled(true);
+            rlGetconfig.setBackgroundResource(R.drawable.btn_action_bg);
+            rlSetconfig.setEnabled(true);
+            rlSetconfig.setBackgroundResource(R.drawable.btn_action_bg);
+        } else {
+            rlGetconfig.setEnabled(false);
+            rlGetconfig.setBackgroundResource(R.drawable.btn_action_bg_g);
+            rlSetconfig.setEnabled(false);
+            rlSetconfig.setBackgroundResource(R.drawable.btn_action_bg_g);
+        }
+    }
+
 
 //    private byte[] ceshi() {
 //        byte[] b = new byte[38];
@@ -396,7 +453,7 @@ public class SetLockConfigActivity extends BaseActivity {
 //        b[34] = (byte) 0x09;
 //
 //
-//        b[35] = ToolUtils.sumCheck(b, 34, 2);
+//        b[35] = ToolUtils.byteOrbyte(b, 34, 2);
 //        b[36] = (byte) 0xf4;
 //        b[37] = (byte) 0x4f;
 //
@@ -404,28 +461,28 @@ public class SetLockConfigActivity extends BaseActivity {
 //    }
 
 
-    private void ceshi(){
+    private void ceshi() {
 //        F3 3F FF FF 03 00 00 01 00 EE F4 4F
 
         byte[] b = new byte[14];
-        b[0] =(byte) 0xF3;
-        b[1] =(byte) 0x3F;
+        b[0] = (byte) 0xF3;
+        b[1] = (byte) 0x3F;
 
-        b[2] =(byte) 0xFF;
-        b[3] =(byte) 0xFF;
+        b[2] = (byte) 0xFF;
+        b[3] = (byte) 0xFF;
 
-        b[4] =(byte) 0x03;
-        b[5] =(byte) 0x00;
+        b[4] = (byte) 0x03;
+        b[5] = (byte) 0x00;
 
-        b[6] =(byte) 0x00;
-        b[7] =(byte) 0x01;
+        b[6] = (byte) 0x00;
+        b[7] = (byte) 0x01;
 
-        b[8] =(byte) 0x00;
+        b[8] = (byte) 0x00;
 
-        b[9] =ToolUtils.sumCheck(b, 3,2);
+        b[9] = ToolUtils.byteOrbyte(b, 3, 2);
 
-        b[10] =(byte) 0xF4;
-        b[11] =(byte) 0x4F;
+        b[10] = (byte) 0xF4;
+        b[11] = (byte) 0x4F;
 
 
         Logger.e("turbo", "蓝牙查询配置指令    发送数据 = " + ToolUtils.byteToHex(b));
@@ -434,7 +491,7 @@ public class SetLockConfigActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         disConnection();
+        super.onDestroy();
     }
 }

@@ -49,7 +49,7 @@ public class ActionUtils {
             b[30 + i] = result[i];
         }
 
-        b[36] = ToolUtils.sumCheck(b, 35, 2);
+        b[36] = ToolUtils.byteOrbyte(b, 35, 2);
 
         b[37] = (byte) 0xf2;
         b[38] = (byte) 0x2f;
@@ -99,7 +99,7 @@ public class ActionUtils {
                 break;
         }
 
-        b[23] = ToolUtils.sumCheck(b, 22, 2);
+        b[23] = ToolUtils.byteOrbyte(b, 22, 2);
 
         b[24] = (byte) 0xf2;
         b[25] = (byte) 0x2f;
@@ -236,9 +236,7 @@ public class ActionUtils {
         b[4] = (byte) 0x03;
         b[5] = (byte) 0x00;
 
-
         b[6] = (byte) 0x00; //长度
-//        b[7] = (byte) Integer.parseInt(b.length - 11 + "", 16);
         b[7] = (byte) (b.length - 11);
 
         byte[] actionCode = onActionCode();
@@ -246,7 +244,6 @@ public class ActionUtils {
             b[8 + i] = actionCode[i];
         }
 
-//        b[16] = (byte) Integer.parseInt(index + "", 16);//总参数条数
         b[16] = (byte) index;//总参数条数
 
         String strs[] = {str1, str2, str3, str4, str5, str6, str7, str8,
@@ -257,9 +254,6 @@ public class ActionUtils {
             String str = strs[i];
             if (i == 0) {
                 if (!TextUtils.isEmpty(str)) {
-//                    b[in + i + 1] = (byte) Integer.parseInt((i + 1) + "", 16);
-//                    b[in + i + 2] = (byte) Integer.parseInt(str.getBytes().length + "", 16);
-
                     b[in + i + 1] = (byte) (i + 1);
                     b[in + i + 2] = (byte) str.getBytes().length;
                     byte str1b[] = str.getBytes();
@@ -275,9 +269,6 @@ public class ActionUtils {
                     in += str.getBytes().length - 1;
                     if (in < 16) in = 17;
                 } else {
-//                    b[in + i] = (byte) Integer.parseInt((i + 1) + "", 16);
-//                    b[in + i + 1] = (byte) Integer.parseInt(str.getBytes().length + "", 16);
-
                     b[in + i] = (byte) (i + 1);
                     b[in + i + 1] = (byte) str.getBytes().length;
 
@@ -291,7 +282,7 @@ public class ActionUtils {
             }
         }
 
-        b[b.length - 3] = ToolUtils.sumCheck(b, b.length - 4, 2);
+        b[b.length - 3] = ToolUtils.byteOrbyte(b, b.length - 4, 2);
         b[b.length - 2] = (byte) 0xf2;
         b[b.length - 1] = (byte) 0x2f;
 
@@ -343,7 +334,7 @@ public class ActionUtils {
         b[32] = (byte) 0x11;
         b[33] = (byte) 0x12;
 
-        b[34] = ToolUtils.sumCheck(b, 33, 2);
+        b[34] = ToolUtils.byteOrbyte(b, 33, 2);
 
         b[35] = (byte) 0xf2;
         b[36] = (byte) 0x2f;
