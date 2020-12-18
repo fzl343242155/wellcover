@@ -307,6 +307,7 @@
                 android:layout_height="80mm"
                 android:hint="终端告警电压值，单位为10MV"
                 android:paddingLeft="20mm"
+                android:text="0"
                 android:textSize="28mm" />
 
             <EditText
@@ -314,6 +315,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="80mm"
                 android:hint="SMS访问密码（8字节）"
+                android:text="1"
                 android:paddingLeft="20mm"
                 android:textSize="28mm" />
 
@@ -323,12 +325,14 @@
                 android:layout_height="80mm"
                 android:hint="倾角检测阈值，单位为度"
                 android:paddingLeft="20mm"
+                android:text="1"
                 android:textSize="28mm" />
 
             <EditText
                 android:id="@+id/et_13"
                 android:layout_width="match_parent"
                 android:layout_height="80mm"
+                android:text="1"
                 android:hint="实时时钟时间（在无GPS功能时校准用）"
                 android:paddingLeft="20mm"
                 android:textSize="28mm" />
@@ -339,6 +343,7 @@
                 android:layout_height="wrap_content"
                 android:hint="00：锁杆闭合不上物理锁\n01:锁杆闭合自动上物理锁"
                 android:paddingLeft="20mm"
+                android:text="1"
                 android:textSize="28mm" />
 
             <EditText
@@ -347,12 +352,14 @@
                 android:layout_height="wrap_content"
                 android:hint="01：终端还原出厂值（终端会自动重启）\n02：终端10秒后强制重启\n03：清除终端盲点数据"
                 android:paddingLeft="20mm"
+                android:text="1"
                 android:textSize="28mm" />
 
             <EditText
                 android:id="@+id/et_16"
                 android:layout_width="match_parent"
                 android:layout_height="80mm"
+                android:text="1"
                 android:hint="蓝牙设备名称更改（ASSIC）"
                 android:paddingLeft="20mm"
                 android:textSize="28mm" />
@@ -362,6 +369,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="80mm"
                 android:hint="蓝牙配对密码更改"
+                android:text="1"
                 android:paddingLeft="20mm"
                 android:textSize="28mm" />
 
@@ -371,6 +379,7 @@
                 android:layout_height="80mm"
                 android:hint="设置蓝牙通讯报文AES128（16字节）密码"
                 android:paddingLeft="20mm"
+                android:text="1"
                 android:textSize="28mm" />
 
         </LinearLayout>

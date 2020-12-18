@@ -210,8 +210,10 @@ public class ActionActivity extends BaseActivity {
      * 断开连接
      */
     private void disConnection() {
-        tvConnectState.setText("未连接");
-        mBluetoothClient.disconnect(mMac);
+        if (!TextUtils.isEmpty(mMac)) {
+            tvConnectState.setText("未连接");
+            mBluetoothClient.disconnect(mMac);
+        }
     }
 
     /**
@@ -335,4 +337,9 @@ public class ActionActivity extends BaseActivity {
         Logger.e(TAG, "处理接收到的数据已经完成");
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disConnection();
+    }
 }

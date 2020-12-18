@@ -1,6 +1,5 @@
 package com.ljkj.wellcover.utils;
 
-import android.annotation.SuppressLint;
 
 /**
  * 文件名：ToolUtils
@@ -18,17 +17,12 @@ public class ToolUtils {
      * @param start 开始的下标
      * @return 校验和
      */
-    @SuppressLint("NewApi")
     public static byte sumCheck(byte[] b, int len, int start) {
-        int sum = 0;
+        byte value = b[start];
         for (int i = start; i <= len; i++) {
-            sum = sum + b[i];
+            value = (byte) (value^b[i]);
         }
-        sum = ~sum + 1;
-        if (sum > 0xf0) {
-            sum -= 16;
-        }
-        return (byte) sum;
+        return value;
     }
 
     /**

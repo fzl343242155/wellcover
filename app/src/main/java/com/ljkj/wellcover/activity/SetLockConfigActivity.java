@@ -422,12 +422,19 @@ public class SetLockConfigActivity extends BaseActivity {
 
         b[8] =(byte) 0x00;
 
-        b[9] =(byte) 0xEE;
+        b[9] =ToolUtils.sumCheck(b, 3,2);
 
         b[10] =(byte) 0xF4;
         b[11] =(byte) 0x4F;
 
-        b[12] = ToolUtils.sumCheck(b,8,2);
+
+        Logger.e("turbo", "蓝牙查询配置指令    发送数据 = " + ToolUtils.byteToHex(b));
+
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disConnection();
+    }
 }

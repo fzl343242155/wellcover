@@ -238,14 +238,16 @@ public class ActionUtils {
 
 
         b[6] = (byte) 0x00; //长度
-        b[7] = (byte) Integer.parseInt(b.length - 11 + "", 16);
+//        b[7] = (byte) Integer.parseInt(b.length - 11 + "", 16);
+        b[7] = (byte) (b.length - 11);
 
         byte[] actionCode = onActionCode();
         for (int i = 0; i < actionCode.length; i++) {
             b[8 + i] = actionCode[i];
         }
 
-        b[16] = (byte) Integer.parseInt(index + "", 16);//总参数条数
+//        b[16] = (byte) Integer.parseInt(index + "", 16);//总参数条数
+        b[16] = (byte) index;//总参数条数
 
         String strs[] = {str1, str2, str3, str4, str5, str6, str7, str8,
                 str9, str10, str11, str12, str13, str14, str15, str16,
@@ -255,8 +257,11 @@ public class ActionUtils {
             String str = strs[i];
             if (i == 0) {
                 if (!TextUtils.isEmpty(str)) {
-                    b[in + i + 1] = (byte) Integer.parseInt((i + 1) + "", 16);
-                    b[in + i + 2] = (byte) Integer.parseInt(str.getBytes().length + "", 16);
+//                    b[in + i + 1] = (byte) Integer.parseInt((i + 1) + "", 16);
+//                    b[in + i + 2] = (byte) Integer.parseInt(str.getBytes().length + "", 16);
+
+                    b[in + i + 1] = (byte) (i + 1);
+                    b[in + i + 2] = (byte) str.getBytes().length;
                     byte str1b[] = str.getBytes();
                     for (int j = 0; j < str1b.length; j++) {
                         b[(in + i + 3) + j] = str1b[j];
@@ -270,8 +275,12 @@ public class ActionUtils {
                     in += str.getBytes().length - 1;
                     if (in < 16) in = 17;
                 } else {
-                    b[in + i] = (byte) Integer.parseInt((i + 1) + "", 16);
-                    b[in + i + 1] = (byte) Integer.parseInt(str.getBytes().length + "", 16);
+//                    b[in + i] = (byte) Integer.parseInt((i + 1) + "", 16);
+//                    b[in + i + 1] = (byte) Integer.parseInt(str.getBytes().length + "", 16);
+
+                    b[in + i] = (byte) (i + 1);
+                    b[in + i + 1] = (byte) str.getBytes().length;
+
                     byte str1b[] = str.getBytes();
                     for (int j = 0; j < str1b.length; j++) {
                         b[(in + i + 2) + j] = str1b[j];
