@@ -125,6 +125,7 @@ public class ActionActivity extends BaseActivity {
 //        connection();
         if (null != mBean) {
             tvNumber.setText(mBean.getId());
+            mMac =  mBean.getBluetoothMac();
             String lockStatus = mBean.getLockStatus();
             //设备状态：1：开启  2 ： 关闭 3： 解除报警
             switch (lockStatus) {
