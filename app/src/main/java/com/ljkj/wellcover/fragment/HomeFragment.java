@@ -66,7 +66,7 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
     private boolean isPlayListOrMap = false;
     private AMap amap;
     private MyLocationStyle myLocationStyle;
-    private List<EquipmentInfoBean> mList = new ArrayList<>();
+//    private List<EquipmentInfoBean> mList = new ArrayList<>();
 
     @Override
     protected int getContentViewLayoutID() {
@@ -130,64 +130,124 @@ public class HomeFragment extends BaseFragment implements LoadingLayout.RetryLis
     }
 
     private void loadData() {
-        HttpServer.$().onEquipmentList(page)
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        showLoading();
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<BaseData<EquipmentBean>>() {
-                    @Override
-                    public void call(BaseData<EquipmentBean> response) {
-                        dismissLoading();
-                        boolean isRefresh;
-                        if (response != null) {
-                            if (response.getSuccess()) {
-                                if (page == 1) {
-                                    mList.clear();
-                                    mList = response.getInfo().getList();
-                                    if (mList.size() == 0) {
-                                        refreshLayout.finishRefresh();
-                                        loadingLayout.showEmpty();
-                                        LoadUtil.forbidLoadMore(mList, refreshLayout, loadingLayout);
-                                        return;
-                                    }
-                                    isRefresh = true;
-                                } else {
-                                    isRefresh = false;
-                                    mList.addAll(response.getInfo().getList());
-                                }
-                                mHomeAdapter.addDatas(mList);
-                                boolean hasNext = false;
-                                if (response.getInfo().getTotalCount() > (response.getInfo().getTotalPage() * 10)) {
-                                    hasNext = true;
-                                }
-                                LoadUtil.closeRefreshOrLoadMore(hasNext, isRefresh, refreshLayout, loadingLayout);
-                                //地图添加marker
-                                for (int i = 0; i < mList.size(); i++) {
-                                    MarkerOptions markerOption = new MarkerOptions();
-                                    markerOption.position(new LatLng(mList.get(i).getLongitude(), mList.get(i).getLatitude()));
-                                    markerOption.icon(BitmapDescriptorFactory.fromResource(R.mipmap.location));//自定义标点的图片
-                                    markerOption.title("编号：" + mList.get(i).getId()
-                                            + "\n所属单位：" + mList.get(i).getCompany()
-                                            + "\n所属街道：" + mList.get(i).getStreetName()
-                                            + "\n状态：" + getLockStatus(mList.get(i).getLockStatus()));
-                                    amap.addMarker(markerOption);
-                                }
-                            } else {
-                                loadingLayout.showEmpty();
-                            }
-                        }
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        dismissLoading();
-                    }
-                });
+//        HttpServer.$().onEquipmentList(page)
+//                .subscribeOn(Schedulers.io())
+//                .doOnSubscribe(new Action0() {
+//                    @Override
+//                    public void call() {
+//                        showLoading();
+//                    }
+//                })
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Action1<BaseData<EquipmentBean>>() {
+//                    @Override
+//                    public void call(BaseData<EquipmentBean> response) {
+//                        dismissLoading();
+//                        boolean isRefresh;
+//                        if (response != null) {
+//                            if (response.getSuccess()) {
+//                                if (page == 1) {
+//                                    mList.clear();
+//                                    mList = response.getInfo().getList();
+//                                    if (mList.size() == 0) {
+//                                        refreshLayout.finishRefresh();
+//                                        loadingLayout.showEmpty();
+//                                        LoadUtil.forbidLoadMore(mList, refreshLayout, loadingLayout);
+//                                        return;
+//                                    }
+//                                    isRefresh = true;
+//                                } else {
+//                                    isRefresh = false;
+//                                    mList.addAll(response.getInfo().getList());
+//                                }
+//                                mHomeAdapter.addDatas(mList);
+//                                boolean hasNext = false;
+//                                if (response.getInfo().getTotalCount() > (response.getInfo().getTotalPage() * 10)) {
+//                                    hasNext = true;
+//                                }
+//                                LoadUtil.closeRefreshOrLoadMore(hasNext, isRefresh, refreshLayout, loadingLayout);
+//                                //地图添加marker
+//                                for (int i = 0; i < mList.size(); i++) {
+//                                    MarkerOptions markerOption = new MarkerOptions();
+//                                    markerOption.position(new LatLng(mList.get(i).getLongitude(), mList.get(i).getLatitude()));
+//                                    markerOption.icon(BitmapDescriptorFactory.fromResource(R.mipmap.location));//自定义标点的图片
+//                                    markerOption.title("编号：" + mList.get(i).getId()
+//                                            + "\n所属单位：" + mList.get(i).getCompany()
+//                                            + "\n所属街道：" + mList.get(i).getStreetName()
+//                                            + "\n状态：" + getLockStatus(mList.get(i).getLockStatus()));
+//                                    amap.addMarker(markerOption);
+//                                }
+//                            } else {
+//                                loadingLayout.showEmpty();
+//                            }
+//                        }
+//                    }
+//                }, new Action1<Throwable>() {
+//                    @Override
+//                    public void call(Throwable throwable) {
+//                        dismissLoading();
+//                    }
+//                });
+
+
+//        loadingLayout.showContent();
+
+        List<EquipmentInfoBean> mList = new ArrayList<>();
+
+        EquipmentInfoBean bean1 = new EquipmentInfoBean();
+        bean1.setId("LJKJ20100819123");
+        bean1.setLockStatus("1");
+        bean1.setBluetoothMac("20:20:09:11:18:5E");
+        bean1.setCompany("苏州维易斯特智能科技有限公司");
+        bean1.setLatitude("116.396633");
+        bean1.setLongitude("40.025402");
+        bean1.setStreetName("奥林匹克森林公园");
+        mList.add(bean1);
+
+        EquipmentInfoBean bean2 = new EquipmentInfoBean();
+        bean2.setId("WYST20100819123");
+        bean2.setLockStatus("2");
+        bean2.setBluetoothMac("20:20:09:11:18:5E");
+        bean2.setCompany("苏州维易斯特智能科技有限公司");
+        bean2.setLatitude("116.418336");
+        bean2.setLongitude("40.02485");
+        bean2.setStreetName("仰山公园");
+        mList.add(bean2);
+
+        EquipmentInfoBean bean3 = new EquipmentInfoBean();
+        bean3.setId("WYST20100819122");
+        bean3.setLockStatus("3");
+        bean3.setBluetoothMac("20:20:09:11:18:5E");
+        bean3.setCompany("苏州维易斯特智能科技有限公司");
+        bean3.setLatitude("116.398933");
+        bean3.setLongitude("39.999208");
+        bean3.setStreetName("北京奥林匹克公园");
+        mList.add(bean3);
+
+        EquipmentInfoBean bean4 = new EquipmentInfoBean();
+        bean4.setId("WYST20100819121");
+        bean4.setLockStatus("1");
+        bean4.setBluetoothMac("20:20:09:11:18:5E");
+        bean4.setCompany("苏州维易斯特智能科技有限公司");
+        bean4.setLatitude("116.435296");
+        bean4.setLongitude("40.003298");
+        bean4.setStreetName("华汇紫薇公园");
+        mList.add(bean4);
+
+        mHomeAdapter.addDatas(mList);
+
+        LoadUtil.closeRefreshOrLoadMore(false, true, refreshLayout, loadingLayout);
+        //地图添加marker
+        for (int i = 0; i < mList.size(); i++) {
+            MarkerOptions markerOption = new MarkerOptions();
+            markerOption.position(new LatLng(mList.get(i).getLongitude(), mList.get(i).getLatitude()));
+            markerOption.icon(BitmapDescriptorFactory.fromResource(R.mipmap.location));//自定义标点的图片
+            markerOption.title("编号：" + mList.get(i).getId()
+                    + "\n所属单位：" + mList.get(i).getCompany()
+                    + "\n所属街道：" + mList.get(i).getStreetName()
+                    + "\n状态：" + getLockStatus(mList.get(i).getLockStatus()));
+            amap.addMarker(markerOption);
+        }
     }
 
     private String getLockStatus(String lockStatus) {

@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:text="18512349876"
                     android:textColor="@color/white"
-                    android:textSize="28mm" />
+                    android:textSize="26mm" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:text="职位权限："
                         android:textColor="@color/white"
-                        android:textSize="28mm" />
+                        android:textSize="24mm" />
 
                     <TextView
                         android:id="@+id/tv_permissions"
@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:text="可操作"
                         android:textColor="@color/white"
-                        android:textSize="28mm" />
+                        android:textSize="24mm" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -64,15 +64,15 @@
                         android:layout_height="wrap_content"
                         android:text="公司名："
                         android:textColor="@color/white"
-                        android:textSize="28mm" />
+                        android:textSize="24mm" />
 
                     <TextView
                         android:id="@+id/tv_compayname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="天津瓴建科技有限公司"
+                        android:text="苏州维易斯特智能科技有限公司"
                         android:textColor="@color/white"
-                        android:textSize="28mm" />
+                        android:textSize="24mm" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

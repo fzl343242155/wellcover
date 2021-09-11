@@ -103,41 +103,44 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login(String userName, String password) {
-        HttpServer.$().onLogin(userName, password)
-                .subscribeOn(Schedulers.io())
-                .flatMap(new Func1<BaseData<LoginBean>, Observable<BaseData<InfoBean>>>() {
-                    @Override
-                    public Observable<BaseData<InfoBean>> call(BaseData<LoginBean> loginBeanBaseData) {
-                        SPUtils.getInstance().put(ConstantUtils.COOKIE, loginBeanBaseData.getInfo().getCookie());
-                        return HttpServer.$().getInfo();
-                    }
-                })
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        showLoading();
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<BaseData<InfoBean>>() {
-                    @Override
-                    public void call(BaseData<InfoBean> stringBaseData) {
-                        dismissLoading();
-                        if (stringBaseData.getSuccess()) {
-                            startActivity(new Intent(mContext, MainActivity.class));
-                            finish();
-                        } else {
-                            if (!TextUtils.isEmpty(stringBaseData.getMsg())) {
-                                toast(stringBaseData.getMsg());
-                            }
-                        }
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        dismissLoading();
-                    }
-                });
+//        HttpServer.$().onLogin(userName, password)
+//                .subscribeOn(Schedulers.io())
+//                .flatMap(new Func1<BaseData<LoginBean>, Observable<BaseData<InfoBean>>>() {
+//                    @Override
+//                    public Observable<BaseData<InfoBean>> call(BaseData<LoginBean> loginBeanBaseData) {
+//                        SPUtils.getInstance().put(ConstantUtils.COOKIE, loginBeanBaseData.getInfo().getCookie());
+//                        return HttpServer.$().getInfo();
+//                    }
+//                })
+//                .doOnSubscribe(new Action0() {
+//                    @Override
+//                    public void call() {
+//                        showLoading();
+//                    }
+//                })
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Action1<BaseData<InfoBean>>() {
+//                    @Override
+//                    public void call(BaseData<InfoBean> stringBaseData) {
+//                        dismissLoading();
+//                        if (stringBaseData.getSuccess()) {
+//                            startActivity(new Intent(mContext, MainActivity.class));
+//                            finish();
+//                        } else {
+//                            if (!TextUtils.isEmpty(stringBaseData.getMsg())) {
+//                                toast(stringBaseData.getMsg());
+//                            }
+//                        }
+//                    }
+//                }, new Action1<Throwable>() {
+//                    @Override
+//                    public void call(Throwable throwable) {
+//                        dismissLoading();
+//                    }
+//                });
+
+        startActivity(new Intent(mContext, MainActivity.class));
+        finish();
     }
 
     private void startLocation() {

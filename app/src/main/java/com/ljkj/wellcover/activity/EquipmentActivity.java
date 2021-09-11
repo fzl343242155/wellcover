@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.MarkerOptions;
 import com.ljkj.wellcover.R;
 import com.ljkj.wellcover.adapter.EquipmentAdapter;
 import com.ljkj.wellcover.bean.BaseData;
@@ -144,80 +147,127 @@ public class EquipmentActivity extends BaseActivity implements LoadingLayout.Ret
     }
 
     private void deleteData(String id) {
-        HttpServer.$().deleteArticle(id)
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        showLoading();
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<BaseData>() {
-                    @Override
-                    public void call(BaseData response) {
-                        dismissLoading();
-                        if (!TextUtils.isEmpty(response.getMsg())) {
-                            toast(response.getMsg());
-                            finish();
-                        }
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        dismissLoading();
-                    }
-                });
+//        HttpServer.$().deleteArticle(id)
+//                .subscribeOn(Schedulers.io())
+//                .doOnSubscribe(new Action0() {
+//                    @Override
+//                    public void call() {
+//                        showLoading();
+//                    }
+//                })
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Action1<BaseData>() {
+//                    @Override
+//                    public void call(BaseData response) {
+//                        dismissLoading();
+//                        if (!TextUtils.isEmpty(response.getMsg())) {
+//                            toast(response.getMsg());
+//                            finish();
+//                        }
+//                    }
+//                }, new Action1<Throwable>() {
+//                    @Override
+//                    public void call(Throwable throwable) {
+//                        dismissLoading();
+//                    }
+//                });
     }
 
     private void loadData() {
-        HttpServer.$().onEquipmentList(page)
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        showLoading();
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<BaseData<EquipmentBean>>() {
-                    @Override
-                    public void call(BaseData<EquipmentBean> response) {
-                        dismissLoading();
-                        boolean isRefresh;
-                        if (response != null) {
-                            if (response.getSuccess()) {
-                                if (page == 1) {
-                                    mList.clear();
-                                    mList = response.getInfo().getList();
-                                    if (mList.size() == 0) {
-                                        refreshLayout.finishRefresh();
-                                        loadingLayout.showEmpty();
-                                        LoadUtil.forbidLoadMore(mList, refreshLayout, loadingLayout);
-                                        return;
-                                    }
-                                    isRefresh = true;
-                                } else {
-                                    isRefresh = false;
-                                    mList.addAll(response.getInfo().getList());
-                                }
-                                mEquipmentAdapter.addDatas(mList);
-                                boolean hasNext = false;
-                                if (response.getInfo().getTotalCount() > (response.getInfo().getTotalPage() * 10)) {
-                                    hasNext = true;
-                                }
-                                LoadUtil.closeRefreshOrLoadMore(hasNext, isRefresh, refreshLayout, loadingLayout);
-                            } else {
-                                loadingLayout.showEmpty();
-                            }
-                        }
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        dismissLoading();
-                    }
-                });
+//        HttpServer.$().onEquipmentList(page)
+//                .subscribeOn(Schedulers.io())
+//                .doOnSubscribe(new Action0() {
+//                    @Override
+//                    public void call() {
+//                        showLoading();
+//                    }
+//                })
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Action1<BaseData<EquipmentBean>>() {
+//                    @Override
+//                    public void call(BaseData<EquipmentBean> response) {
+//                        dismissLoading();
+//                        boolean isRefresh;
+//                        if (response != null) {
+//                            if (response.getSuccess()) {
+//                                if (page == 1) {
+//                                    mList.clear();
+//                                    mList = response.getInfo().getList();
+//                                    if (mList.size() == 0) {
+//                                        refreshLayout.finishRefresh();
+//                                        loadingLayout.showEmpty();
+//                                        LoadUtil.forbidLoadMore(mList, refreshLayout, loadingLayout);
+//                                        return;
+//                                    }
+//                                    isRefresh = true;
+//                                } else {
+//                                    isRefresh = false;
+//                                    mList.addAll(response.getInfo().getList());
+//                                }
+//                                mEquipmentAdapter.addDatas(mList);
+//                                boolean hasNext = false;
+//                                if (response.getInfo().getTotalCount() > (response.getInfo().getTotalPage() * 10)) {
+//                                    hasNext = true;
+//                                }
+//                                LoadUtil.closeRefreshOrLoadMore(hasNext, isRefresh, refreshLayout, loadingLayout);
+//                            } else {
+//                                loadingLayout.showEmpty();
+//                            }
+//                        }
+//                    }
+//                }, new Action1<Throwable>() {
+//                    @Override
+//                    public void call(Throwable throwable) {
+//                        dismissLoading();
+//                    }
+//                });
+
+        List<EquipmentInfoBean> mList = new ArrayList<>();
+
+        EquipmentInfoBean bean1 = new EquipmentInfoBean();
+        bean1.setId("LJKJ20100819123");
+        bean1.setLockStatus("1");
+        bean1.setBluetoothMac("20:20:09:11:18:5E");
+        bean1.setCompany("苏州维易斯特智能科技有限公司");
+        bean1.setLatitude("116.396633");
+        bean1.setLongitude("40.025402");
+        bean1.setStreetName("奥林匹克森林公园");
+        mList.add(bean1);
+
+        EquipmentInfoBean bean2 = new EquipmentInfoBean();
+        bean2.setId("WYST20100819123");
+        bean2.setLockStatus("2");
+        bean2.setBluetoothMac("20:20:09:11:18:5E");
+        bean2.setCompany("苏州维易斯特智能科技有限公司");
+        bean2.setLatitude("116.418336");
+        bean2.setLongitude("40.02485");
+        bean2.setStreetName("仰山公园");
+        mList.add(bean2);
+
+        EquipmentInfoBean bean3 = new EquipmentInfoBean();
+        bean3.setId("WYST20100819122");
+        bean3.setLockStatus("3");
+        bean3.setBluetoothMac("20:20:09:11:18:5E");
+        bean3.setCompany("苏州维易斯特智能科技有限公司");
+        bean3.setLatitude("116.398933");
+        bean3.setLongitude("39.999208");
+        bean3.setStreetName("北京奥林匹克公园");
+        mList.add(bean3);
+
+        EquipmentInfoBean bean4 = new EquipmentInfoBean();
+        bean4.setId("WYST20100819121");
+        bean4.setLockStatus("1");
+        bean4.setBluetoothMac("20:20:09:11:18:5E");
+        bean4.setCompany("苏州维易斯特智能科技有限公司");
+        bean4.setLatitude("116.435296");
+        bean4.setLongitude("40.003298");
+        bean4.setStreetName("华汇紫薇公园");
+        mList.add(bean4);
+
+        mEquipmentAdapter.addDatas(mList);
+
+        LoadUtil.closeRefreshOrLoadMore(false, true, refreshLayout, loadingLayout);
+
     }
 
     @Override
