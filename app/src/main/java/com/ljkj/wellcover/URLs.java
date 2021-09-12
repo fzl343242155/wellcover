@@ -8,7 +8,7 @@ package com.ljkj.wellcover;
  */
 public class URLs {
 
-    public static final String BASEURL = "http://101.200.202.152:8080";
+    public static final String BASEURL = "http://82.156.183.76:8080";
 
     /**
      * 登录接口
